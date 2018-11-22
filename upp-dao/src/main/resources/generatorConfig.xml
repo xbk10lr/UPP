@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar" />
+  <context id="context1">
+   <commentGenerator>  
+       <!-- 是否去除自动生成的注释 true：是 ： false:否 -->  
+       <property name="suppressAllComments" value="true" />  
+    </commentGenerator>
+    <jdbcConnection connectionURL="jdbc:mysql://45.40.198.219:3306/upsdb" driverClass="com.mysql.jdbc.Driver" password="uppdb" userId="uppdb" />
+    <javaModelGenerator targetPackage="com.upp.dto.generate" targetProject="upp-dao" />
+    <sqlMapGenerator targetPackage="com.upp.dao.sqlMap" targetProject="upp-dao" />
+    <javaClientGenerator targetPackage="com.upp.dao.mapper" targetProject="upp-dao" type="XMLMAPPER" />
+    <table schema="" tableName="FUNDTRANS">
+    </table>
+    <table schema="" tableName="MERBASEINFO">
+    </table>
+    <table schema="" tableName="ONLINEORDERINFO">
+    </table>
+    <table schema="" tableName="UPPERSYSINFO">
+    </table>
+  </context>
+</generatorConfiguration>

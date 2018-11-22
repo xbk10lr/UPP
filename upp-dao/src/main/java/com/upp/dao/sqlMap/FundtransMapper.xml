@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upp.dao.mapper.FundtransMapper">
+  <resultMap id="BaseResultMap" type="com.upp.dto.generate.Fundtrans">
+    <id column="FUNDTRANSNBR" jdbcType="VARCHAR" property="fundtransnbr" />
+    <id column="TRANSDATE" jdbcType="DATE" property="transdate" />
+    <result column="FUNDCHANNELCODE" jdbcType="VARCHAR" property="fundchannelcode" />
+    <result column="UPPERSYSNBR" jdbcType="VARCHAR" property="uppersysnbr" />
+    <result column="UPPERTRANSDATE" jdbcType="DATE" property="uppertransdate" />
+    <result column="UPPERTRANSTIME" jdbcType="TIMESTAMP" property="uppertranstime" />
+    <result column="UPPERTRANSNBR" jdbcType="VARCHAR" property="uppertransnbr" />
+    <result column="TRANSTIME" jdbcType="TIMESTAMP" property="transtime" />
+    <result column="CLEARDATE" jdbcType="DATE" property="cleardate" />
+    <result column="TRANSCODE" jdbcType="VARCHAR" property="transcode" />
+    <result column="PAYERACCTNBR" jdbcType="VARCHAR" property="payeracctnbr" />
+    <result column="PAYERNAME" jdbcType="VARCHAR" property="payername" />
+    <result column="PAYEEACCTNBR" jdbcType="VARCHAR" property="payeeacctnbr" />
+    <result column="PAYEENAME" jdbcType="VARCHAR" property="payeename" />
+    <result column="ORIGFUNDTRANSNBR" jdbcType="VARCHAR" property="origfundtransnbr" />
+    <result column="CURRENCYCD" jdbcType="VARCHAR" property="currencycd" />
+    <result column="TRANSAMT" jdbcType="DOUBLE" property="transamt" />
+    <result column="FEEAMT" jdbcType="DOUBLE" property="feeamt" />
+    <result column="CHECKSTATUS" jdbcType="VARCHAR" property="checkstatus" />
+    <result column="RETURNCODE" jdbcType="VARCHAR" property="returncode" />
+    <result column="RETURNMSG" jdbcType="VARCHAR" property="returnmsg" />
+    <result column="TRANSSTATUS" jdbcType="VARCHAR" property="transstatus" />
+    <result column="DOWNTRANSNBR" jdbcType="VARCHAR" property="downtransnbr" />
+    <result column="DOWNTRANSDATE" jdbcType="DATE" property="downtransdate" />
+    <result column="DOWNTRANSTIME" jdbcType="TIMESTAMP" property="downtranstime" />
+    <result column="DOWNSYSNBR" jdbcType="VARCHAR" property="downsysnbr" />
+    <result column="CRTDATETIME" jdbcType="TIMESTAMP" property="crtdatetime" />
+    <result column="DATELASTMAINT" jdbcType="TIMESTAMP" property="datelastmaint" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    FUNDTRANSNBR, TRANSDATE, FUNDCHANNELCODE, UPPERSYSNBR, UPPERTRANSDATE, UPPERTRANSTIME, 
+    UPPERTRANSNBR, TRANSTIME, CLEARDATE, TRANSCODE, PAYERACCTNBR, PAYERNAME, PAYEEACCTNBR, 
+    PAYEENAME, ORIGFUNDTRANSNBR, CURRENCYCD, TRANSAMT, FEEAMT, CHECKSTATUS, RETURNCODE, 
+    RETURNMSG, TRANSSTATUS, DOWNTRANSNBR, DOWNTRANSDATE, DOWNTRANSTIME, DOWNSYSNBR, CRTDATETIME, 
+    DATELASTMAINT
+  </sql>
+  <select id="selectByExample" parameterType="com.upp.dto.generate.FundtransExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from FUNDTRANS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.upp.dto.generate.FundtransKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from FUNDTRANS
+    where FUNDTRANSNBR = #{fundtransnbr,jdbcType=VARCHAR}
+      and TRANSDATE = #{transdate,jdbcType=DATE}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.upp.dto.generate.FundtransKey">
+    delete from FUNDTRANS
+    where FUNDTRANSNBR = #{fundtransnbr,jdbcType=VARCHAR}
+      and TRANSDATE = #{transdate,jdbcType=DATE}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.upp.dto.generate.FundtransExample">
+    delete from FUNDTRANS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.upp.dto.generate.Fundtrans">
+    insert into FUNDTRANS (FUNDTRANSNBR, TRANSDATE, FUNDCHANNELCODE, 
+      UPPERSYSNBR, UPPERTRANSDATE, UPPERTRANSTIME, 
+      UPPERTRANSNBR, TRANSTIME, CLEARDATE, 
+      TRANSCODE, PAYERACCTNBR, PAYERNAME, 
+      PAYEEACCTNBR, PAYEENAME, ORIGFUNDTRANSNBR, 
+      CURRENCYCD, TRANSAMT, FEEAMT, 
+      CHECKSTATUS, RETURNCODE, RETURNMSG, 
+      TRANSSTATUS, DOWNTRANSNBR, DOWNTRANSDATE, 
+      DOWNTRANSTIME, DOWNSYSNBR, CRTDATETIME, 
+      DATELASTMAINT)
+    values (#{fundtransnbr,jdbcType=VARCHAR}, #{transdate,jdbcType=DATE}, #{fundchannelcode,jdbcType=VARCHAR}, 
+      #{uppersysnbr,jdbcType=VARCHAR}, #{uppertransdate,jdbcType=DATE}, #{uppertranstime,jdbcType=TIMESTAMP}, 
+      #{uppertransnbr,jdbcType=VARCHAR}, #{transtime,jdbcType=TIMESTAMP}, #{cleardate,jdbcType=DATE}, 
+      #{transcode,jdbcType=VARCHAR}, #{payeracctnbr,jdbcType=VARCHAR}, #{payername,jdbcType=VARCHAR}, 
+      #{payeeacctnbr,jdbcType=VARCHAR}, #{payeename,jdbcType=VARCHAR}, #{origfundtransnbr,jdbcType=VARCHAR}, 
+      #{currencycd,jdbcType=VARCHAR}, #{transamt,jdbcType=DOUBLE}, #{feeamt,jdbcType=DOUBLE}, 
+      #{checkstatus,jdbcType=VARCHAR}, #{returncode,jdbcType=VARCHAR}, #{returnmsg,jdbcType=VARCHAR}, 
+      #{transstatus,jdbcType=VARCHAR}, #{downtransnbr,jdbcType=VARCHAR}, #{downtransdate,jdbcType=DATE}, 
+      #{downtranstime,jdbcType=TIMESTAMP}, #{downsysnbr,jdbcType=VARCHAR}, #{crtdatetime,jdbcType=TIMESTAMP}, 
+      #{datelastmaint,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.upp.dto.generate.Fundtrans">
+    insert into FUNDTRANS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fundtransnbr != null">
+        FUNDTRANSNBR,
+      </if>
+      <if test="transdate != null">
+        TRANSDATE,
+      </if>
+      <if test="fundchannelcode != null">
+        FUNDCHANNELCODE,
+      </if>
+      <if test="uppersysnbr != null">
+        UPPERSYSNBR,
+      </if>
+      <if test="uppertransdate != null">
+        UPPERTRANSDATE,
+      </if>
+      <if test="uppertranstime != null">
+        UPPERTRANSTIME,
+      </if>
+      <if test="uppertransnbr != null">
+        UPPERTRANSNBR,
+      </if>
+      <if test="transtime != null">
+        TRANSTIME,
+      </if>
+      <if test="cleardate != null">
+        CLEARDATE,
+      </if>
+      <if test="transcode != null">
+        TRANSCODE,
+      </if>
+      <if test="payeracctnbr != null">
+        PAYERACCTNBR,
+      </if>
+      <if test="payername != null">
+        PAYERNAME,
+      </if>
+      <if test="payeeacctnbr != null">
+        PAYEEACCTNBR,
+      </if>
+      <if test="payeename != null">
+        PAYEENAME,
+      </if>
+      <if test="origfundtransnbr != null">
+        ORIGFUNDTRANSNBR,
+      </if>
+      <if test="currencycd != null">
+        CURRENCYCD,
+      </if>
+      <if test="transamt != null">
+        TRANSAMT,
+      </if>
+      <if test="feeamt != null">
+        FEEAMT,
+      </if>
+      <if test="checkstatus != null">
+        CHECKSTATUS,
+      </if>
+      <if test="returncode != null">
+        RETURNCODE,
+      </if>
+      <if test="returnmsg != null">
+        RETURNMSG,
+      </if>
+      <if test="transstatus != null">
+        TRANSSTATUS,
+      </if>
+      <if test="downtransnbr != null">
+        DOWNTRANSNBR,
+      </if>
+      <if test="downtransdate != null">
+        DOWNTRANSDATE,
+      </if>
+      <if test="downtranstime != null">
+        DOWNTRANSTIME,
+      </if>
+      <if test="downsysnbr != null">
+        DOWNSYSNBR,
+      </if>
+      <if test="crtdatetime != null">
+        CRTDATETIME,
+      </if>
+      <if test="datelastmaint != null">
+        DATELASTMAINT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fundtransnbr != null">
+        #{fundtransnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="transdate != null">
+        #{transdate,jdbcType=DATE},
+      </if>
+      <if test="fundchannelcode != null">
+        #{fundchannelcode,jdbcType=VARCHAR},
+      </if>
+      <if test="uppersysnbr != null">
+        #{uppersysnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="uppertransdate != null">
+        #{uppertransdate,jdbcType=DATE},
+      </if>
+      <if test="uppertranstime != null">
+        #{uppertranstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uppertransnbr != null">
+        #{uppertransnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="transtime != null">
+        #{transtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cleardate != null">
+        #{cleardate,jdbcType=DATE},
+      </if>
+      <if test="transcode != null">
+        #{transcode,jdbcType=VARCHAR},
+      </if>
+      <if test="payeracctnbr != null">
+        #{payeracctnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="payername != null">
+        #{payername,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeacctnbr != null">
+        #{payeeacctnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="payeename != null">
+        #{payeename,jdbcType=VARCHAR},
+      </if>
+      <if test="origfundtransnbr != null">
+        #{origfundtransnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="currencycd != null">
+        #{currencycd,jdbcType=VARCHAR},
+      </if>
+      <if test="transamt != null">
+        #{transamt,jdbcType=DOUBLE},
+      </if>
+      <if test="feeamt != null">
+        #{feeamt,jdbcType=DOUBLE},
+      </if>
+      <if test="checkstatus != null">
+        #{checkstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="returncode != null">
+        #{returncode,jdbcType=VARCHAR},
+      </if>
+      <if test="returnmsg != null">
+        #{returnmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="transstatus != null">
+        #{transstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="downtransnbr != null">
+        #{downtransnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="downtransdate != null">
+        #{downtransdate,jdbcType=DATE},
+      </if>
+      <if test="downtranstime != null">
+        #{downtranstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="downsysnbr != null">
+        #{downsysnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtdatetime != null">
+        #{crtdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datelastmaint != null">
+        #{datelastmaint,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.upp.dto.generate.FundtransExample" resultType="java.lang.Long">
+    select count(*) from FUNDTRANS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update FUNDTRANS
+    <set>
+      <if test="record.fundtransnbr != null">
+        FUNDTRANSNBR = #{record.fundtransnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transdate != null">
+        TRANSDATE = #{record.transdate,jdbcType=DATE},
+      </if>
+      <if test="record.fundchannelcode != null">
+        FUNDCHANNELCODE = #{record.fundchannelcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uppersysnbr != null">
+        UPPERSYSNBR = #{record.uppersysnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uppertransdate != null">
+        UPPERTRANSDATE = #{record.uppertransdate,jdbcType=DATE},
+      </if>
+      <if test="record.uppertranstime != null">
+        UPPERTRANSTIME = #{record.uppertranstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uppertransnbr != null">
+        UPPERTRANSNBR = #{record.uppertransnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transtime != null">
+        TRANSTIME = #{record.transtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cleardate != null">
+        CLEARDATE = #{record.cleardate,jdbcType=DATE},
+      </if>
+      <if test="record.transcode != null">
+        TRANSCODE = #{record.transcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payeracctnbr != null">
+        PAYERACCTNBR = #{record.payeracctnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payername != null">
+        PAYERNAME = #{record.payername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payeeacctnbr != null">
+        PAYEEACCTNBR = #{record.payeeacctnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payeename != null">
+        PAYEENAME = #{record.payeename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.origfundtransnbr != null">
+        ORIGFUNDTRANSNBR = #{record.origfundtransnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currencycd != null">
+        CURRENCYCD = #{record.currencycd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transamt != null">
+        TRANSAMT = #{record.transamt,jdbcType=DOUBLE},
+      </if>
+      <if test="record.feeamt != null">
+        FEEAMT = #{record.feeamt,jdbcType=DOUBLE},
+      </if>
+      <if test="record.checkstatus != null">
+        CHECKSTATUS = #{record.checkstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returncode != null">
+        RETURNCODE = #{record.returncode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnmsg != null">
+        RETURNMSG = #{record.returnmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transstatus != null">
+        TRANSSTATUS = #{record.transstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.downtransnbr != null">
+        DOWNTRANSNBR = #{record.downtransnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.downtransdate != null">
+        DOWNTRANSDATE = #{record.downtransdate,jdbcType=DATE},
+      </if>
+      <if test="record.downtranstime != null">
+        DOWNTRANSTIME = #{record.downtranstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.downsysnbr != null">
+        DOWNSYSNBR = #{record.downsysnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crtdatetime != null">
+        CRTDATETIME = #{record.crtdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.datelastmaint != null">
+        DATELASTMAINT = #{record.datelastmaint,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update FUNDTRANS
+    set FUNDTRANSNBR = #{record.fundtransnbr,jdbcType=VARCHAR},
+      TRANSDATE = #{record.transdate,jdbcType=DATE},
+      FUNDCHANNELCODE = #{record.fundchannelcode,jdbcType=VARCHAR},
+      UPPERSYSNBR = #{record.uppersysnbr,jdbcType=VARCHAR},
+      UPPERTRANSDATE = #{record.uppertransdate,jdbcType=DATE},
+      UPPERTRANSTIME = #{record.uppertranstime,jdbcType=TIMESTAMP},
+      UPPERTRANSNBR = #{record.uppertransnbr,jdbcType=VARCHAR},
+      TRANSTIME = #{record.transtime,jdbcType=TIMESTAMP},
+      CLEARDATE = #{record.cleardate,jdbcType=DATE},
+      TRANSCODE = #{record.transcode,jdbcType=VARCHAR},
+      PAYERACCTNBR = #{record.payeracctnbr,jdbcType=VARCHAR},
+      PAYERNAME = #{record.payername,jdbcType=VARCHAR},
+      PAYEEACCTNBR = #{record.payeeacctnbr,jdbcType=VARCHAR},
+      PAYEENAME = #{record.payeename,jdbcType=VARCHAR},
+      ORIGFUNDTRANSNBR = #{record.origfundtransnbr,jdbcType=VARCHAR},
+      CURRENCYCD = #{record.currencycd,jdbcType=VARCHAR},
+      TRANSAMT = #{record.transamt,jdbcType=DOUBLE},
+      FEEAMT = #{record.feeamt,jdbcType=DOUBLE},
+      CHECKSTATUS = #{record.checkstatus,jdbcType=VARCHAR},
+      RETURNCODE = #{record.returncode,jdbcType=VARCHAR},
+      RETURNMSG = #{record.returnmsg,jdbcType=VARCHAR},
+      TRANSSTATUS = #{record.transstatus,jdbcType=VARCHAR},
+      DOWNTRANSNBR = #{record.downtransnbr,jdbcType=VARCHAR},
+      DOWNTRANSDATE = #{record.downtransdate,jdbcType=DATE},
+      DOWNTRANSTIME = #{record.downtranstime,jdbcType=TIMESTAMP},
+      DOWNSYSNBR = #{record.downsysnbr,jdbcType=VARCHAR},
+      CRTDATETIME = #{record.crtdatetime,jdbcType=TIMESTAMP},
+      DATELASTMAINT = #{record.datelastmaint,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.upp.dto.generate.Fundtrans">
+    update FUNDTRANS
+    <set>
+      <if test="fundchannelcode != null">
+        FUNDCHANNELCODE = #{fundchannelcode,jdbcType=VARCHAR},
+      </if>
+      <if test="uppersysnbr != null">
+        UPPERSYSNBR = #{uppersysnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="uppertransdate != null">
+        UPPERTRANSDATE = #{uppertransdate,jdbcType=DATE},
+      </if>
+      <if test="uppertranstime != null">
+        UPPERTRANSTIME = #{uppertranstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uppertransnbr != null">
+        UPPERTRANSNBR = #{uppertransnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="transtime != null">
+        TRANSTIME = #{transtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cleardate != null">
+        CLEARDATE = #{cleardate,jdbcType=DATE},
+      </if>
+      <if test="transcode != null">
+        TRANSCODE = #{transcode,jdbcType=VARCHAR},
+      </if>
+      <if test="payeracctnbr != null">
+        PAYERACCTNBR = #{payeracctnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="payername != null">
+        PAYERNAME = #{payername,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeacctnbr != null">
+        PAYEEACCTNBR = #{payeeacctnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="payeename != null">
+        PAYEENAME = #{payeename,jdbcType=VARCHAR},
+      </if>
+      <if test="origfundtransnbr != null">
+        ORIGFUNDTRANSNBR = #{origfundtransnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="currencycd != null">
+        CURRENCYCD = #{currencycd,jdbcType=VARCHAR},
+      </if>
+      <if test="transamt != null">
+        TRANSAMT = #{transamt,jdbcType=DOUBLE},
+      </if>
+      <if test="feeamt != null">
+        FEEAMT = #{feeamt,jdbcType=DOUBLE},
+      </if>
+      <if test="checkstatus != null">
+        CHECKSTATUS = #{checkstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="returncode != null">
+        RETURNCODE = #{returncode,jdbcType=VARCHAR},
+      </if>
+      <if test="returnmsg != null">
+        RETURNMSG = #{returnmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="transstatus != null">
+        TRANSSTATUS = #{transstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="downtransnbr != null">
+        DOWNTRANSNBR = #{downtransnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="downtransdate != null">
+        DOWNTRANSDATE = #{downtransdate,jdbcType=DATE},
+      </if>
+      <if test="downtranstime != null">
+        DOWNTRANSTIME = #{downtranstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="downsysnbr != null">
+        DOWNSYSNBR = #{downsysnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtdatetime != null">
+        CRTDATETIME = #{crtdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datelastmaint != null">
+        DATELASTMAINT = #{datelastmaint,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where FUNDTRANSNBR = #{fundtransnbr,jdbcType=VARCHAR}
+      and TRANSDATE = #{transdate,jdbcType=DATE}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.upp.dto.generate.Fundtrans">
+    update FUNDTRANS
+    set FUNDCHANNELCODE = #{fundchannelcode,jdbcType=VARCHAR},
+      UPPERSYSNBR = #{uppersysnbr,jdbcType=VARCHAR},
+      UPPERTRANSDATE = #{uppertransdate,jdbcType=DATE},
+      UPPERTRANSTIME = #{uppertranstime,jdbcType=TIMESTAMP},
+      UPPERTRANSNBR = #{uppertransnbr,jdbcType=VARCHAR},
+      TRANSTIME = #{transtime,jdbcType=TIMESTAMP},
+      CLEARDATE = #{cleardate,jdbcType=DATE},
+      TRANSCODE = #{transcode,jdbcType=VARCHAR},
+      PAYERACCTNBR = #{payeracctnbr,jdbcType=VARCHAR},
+      PAYERNAME = #{payername,jdbcType=VARCHAR},
+      PAYEEACCTNBR = #{payeeacctnbr,jdbcType=VARCHAR},
+      PAYEENAME = #{payeename,jdbcType=VARCHAR},
+      ORIGFUNDTRANSNBR = #{origfundtransnbr,jdbcType=VARCHAR},
+      CURRENCYCD = #{currencycd,jdbcType=VARCHAR},
+      TRANSAMT = #{transamt,jdbcType=DOUBLE},
+      FEEAMT = #{feeamt,jdbcType=DOUBLE},
+      CHECKSTATUS = #{checkstatus,jdbcType=VARCHAR},
+      RETURNCODE = #{returncode,jdbcType=VARCHAR},
+      RETURNMSG = #{returnmsg,jdbcType=VARCHAR},
+      TRANSSTATUS = #{transstatus,jdbcType=VARCHAR},
+      DOWNTRANSNBR = #{downtransnbr,jdbcType=VARCHAR},
+      DOWNTRANSDATE = #{downtransdate,jdbcType=DATE},
+      DOWNTRANSTIME = #{downtranstime,jdbcType=TIMESTAMP},
+      DOWNSYSNBR = #{downsysnbr,jdbcType=VARCHAR},
+      CRTDATETIME = #{crtdatetime,jdbcType=TIMESTAMP},
+      DATELASTMAINT = #{datelastmaint,jdbcType=TIMESTAMP}
+    where FUNDTRANSNBR = #{fundtransnbr,jdbcType=VARCHAR}
+      and TRANSDATE = #{transdate,jdbcType=DATE}
+  </update>
+</mapper>

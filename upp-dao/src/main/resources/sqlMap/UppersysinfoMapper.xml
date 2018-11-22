@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upp.dao.mapper.UppersysinfoMapper">
+  <resultMap id="BaseResultMap" type="com.upp.dto.generate.Uppersysinfo">
+    <id column="SYSTEMCODE" jdbcType="VARCHAR" property="systemcode" />
+    <result column="SYSTEMNAME" jdbcType="VARCHAR" property="systemname" />
+    <result column="SYSSTATUS" jdbcType="VARCHAR" property="sysstatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SYSTEMCODE, SYSTEMNAME, SYSSTATUS
+  </sql>
+  <select id="selectByExample" parameterType="com.upp.dto.generate.UppersysinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from UPPERSYSINFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from UPPERSYSINFO
+    where SYSTEMCODE = #{systemcode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from UPPERSYSINFO
+    where SYSTEMCODE = #{systemcode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.upp.dto.generate.UppersysinfoExample">
+    delete from UPPERSYSINFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.upp.dto.generate.Uppersysinfo">
+    insert into UPPERSYSINFO (SYSTEMCODE, SYSTEMNAME, SYSSTATUS
+      )
+    values (#{systemcode,jdbcType=VARCHAR}, #{systemname,jdbcType=VARCHAR}, #{sysstatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.upp.dto.generate.Uppersysinfo">
+    insert into UPPERSYSINFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="systemcode != null">
+        SYSTEMCODE,
+      </if>
+      <if test="systemname != null">
+        SYSTEMNAME,
+      </if>
+      <if test="sysstatus != null">
+        SYSSTATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="systemcode != null">
+        #{systemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="systemname != null">
+        #{systemname,jdbcType=VARCHAR},
+      </if>
+      <if test="sysstatus != null">
+        #{sysstatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.upp.dto.generate.UppersysinfoExample" resultType="java.lang.Long">
+    select count(*) from UPPERSYSINFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update UPPERSYSINFO
+    <set>
+      <if test="record.systemcode != null">
+        SYSTEMCODE = #{record.systemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systemname != null">
+        SYSTEMNAME = #{record.systemname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysstatus != null">
+        SYSSTATUS = #{record.sysstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update UPPERSYSINFO
+    set SYSTEMCODE = #{record.systemcode,jdbcType=VARCHAR},
+      SYSTEMNAME = #{record.systemname,jdbcType=VARCHAR},
+      SYSSTATUS = #{record.sysstatus,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.upp.dto.generate.Uppersysinfo">
+    update UPPERSYSINFO
+    <set>
+      <if test="systemname != null">
+        SYSTEMNAME = #{systemname,jdbcType=VARCHAR},
+      </if>
+      <if test="sysstatus != null">
+        SYSSTATUS = #{sysstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SYSTEMCODE = #{systemcode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.upp.dto.generate.Uppersysinfo">
+    update UPPERSYSINFO
+    set SYSTEMNAME = #{systemname,jdbcType=VARCHAR},
+      SYSSTATUS = #{sysstatus,jdbcType=VARCHAR}
+    where SYSTEMCODE = #{systemcode,jdbcType=VARCHAR}
+  </update>
+</mapper>
