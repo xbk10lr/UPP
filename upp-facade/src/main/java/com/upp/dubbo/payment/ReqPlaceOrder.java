@@ -1,9 +1,8 @@
-package com.upp.dto.model;
+package com.upp.dubbo.payment;
 
 import java.math.BigDecimal;
 
-public class ReqCollection {
-	
+public class ReqPlaceOrder {
 	//商户号
 	private String mernbr;
 	
@@ -39,9 +38,6 @@ public class ReqCollection {
 	
 	//交易金额
 	private BigDecimal transamt;
-	
-	//签名
-	private String signature;
 
 	public String getMernbr() {
 		return mernbr;
@@ -139,23 +135,12 @@ public class ReqCollection {
 		this.transamt = transamt;
 	}
 
-	public String getSignature() {
-		return signature;
-	}
-
-	public void setSignature(String signature) {
-		this.signature = signature;
-	}
-
 	@Override
 	public String toString() {
-		return "ReqCollection [mernbr=" + mernbr + ", merseqnbr=" + merseqnbr + ", mertranstime=" + mertranstime
+		return "ReqPlaceOrder [mernbr=" + mernbr + ", merseqnbr=" + merseqnbr + ", mertranstime=" + mertranstime
 				+ ", payeracctnbr=" + payeracctnbr + ", payeeacctnbr=" + payeeacctnbr + ", payeeacctkind="
 				+ payeeacctkind + ", payeeacctname=" + payeeacctname + ", payeracctname=" + payeracctname
 				+ ", payeraccttypcd=" + payeraccttypcd + ", payeeaccttypcd=" + payeeaccttypcd + ", currencycd="
-				+ currencycd + ", transamt=" + transamt + ", signature=" + signature + "]";
+				+ currencycd + ", transamt=" + transamt + "]";
 	}
-	
-	
-	
 }
