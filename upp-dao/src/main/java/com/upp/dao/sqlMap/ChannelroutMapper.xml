@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upp.dao.mapper.ChannelroutMapper">
+  <resultMap id="BaseResultMap" type="com.upp.dto.generate.Channelrout">
+    <id column="FUNDCHANNELCODE" jdbcType="VARCHAR" property="fundchannelcode" />
+    <result column="ROUTSTATE" jdbcType="VARCHAR" property="routstate" />
+    <result column="PRIORITY" jdbcType="VARCHAR" property="priority" />
+    <result column="LIMITAMT" jdbcType="DECIMAL" property="limitamt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    FUNDCHANNELCODE, ROUTSTATE, PRIORITY, LIMITAMT
+  </sql>
+  <select id="selectByExample" parameterType="com.upp.dto.generate.ChannelroutExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CHANNELROUT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CHANNELROUT
+    where FUNDCHANNELCODE = #{fundchannelcode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CHANNELROUT
+    where FUNDCHANNELCODE = #{fundchannelcode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.upp.dto.generate.ChannelroutExample">
+    delete from CHANNELROUT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.upp.dto.generate.Channelrout">
+    insert into CHANNELROUT (FUNDCHANNELCODE, ROUTSTATE, PRIORITY, 
+      LIMITAMT)
+    values (#{fundchannelcode,jdbcType=VARCHAR}, #{routstate,jdbcType=VARCHAR}, #{priority,jdbcType=VARCHAR}, 
+      #{limitamt,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.upp.dto.generate.Channelrout">
+    insert into CHANNELROUT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fundchannelcode != null">
+        FUNDCHANNELCODE,
+      </if>
+      <if test="routstate != null">
+        ROUTSTATE,
+      </if>
+      <if test="priority != null">
+        PRIORITY,
+      </if>
+      <if test="limitamt != null">
+        LIMITAMT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fundchannelcode != null">
+        #{fundchannelcode,jdbcType=VARCHAR},
+      </if>
+      <if test="routstate != null">
+        #{routstate,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="limitamt != null">
+        #{limitamt,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.upp.dto.generate.ChannelroutExample" resultType="java.lang.Long">
+    select count(*) from CHANNELROUT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update CHANNELROUT
+    <set>
+      <if test="record.fundchannelcode != null">
+        FUNDCHANNELCODE = #{record.fundchannelcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.routstate != null">
+        ROUTSTATE = #{record.routstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priority != null">
+        PRIORITY = #{record.priority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.limitamt != null">
+        LIMITAMT = #{record.limitamt,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update CHANNELROUT
+    set FUNDCHANNELCODE = #{record.fundchannelcode,jdbcType=VARCHAR},
+      ROUTSTATE = #{record.routstate,jdbcType=VARCHAR},
+      PRIORITY = #{record.priority,jdbcType=VARCHAR},
+      LIMITAMT = #{record.limitamt,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.upp.dto.generate.Channelrout">
+    update CHANNELROUT
+    <set>
+      <if test="routstate != null">
+        ROUTSTATE = #{routstate,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        PRIORITY = #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="limitamt != null">
+        LIMITAMT = #{limitamt,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where FUNDCHANNELCODE = #{fundchannelcode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.upp.dto.generate.Channelrout">
+    update CHANNELROUT
+    set ROUTSTATE = #{routstate,jdbcType=VARCHAR},
+      PRIORITY = #{priority,jdbcType=VARCHAR},
+      LIMITAMT = #{limitamt,jdbcType=DECIMAL}
+    where FUNDCHANNELCODE = #{fundchannelcode,jdbcType=VARCHAR}
+  </update>
+</mapper>

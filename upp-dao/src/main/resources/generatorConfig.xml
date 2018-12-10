@@ -11,13 +11,16 @@
     <javaModelGenerator targetPackage="com.upp.dto.generate" targetProject="upp-dao" />
     <sqlMapGenerator targetPackage="com.upp.dao.sqlMap" targetProject="upp-dao" />
     <javaClientGenerator targetPackage="com.upp.dao.mapper" targetProject="upp-dao" type="XMLMAPPER" />
-    <table schema="" tableName="FUNDTRANS">
+    <!-- <table schema="" tableName="FUNDTRANS">
     </table>
     <table schema="" tableName="MERBASEINFO">
     </table>
     <table schema="" tableName="ONLINEORDERINFO">
     </table>
     <table schema="" tableName="UPPERSYSINFO">
+    </table>-->
+    
+    <table schema="" tableName="CHANNELROUT">
     </table>
   </context>
 </generatorConfiguration>
