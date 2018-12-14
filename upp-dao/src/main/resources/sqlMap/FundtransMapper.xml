@@ -18,8 +18,8 @@
     <result column="PAYEENAME" jdbcType="VARCHAR" property="payeename" />
     <result column="ORIGFUNDTRANSNBR" jdbcType="VARCHAR" property="origfundtransnbr" />
     <result column="CURRENCYCD" jdbcType="VARCHAR" property="currencycd" />
-    <result column="TRANSAMT" jdbcType="DOUBLE" property="transamt" />
-    <result column="FEEAMT" jdbcType="DOUBLE" property="feeamt" />
+    <result column="TRANSAMT" jdbcType="DECIMAL" property="transamt" />
+    <result column="FEEAMT" jdbcType="DECIMAL" property="feeamt" />
     <result column="CHECKSTATUS" jdbcType="VARCHAR" property="checkstatus" />
     <result column="RETURNCODE" jdbcType="VARCHAR" property="returncode" />
     <result column="RETURNMSG" jdbcType="VARCHAR" property="returnmsg" />
@@ -144,7 +144,7 @@
       #{uppertransnbr,jdbcType=VARCHAR}, #{transtime,jdbcType=TIMESTAMP}, #{cleardate,jdbcType=DATE}, 
       #{transcode,jdbcType=VARCHAR}, #{payeracctnbr,jdbcType=VARCHAR}, #{payername,jdbcType=VARCHAR}, 
       #{payeeacctnbr,jdbcType=VARCHAR}, #{payeename,jdbcType=VARCHAR}, #{origfundtransnbr,jdbcType=VARCHAR}, 
-      #{currencycd,jdbcType=VARCHAR}, #{transamt,jdbcType=DOUBLE}, #{feeamt,jdbcType=DOUBLE}, 
+      #{currencycd,jdbcType=VARCHAR}, #{transamt,jdbcType=DECIMAL}, #{feeamt,jdbcType=DECIMAL}, 
       #{checkstatus,jdbcType=VARCHAR}, #{returncode,jdbcType=VARCHAR}, #{returnmsg,jdbcType=VARCHAR}, 
       #{transstatus,jdbcType=VARCHAR}, #{downtransnbr,jdbcType=VARCHAR}, #{downtransdate,jdbcType=DATE}, 
       #{downtranstime,jdbcType=TIMESTAMP}, #{downsysnbr,jdbcType=VARCHAR}, #{crtdatetime,jdbcType=TIMESTAMP}, 
@@ -288,10 +288,10 @@
         #{currencycd,jdbcType=VARCHAR},
       </if>
       <if test="transamt != null">
-        #{transamt,jdbcType=DOUBLE},
+        #{transamt,jdbcType=DECIMAL},
       </if>
       <if test="feeamt != null">
-        #{feeamt,jdbcType=DOUBLE},
+        #{feeamt,jdbcType=DECIMAL},
       </if>
       <if test="checkstatus != null">
         #{checkstatus,jdbcType=VARCHAR},
@@ -383,10 +383,10 @@
         CURRENCYCD = #{record.currencycd,jdbcType=VARCHAR},
       </if>
       <if test="record.transamt != null">
-        TRANSAMT = #{record.transamt,jdbcType=DOUBLE},
+        TRANSAMT = #{record.transamt,jdbcType=DECIMAL},
       </if>
       <if test="record.feeamt != null">
-        FEEAMT = #{record.feeamt,jdbcType=DOUBLE},
+        FEEAMT = #{record.feeamt,jdbcType=DECIMAL},
       </if>
       <if test="record.checkstatus != null">
         CHECKSTATUS = #{record.checkstatus,jdbcType=VARCHAR},
@@ -441,8 +441,8 @@
       PAYEENAME = #{record.payeename,jdbcType=VARCHAR},
       ORIGFUNDTRANSNBR = #{record.origfundtransnbr,jdbcType=VARCHAR},
       CURRENCYCD = #{record.currencycd,jdbcType=VARCHAR},
-      TRANSAMT = #{record.transamt,jdbcType=DOUBLE},
-      FEEAMT = #{record.feeamt,jdbcType=DOUBLE},
+      TRANSAMT = #{record.transamt,jdbcType=DECIMAL},
+      FEEAMT = #{record.feeamt,jdbcType=DECIMAL},
       CHECKSTATUS = #{record.checkstatus,jdbcType=VARCHAR},
       RETURNCODE = #{record.returncode,jdbcType=VARCHAR},
       RETURNMSG = #{record.returnmsg,jdbcType=VARCHAR},
@@ -503,10 +503,10 @@
         CURRENCYCD = #{currencycd,jdbcType=VARCHAR},
       </if>
       <if test="transamt != null">
-        TRANSAMT = #{transamt,jdbcType=DOUBLE},
+        TRANSAMT = #{transamt,jdbcType=DECIMAL},
       </if>
       <if test="feeamt != null">
-        FEEAMT = #{feeamt,jdbcType=DOUBLE},
+        FEEAMT = #{feeamt,jdbcType=DECIMAL},
       </if>
       <if test="checkstatus != null">
         CHECKSTATUS = #{checkstatus,jdbcType=VARCHAR},
@@ -558,8 +558,8 @@
       PAYEENAME = #{payeename,jdbcType=VARCHAR},
       ORIGFUNDTRANSNBR = #{origfundtransnbr,jdbcType=VARCHAR},
       CURRENCYCD = #{currencycd,jdbcType=VARCHAR},
-      TRANSAMT = #{transamt,jdbcType=DOUBLE},
-      FEEAMT = #{feeamt,jdbcType=DOUBLE},
+      TRANSAMT = #{transamt,jdbcType=DECIMAL},
+      FEEAMT = #{feeamt,jdbcType=DECIMAL},
       CHECKSTATUS = #{checkstatus,jdbcType=VARCHAR},
       RETURNCODE = #{returncode,jdbcType=VARCHAR},
       RETURNMSG = #{returnmsg,jdbcType=VARCHAR},

@@ -26,12 +26,12 @@
     <result column="PAYEEACCTDEPTNBR" jdbcType="VARCHAR" property="payeeacctdeptnbr" />
     <result column="PAYEEACCTNAME" jdbcType="VARCHAR" property="payeeacctname" />
     <result column="CURRENCYCD" jdbcType="VARCHAR" property="currencycd" />
-    <result column="TRANSAMT" jdbcType="DOUBLE" property="transamt" />
-    <result column="REFUNDEDAMT" jdbcType="DOUBLE" property="refundedamt" />
-    <result column="UNREFUNDEDAMT" jdbcType="DOUBLE" property="unrefundedamt" />
+    <result column="TRANSAMT" jdbcType="DECIMAL" property="transamt" />
+    <result column="REFUNDEDAMT" jdbcType="DECIMAL" property="refundedamt" />
+    <result column="UNREFUNDEDAMT" jdbcType="DECIMAL" property="unrefundedamt" />
     <result column="RESPCODE" jdbcType="VARCHAR" property="respcode" />
     <result column="RESPMSG" jdbcType="VARCHAR" property="respmsg" />
-    <result column="FEEAMT" jdbcType="DOUBLE" property="feeamt" />
+    <result column="FEEAMT" jdbcType="DECIMAL" property="feeamt" />
     <result column="TRANSSTATUS" jdbcType="VARCHAR" property="transstatus" />
     <result column="PROCSTEP" jdbcType="VARCHAR" property="procstep" />
     <result column="PROCSTATUS" jdbcType="VARCHAR" property="procstatus" />
@@ -159,10 +159,10 @@
       #{payeracctkind,jdbcType=VARCHAR}, #{payeracctdeptnbr,jdbcType=VARCHAR}, #{payeracctname,jdbcType=VARCHAR}, 
       #{payeeacctnbr,jdbcType=VARCHAR}, #{payeeaccttypcd,jdbcType=VARCHAR}, #{payeeacctkind,jdbcType=VARCHAR}, 
       #{payeeacctdeptnbr,jdbcType=VARCHAR}, #{payeeacctname,jdbcType=VARCHAR}, #{currencycd,jdbcType=VARCHAR}, 
-      #{transamt,jdbcType=DOUBLE}, #{refundedamt,jdbcType=DOUBLE}, #{unrefundedamt,jdbcType=DOUBLE}, 
-      #{respcode,jdbcType=VARCHAR}, #{respmsg,jdbcType=VARCHAR}, #{feeamt,jdbcType=DOUBLE}, 
+      #{transamt,jdbcType=DECIMAL}, #{refundedamt,jdbcType=DECIMAL}, #{unrefundedamt,jdbcType=DECIMAL}, 
+      #{respcode,jdbcType=VARCHAR}, #{respmsg,jdbcType=VARCHAR}, #{feeamt,jdbcType=DECIMAL}, 
       #{transstatus,jdbcType=VARCHAR}, #{procstep,jdbcType=VARCHAR}, #{procstatus,jdbcType=VARCHAR}, 
-      #{memo1,jdbcType=VARCHAR}, #{crtdatetime,jdbcType=TIMESTAMP}, #{datelastmaint,jdbcType=TIMESTAMP}
+      #{memo1,jdbcType=VARCHAR}, now(), now()
       )
   </insert>
   <insert id="insertSelective" parameterType="com.upp.dto.generate.Onlineorderinfo">
@@ -270,12 +270,8 @@
       <if test="memo1 != null">
         MEMO1,
       </if>
-      <if test="crtdatetime != null">
         CRTDATETIME,
-      </if>
-      <if test="datelastmaint != null">
         DATELASTMAINT,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="transseqnbr != null">
@@ -351,13 +347,13 @@
         #{currencycd,jdbcType=VARCHAR},
       </if>
       <if test="transamt != null">
-        #{transamt,jdbcType=DOUBLE},
+        #{transamt,jdbcType=DECIMAL},
       </if>
       <if test="refundedamt != null">
-        #{refundedamt,jdbcType=DOUBLE},
+        #{refundedamt,jdbcType=DECIMAL},
       </if>
       <if test="unrefundedamt != null">
-        #{unrefundedamt,jdbcType=DOUBLE},
+        #{unrefundedamt,jdbcType=DECIMAL},
       </if>
       <if test="respcode != null">
         #{respcode,jdbcType=VARCHAR},
@@ -366,7 +362,7 @@
         #{respmsg,jdbcType=VARCHAR},
       </if>
       <if test="feeamt != null">
-        #{feeamt,jdbcType=DOUBLE},
+        #{feeamt,jdbcType=DECIMAL},
       </if>
       <if test="transstatus != null">
         #{transstatus,jdbcType=VARCHAR},
@@ -380,12 +376,8 @@
       <if test="memo1 != null">
         #{memo1,jdbcType=VARCHAR},
       </if>
-      <if test="crtdatetime != null">
-        #{crtdatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="datelastmaint != null">
-        #{datelastmaint,jdbcType=TIMESTAMP},
-      </if>
+        now(),
+        now(),
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.upp.dto.generate.OnlineorderinfoExample" resultType="java.lang.Long">
@@ -470,13 +462,13 @@
         CURRENCYCD = #{record.currencycd,jdbcType=VARCHAR},
       </if>
       <if test="record.transamt != null">
-        TRANSAMT = #{record.transamt,jdbcType=DOUBLE},
+        TRANSAMT = #{record.transamt,jdbcType=DECIMAL},
       </if>
       <if test="record.refundedamt != null">
-        REFUNDEDAMT = #{record.refundedamt,jdbcType=DOUBLE},
+        REFUNDEDAMT = #{record.refundedamt,jdbcType=DECIMAL},
       </if>
       <if test="record.unrefundedamt != null">
-        UNREFUNDEDAMT = #{record.unrefundedamt,jdbcType=DOUBLE},
+        UNREFUNDEDAMT = #{record.unrefundedamt,jdbcType=DECIMAL},
       </if>
       <if test="record.respcode != null">
         RESPCODE = #{record.respcode,jdbcType=VARCHAR},
@@ -485,7 +477,7 @@
         RESPMSG = #{record.respmsg,jdbcType=VARCHAR},
       </if>
       <if test="record.feeamt != null">
-        FEEAMT = #{record.feeamt,jdbcType=DOUBLE},
+        FEEAMT = #{record.feeamt,jdbcType=DECIMAL},
       </if>
       <if test="record.transstatus != null">
         TRANSSTATUS = #{record.transstatus,jdbcType=VARCHAR},
@@ -502,9 +494,7 @@
       <if test="record.crtdatetime != null">
         CRTDATETIME = #{record.crtdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.datelastmaint != null">
-        DATELASTMAINT = #{record.datelastmaint,jdbcType=TIMESTAMP},
-      </if>
+        DATELASTMAINT = now(),
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -536,18 +526,18 @@
       PAYEEACCTDEPTNBR = #{record.payeeacctdeptnbr,jdbcType=VARCHAR},
       PAYEEACCTNAME = #{record.payeeacctname,jdbcType=VARCHAR},
       CURRENCYCD = #{record.currencycd,jdbcType=VARCHAR},
-      TRANSAMT = #{record.transamt,jdbcType=DOUBLE},
-      REFUNDEDAMT = #{record.refundedamt,jdbcType=DOUBLE},
-      UNREFUNDEDAMT = #{record.unrefundedamt,jdbcType=DOUBLE},
+      TRANSAMT = #{record.transamt,jdbcType=DECIMAL},
+      REFUNDEDAMT = #{record.refundedamt,jdbcType=DECIMAL},
+      UNREFUNDEDAMT = #{record.unrefundedamt,jdbcType=DECIMAL},
       RESPCODE = #{record.respcode,jdbcType=VARCHAR},
       RESPMSG = #{record.respmsg,jdbcType=VARCHAR},
-      FEEAMT = #{record.feeamt,jdbcType=DOUBLE},
+      FEEAMT = #{record.feeamt,jdbcType=DECIMAL},
       TRANSSTATUS = #{record.transstatus,jdbcType=VARCHAR},
       PROCSTEP = #{record.procstep,jdbcType=VARCHAR},
       PROCSTATUS = #{record.procstatus,jdbcType=VARCHAR},
       MEMO1 = #{record.memo1,jdbcType=VARCHAR},
       CRTDATETIME = #{record.crtdatetime,jdbcType=TIMESTAMP},
-      DATELASTMAINT = #{record.datelastmaint,jdbcType=TIMESTAMP}
+      DATELASTMAINT = now()
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -622,13 +612,13 @@
         CURRENCYCD = #{currencycd,jdbcType=VARCHAR},
       </if>
       <if test="transamt != null">
-        TRANSAMT = #{transamt,jdbcType=DOUBLE},
+        TRANSAMT = #{transamt,jdbcType=DECIMAL},
       </if>
       <if test="refundedamt != null">
-        REFUNDEDAMT = #{refundedamt,jdbcType=DOUBLE},
+        REFUNDEDAMT = #{refundedamt,jdbcType=DECIMAL},
       </if>
       <if test="unrefundedamt != null">
-        UNREFUNDEDAMT = #{unrefundedamt,jdbcType=DOUBLE},
+        UNREFUNDEDAMT = #{unrefundedamt,jdbcType=DECIMAL},
       </if>
       <if test="respcode != null">
         RESPCODE = #{respcode,jdbcType=VARCHAR},
@@ -637,7 +627,7 @@
         RESPMSG = #{respmsg,jdbcType=VARCHAR},
       </if>
       <if test="feeamt != null">
-        FEEAMT = #{feeamt,jdbcType=DOUBLE},
+        FEEAMT = #{feeamt,jdbcType=DECIMAL},
       </if>
       <if test="transstatus != null">
         TRANSSTATUS = #{transstatus,jdbcType=VARCHAR},
@@ -654,9 +644,7 @@
       <if test="crtdatetime != null">
         CRTDATETIME = #{crtdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="datelastmaint != null">
-        DATELASTMAINT = #{datelastmaint,jdbcType=TIMESTAMP},
-      </if>
+        DATELASTMAINT = now(),
     </set>
     where TRANSSEQNBR = #{transseqnbr,jdbcType=VARCHAR}
       and TRANSDATE = #{transdate,jdbcType=DATE}
@@ -685,18 +673,18 @@
       PAYEEACCTDEPTNBR = #{payeeacctdeptnbr,jdbcType=VARCHAR},
       PAYEEACCTNAME = #{payeeacctname,jdbcType=VARCHAR},
       CURRENCYCD = #{currencycd,jdbcType=VARCHAR},
-      TRANSAMT = #{transamt,jdbcType=DOUBLE},
-      REFUNDEDAMT = #{refundedamt,jdbcType=DOUBLE},
-      UNREFUNDEDAMT = #{unrefundedamt,jdbcType=DOUBLE},
+      TRANSAMT = #{transamt,jdbcType=DECIMAL},
+      REFUNDEDAMT = #{refundedamt,jdbcType=DECIMAL},
+      UNREFUNDEDAMT = #{unrefundedamt,jdbcType=DECIMAL},
       RESPCODE = #{respcode,jdbcType=VARCHAR},
       RESPMSG = #{respmsg,jdbcType=VARCHAR},
-      FEEAMT = #{feeamt,jdbcType=DOUBLE},
+      FEEAMT = #{feeamt,jdbcType=DECIMAL},
       TRANSSTATUS = #{transstatus,jdbcType=VARCHAR},
       PROCSTEP = #{procstep,jdbcType=VARCHAR},
       PROCSTATUS = #{procstatus,jdbcType=VARCHAR},
       MEMO1 = #{memo1,jdbcType=VARCHAR},
       CRTDATETIME = #{crtdatetime,jdbcType=TIMESTAMP},
-      DATELASTMAINT = #{datelastmaint,jdbcType=TIMESTAMP}
+      DATELASTMAINT = now()
     where TRANSSEQNBR = #{transseqnbr,jdbcType=VARCHAR}
       and TRANSDATE = #{transdate,jdbcType=DATE}
   </update>

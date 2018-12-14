@@ -1,5 +1,6 @@
 package com.upp.dto.generate;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Onlineorderinfo extends OnlineorderinfoKey {
@@ -47,17 +48,17 @@ public class Onlineorderinfo extends OnlineorderinfoKey {
 
     private String currencycd;
 
-    private Double transamt;
+    private BigDecimal transamt;
 
-    private Double refundedamt;
+    private BigDecimal refundedamt;
 
-    private Double unrefundedamt;
+    private BigDecimal unrefundedamt;
 
     private String respcode;
 
     private String respmsg;
 
-    private Double feeamt;
+    private BigDecimal feeamt;
 
     private String transstatus;
 
@@ -247,27 +248,27 @@ public class Onlineorderinfo extends OnlineorderinfoKey {
         this.currencycd = currencycd;
     }
 
-    public Double getTransamt() {
+    public BigDecimal getTransamt() {
         return transamt;
     }
 
-    public void setTransamt(Double transamt) {
+    public void setTransamt(BigDecimal transamt) {
         this.transamt = transamt;
     }
 
-    public Double getRefundedamt() {
+    public BigDecimal getRefundedamt() {
         return refundedamt;
     }
 
-    public void setRefundedamt(Double refundedamt) {
+    public void setRefundedamt(BigDecimal refundedamt) {
         this.refundedamt = refundedamt;
     }
 
-    public Double getUnrefundedamt() {
+    public BigDecimal getUnrefundedamt() {
         return unrefundedamt;
     }
 
-    public void setUnrefundedamt(Double unrefundedamt) {
+    public void setUnrefundedamt(BigDecimal unrefundedamt) {
         this.unrefundedamt = unrefundedamt;
     }
 
@@ -287,11 +288,11 @@ public class Onlineorderinfo extends OnlineorderinfoKey {
         this.respmsg = respmsg;
     }
 
-    public Double getFeeamt() {
+    public BigDecimal getFeeamt() {
         return feeamt;
     }
 
-    public void setFeeamt(Double feeamt) {
+    public void setFeeamt(BigDecimal feeamt) {
         this.feeamt = feeamt;
     }
 

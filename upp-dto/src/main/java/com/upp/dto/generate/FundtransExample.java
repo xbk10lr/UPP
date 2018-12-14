@@ -1,5 +1,6 @@
 package com.upp.dto.generate;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -1212,52 +1213,52 @@ public class FundtransExample {
             return (Criteria) this;
         }
 
-        public Criteria andTransamtEqualTo(Double value) {
+        public Criteria andTransamtEqualTo(BigDecimal value) {
             addCriterion("TRANSAMT =", value, "transamt");
             return (Criteria) this;
         }
 
-        public Criteria andTransamtNotEqualTo(Double value) {
+        public Criteria andTransamtNotEqualTo(BigDecimal value) {
             addCriterion("TRANSAMT <>", value, "transamt");
             return (Criteria) this;
         }
 
-        public Criteria andTransamtGreaterThan(Double value) {
+        public Criteria andTransamtGreaterThan(BigDecimal value) {
             addCriterion("TRANSAMT >", value, "transamt");
             return (Criteria) this;
         }
 
-        public Criteria andTransamtGreaterThanOrEqualTo(Double value) {
+        public Criteria andTransamtGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("TRANSAMT >=", value, "transamt");
             return (Criteria) this;
         }
 
-        public Criteria andTransamtLessThan(Double value) {
+        public Criteria andTransamtLessThan(BigDecimal value) {
             addCriterion("TRANSAMT <", value, "transamt");
             return (Criteria) this;
         }
 
-        public Criteria andTransamtLessThanOrEqualTo(Double value) {
+        public Criteria andTransamtLessThanOrEqualTo(BigDecimal value) {
             addCriterion("TRANSAMT <=", value, "transamt");
             return (Criteria) this;
         }
 
-        public Criteria andTransamtIn(List<Double> values) {
+        public Criteria andTransamtIn(List<BigDecimal> values) {
             addCriterion("TRANSAMT in", values, "transamt");
             return (Criteria) this;
         }
 
-        public Criteria andTransamtNotIn(List<Double> values) {
+        public Criteria andTransamtNotIn(List<BigDecimal> values) {
             addCriterion("TRANSAMT not in", values, "transamt");
             return (Criteria) this;
         }
 
-        public Criteria andTransamtBetween(Double value1, Double value2) {
+        public Criteria andTransamtBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("TRANSAMT between", value1, value2, "transamt");
             return (Criteria) this;
         }
 
-        public Criteria andTransamtNotBetween(Double value1, Double value2) {
+        public Criteria andTransamtNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("TRANSAMT not between", value1, value2, "transamt");
             return (Criteria) this;
         }
@@ -1272,52 +1273,52 @@ public class FundtransExample {
             return (Criteria) this;
         }
 
-        public Criteria andFeeamtEqualTo(Double value) {
+        public Criteria andFeeamtEqualTo(BigDecimal value) {
             addCriterion("FEEAMT =", value, "feeamt");
             return (Criteria) this;
         }
 
-        public Criteria andFeeamtNotEqualTo(Double value) {
+        public Criteria andFeeamtNotEqualTo(BigDecimal value) {
             addCriterion("FEEAMT <>", value, "feeamt");
             return (Criteria) this;
         }
 
-        public Criteria andFeeamtGreaterThan(Double value) {
+        public Criteria andFeeamtGreaterThan(BigDecimal value) {
             addCriterion("FEEAMT >", value, "feeamt");
             return (Criteria) this;
         }
 
-        public Criteria andFeeamtGreaterThanOrEqualTo(Double value) {
+        public Criteria andFeeamtGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("FEEAMT >=", value, "feeamt");
             return (Criteria) this;
         }
 
-        public Criteria andFeeamtLessThan(Double value) {
+        public Criteria andFeeamtLessThan(BigDecimal value) {
             addCriterion("FEEAMT <", value, "feeamt");
             return (Criteria) this;
         }
 
-        public Criteria andFeeamtLessThanOrEqualTo(Double value) {
+        public Criteria andFeeamtLessThanOrEqualTo(BigDecimal value) {
             addCriterion("FEEAMT <=", value, "feeamt");
             return (Criteria) this;
         }
 
-        public Criteria andFeeamtIn(List<Double> values) {
+        public Criteria andFeeamtIn(List<BigDecimal> values) {
             addCriterion("FEEAMT in", values, "feeamt");
             return (Criteria) this;
         }
 
-        public Criteria andFeeamtNotIn(List<Double> values) {
+        public Criteria andFeeamtNotIn(List<BigDecimal> values) {
             addCriterion("FEEAMT not in", values, "feeamt");
             return (Criteria) this;
         }
 
-        public Criteria andFeeamtBetween(Double value1, Double value2) {
+        public Criteria andFeeamtBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("FEEAMT between", value1, value2, "feeamt");
             return (Criteria) this;
         }
 
-        public Criteria andFeeamtNotBetween(Double value1, Double value2) {
+        public Criteria andFeeamtNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("FEEAMT not between", value1, value2, "feeamt");
             return (Criteria) this;
         }

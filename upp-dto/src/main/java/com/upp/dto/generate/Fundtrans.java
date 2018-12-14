@@ -1,5 +1,6 @@
 package com.upp.dto.generate;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Fundtrans extends FundtransKey {
@@ -31,9 +32,9 @@ public class Fundtrans extends FundtransKey {
 
     private String currencycd;
 
-    private Double transamt;
+    private BigDecimal transamt;
 
-    private Double feeamt;
+    private BigDecimal feeamt;
 
     private String checkstatus;
 
@@ -167,19 +168,19 @@ public class Fundtrans extends FundtransKey {
         this.currencycd = currencycd;
     }
 
-    public Double getTransamt() {
+    public BigDecimal getTransamt() {
         return transamt;
     }
 
-    public void setTransamt(Double transamt) {
+    public void setTransamt(BigDecimal transamt) {
         this.transamt = transamt;
     }
 
-    public Double getFeeamt() {
+    public BigDecimal getFeeamt() {
         return feeamt;
     }
 
-    public void setFeeamt(Double feeamt) {
+    public void setFeeamt(BigDecimal feeamt) {
         this.feeamt = feeamt;
     }
 
