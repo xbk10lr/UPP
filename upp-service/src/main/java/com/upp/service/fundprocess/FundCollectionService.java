@@ -8,10 +8,14 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.upp.constant.CheckStatus;
 import com.upp.constant.DateFormatCode;
 import com.upp.constant.DictErrors;
+import com.upp.constant.TransCode;
+import com.upp.constant.TransStatus;
 import com.upp.dao.mapper.ChannelroutMapper;
 import com.upp.dao.mapper.FundtransMapper;
+import com.upp.dto.common.InputFundTrans;
 import com.upp.dto.generate.Channelrout;
 import com.upp.dto.generate.ChannelroutExample;
 import com.upp.dto.generate.Fundtrans;
@@ -37,8 +41,8 @@ public class FundCollectionService extends BaseService {
 	 * @return
 	 * @throws UppException 
 	 */
-	public String autoChannel(ReqFundCollection req) throws UppException {
-		BigDecimal transamt = req.getTransamt();
+	public String autoChannel(InputFundTrans input) throws UppException {
+		BigDecimal transamt = input.getTransamt();
 		ChannelroutExample example = new ChannelroutExample();
 		example.createCriteria().andLimitamtGreaterThan(transamt);
 		List<Channelrout> lists = cm.selectByExample(example);
@@ -68,10 +72,13 @@ public class FundCollectionService extends BaseService {
 	 * @param req
 	 * @return
 	 */
-	public RespFundCollection send(ReqFundCollection req){
-		insertFundtrans(req);
-		
-		
+	public RespFundCollection send(InputFundTrans input){
+		insertFundtrans(input);
+//		RespFundCollection resp = new RespFundCollection();
+//		resp.setRespStatus("0");
+//		resp.setRespMsg("交易成功");
+//		resp.setRespCode("00");
+//		update
 		return null;
 	}
 	
@@ -79,12 +86,22 @@ public class FundCollectionService extends BaseService {
 	 * 插入资金流水表
 	 * @param req
 	 */
-	public void insertFundtrans(ReqFundCollection req) {
-		Fundtrans record = new Fundtrans();
-		BeanUtils.copyProperties(req, record);
-		record.setFundtransnbr(DateUtil.Date_To_DateTimeFormat(new Date(), DateFormatCode.DATETIME_FORMATTER3)+UUIDUtil.getUUID());
-		fm.insertSelective(record);
-
+	public void insertFundtrans(InputFundTrans input) {
+		input.setFundtransnbr(DateUtil.Date_To_DateTimeFormat(new Date(), DateFormatCode.DATETIME_FORMATTER3)+UUIDUtil.getUUID());
+		input.setTransstatus(TransStatus.INIT);
+		input.setCheckstatus(CheckStatus.UNCHECK);
+		input.setTranscode(TransCode.COLLECTION);
+		fm.insertSelective(input);
 	}
-
+	
+	/**
+	 * 更新资金流水表
+	 * @param req
+	 */
+	public void updateFundtrans(RespFundCollection resp,InputFundTrans input) {
+		Fundtrans record = new Fundtrans();
+		record.setFundtransnbr(input.getFundtransnbr());
+		record.setTransdate(input.getTransdate());
+		fm.insertSelective(record);
+	}
 }

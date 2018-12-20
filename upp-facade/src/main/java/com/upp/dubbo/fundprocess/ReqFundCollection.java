@@ -4,41 +4,47 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class ReqFundCollection {
-	
-	//上游系统编号
+
+	// 上游系统编号
 	private String uppersysnbr;
-	
-	//上游交易日期
+
+	// 上游交易流水号
+	private String uppertransnbr;
+
+	// 上游交易日期
 	private Date uppertransdate;
-	
-	//上游交易时间
+
+	// 上游交易时间
 	private Date uppertranstime;
-	
-	//付款账户
+
+	// 付款账户
 	private String payeracctnbr;
-	
-	//收款账户
+
+	// 收款账户
 	private String payeeacctnbr;
-	
-	//付款账户性质
+
+	// 付款账户性质
+	private String payeracctkind;
+
+	// 收款账户性质
 	private String payeeacctkind;
-	
-	//收款账户名
+
+	// 收款账户名
 	private String payeeacctname;
-	
-	//付款账户名
+
+	// 付款账户名
 	private String payeracctname;
-	
-	//付款账户类型
+
+	// 付款账户类型
 	private String payeraccttypcd;
-	
-	//收款账户类型
+
+	// 收款账户类型
 	private String payeeaccttypcd;
-	
-	//币种
+
+	// 币种
 	private String currencycd;
-	
-	//交易金额
+
+	// 交易金额
 	private BigDecimal transamt;
 
 	public String getPayeracctnbr() {
@@ -135,6 +141,32 @@ public class ReqFundCollection {
 
 	public void setUppertranstime(Date uppertranstime) {
 		this.uppertranstime = uppertranstime;
+	}
+
+	public String getUppertransnbr() {
+		return uppertransnbr;
+	}
+
+	public void setUppertransnbr(String uppertransnbr) {
+		this.uppertransnbr = uppertransnbr;
+	}
+
+	@Override
+	public String toString() {
+		return "ReqFundCollection [uppersysnbr=" + uppersysnbr + ", uppertransnbr=" + uppertransnbr
+				+ ", uppertransdate=" + uppertransdate + ", uppertranstime=" + uppertranstime + ", payeracctnbr="
+				+ payeracctnbr + ", payeeacctnbr=" + payeeacctnbr + ", payeeacctkind=" + payeeacctkind
+				+ ", payeeacctname=" + payeeacctname + ", payeracctname=" + payeracctname + ", payeraccttypcd="
+				+ payeraccttypcd + ", payeeaccttypcd=" + payeeaccttypcd + ", currencycd=" + currencycd + ", transamt="
+				+ transamt + "]";
+	}
+
+	public String getPayeracctkind() {
+		return payeracctkind;
+	}
+
+	public void setPayeracctkind(String payeracctkind) {
+		this.payeracctkind = payeracctkind;
 	}
 
 }

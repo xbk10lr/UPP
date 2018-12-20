@@ -5,6 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.upp.dto.common.InputFundTrans;
 import com.upp.exception.UppException;
 import com.upp.service.fundprocess.FundCollectionService;
 
@@ -18,11 +19,13 @@ public class FundCollectionImpl implements FundCollection {
 	
 	@Override
 	public RespFundCollection fundCollection(ReqFundCollection req) {
+		InputFundTrans input = new InputFundTrans(req); 
 		try {
 			//路由选路
-			fcs.autoChannel(req);
+			String channel = fcs.autoChannel(input);
+			input.setFundchannelcode(channel);
 			//资金流水落库、发送下游通道
-			fcs.send(req);
+			fcs.send(input);
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
 		}

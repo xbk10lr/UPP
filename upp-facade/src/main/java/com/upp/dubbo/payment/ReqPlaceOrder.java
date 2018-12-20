@@ -19,6 +19,9 @@ public class ReqPlaceOrder {
 	private String payeeacctnbr;
 	
 	//付款账户性质
+	private String payeracctkind;
+	
+	//收款账户性质
 	private String payeeacctkind;
 	
 	//收款账户名
@@ -135,12 +138,20 @@ public class ReqPlaceOrder {
 		this.transamt = transamt;
 	}
 
+	public String getPayeracctkind() {
+		return payeracctkind;
+	}
+
+	public void setPayeracctkind(String payeracctkind) {
+		this.payeracctkind = payeracctkind;
+	}
+
 	@Override
 	public String toString() {
 		return "ReqPlaceOrder [mernbr=" + mernbr + ", merseqnbr=" + merseqnbr + ", mertranstime=" + mertranstime
-				+ ", payeracctnbr=" + payeracctnbr + ", payeeacctnbr=" + payeeacctnbr + ", payeeacctkind="
-				+ payeeacctkind + ", payeeacctname=" + payeeacctname + ", payeracctname=" + payeracctname
-				+ ", payeraccttypcd=" + payeraccttypcd + ", payeeaccttypcd=" + payeeaccttypcd + ", currencycd="
-				+ currencycd + ", transamt=" + transamt + "]";
+				+ ", payeracctnbr=" + payeracctnbr + ", payeeacctnbr=" + payeeacctnbr + ", payeracctkind="
+				+ payeracctkind + ", payeeacctkind=" + payeeacctkind + ", payeeacctname=" + payeeacctname
+				+ ", payeracctname=" + payeracctname + ", payeraccttypcd=" + payeraccttypcd + ", payeeaccttypcd="
+				+ payeeaccttypcd + ", currencycd=" + currencycd + ", transamt=" + transamt + "]";
 	}
 }
