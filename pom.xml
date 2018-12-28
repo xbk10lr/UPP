@@ -31,6 +31,7 @@
 		<module>upp-paygate</module>
 		<module>upp-notify</module>
 		<module>upp-excephandler</module>
+		<module>upp-batch</module>
 	</modules>
 	
 	<properties>
