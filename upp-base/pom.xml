@@ -15,5 +15,13 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.upp</groupId>
+			<artifactId>upp-facade</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 
 </project>

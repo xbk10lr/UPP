@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>upp-excephandler</artifactId>
+	<artifactId>upp-transport</artifactId>
 	<packaging>war</packaging>
 
-	<name>upp-excephandler</name>
+	<name>upp-transport</name>
 	<description>Upp project for Spring Boot</description>
 
 	<parent>
@@ -19,10 +19,16 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.upp</groupId>
-			<artifactId>upp-service</artifactId>
+			<artifactId>upp-base</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.upp</groupId>
+			<artifactId>upp-facade</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
+	
 
 	<build>
 		<plugins>

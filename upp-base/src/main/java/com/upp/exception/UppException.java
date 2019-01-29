@@ -6,6 +6,8 @@ public class UppException extends Exception {
 	 * 
 	 */
 	private static final long serialVersionUID = -815056007825252656L;
+	
+	private String errormessage;
 
 	public UppException() {
 		super();
@@ -31,7 +33,14 @@ public class UppException extends Exception {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public UppException(String errorcode, String message){
+		super(errorcode);
+		this.errormessage = message;
+	}
 
-	
-	
+	public String getErrormessage() {
+		return errormessage;
+	}
+
 }

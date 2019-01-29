@@ -23,15 +23,13 @@
 	<modules>
 		<module>upp-base</module>
 		<module>upp-dao</module>
-		<module>upp-dto</module>
-		<module>upp-service</module>
 		<module>upp-facade</module>
 		<module>upp-fundprocess</module>
 		<module>upp-payment</module>
 		<module>upp-paygate</module>
 		<module>upp-notify</module>
-		<module>upp-excephandler</module>
-		<module>upp-batch</module>
+		<module>upp-schedule</module>
+		<module>upp-transport</module>
 	</modules>
 	
 	<properties>
@@ -108,6 +106,10 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-batch</artifactId>
+        </dependency>
 	</dependencies>
 
 	<build>
