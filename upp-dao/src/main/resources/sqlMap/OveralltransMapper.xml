@@ -140,7 +140,7 @@
       #{payeeacctnbr,jdbcType=VARCHAR}, #{payeename,jdbcType=VARCHAR}, #{origfundtransnbr,jdbcType=VARCHAR}, 
       #{currencycd,jdbcType=VARCHAR}, #{transamt,jdbcType=DECIMAL}, #{feeamt,jdbcType=DECIMAL}, 
       #{checkdataflag,jdbcType=VARCHAR}, #{returncode,jdbcType=VARCHAR}, #{returnmsg,jdbcType=VARCHAR}, 
-      #{transstatus,jdbcType=VARCHAR}, #{crtdatetime,jdbcType=TIMESTAMP}, #{datelastmaint,jdbcType=TIMESTAMP}
+      #{transstatus,jdbcType=VARCHAR}, now(), now()
       )
   </insert>
   <insert id="insertSelective" parameterType="com.upp.dto.generate.Overalltrans">
@@ -212,12 +212,8 @@
       <if test="transstatus != null">
         TRANSSTATUS,
       </if>
-      <if test="crtdatetime != null">
         CRTDATETIME,
-      </if>
-      <if test="datelastmaint != null">
         DATELASTMAINT,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="overalltransnbr != null">
@@ -286,12 +282,8 @@
       <if test="transstatus != null">
         #{transstatus,jdbcType=VARCHAR},
       </if>
-      <if test="crtdatetime != null">
-        #{crtdatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="datelastmaint != null">
-        #{datelastmaint,jdbcType=TIMESTAMP},
-      </if>
+      now(),
+      now(),
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.upp.dto.generate.OveralltransExample" resultType="java.lang.Long">
@@ -372,9 +364,7 @@
       <if test="record.crtdatetime != null">
         CRTDATETIME = #{record.crtdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.datelastmaint != null">
-        DATELASTMAINT = #{record.datelastmaint,jdbcType=TIMESTAMP},
-      </if>
+       DATELASTMAINT = now(),
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -405,7 +395,7 @@
       RETURNMSG = #{record.returnmsg,jdbcType=VARCHAR},
       TRANSSTATUS = #{record.transstatus,jdbcType=VARCHAR},
       CRTDATETIME = #{record.crtdatetime,jdbcType=TIMESTAMP},
-      DATELASTMAINT = #{record.datelastmaint,jdbcType=TIMESTAMP}
+      DATELASTMAINT = now()
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -476,9 +466,7 @@
       <if test="crtdatetime != null">
         CRTDATETIME = #{crtdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="datelastmaint != null">
-        DATELASTMAINT = #{datelastmaint,jdbcType=TIMESTAMP},
-      </if>
+        DATELASTMAINT = now(),
     </set>
     where OVERALLTRANSNBR = #{overalltransnbr,jdbcType=VARCHAR}
       and TRANSDATE = #{transdate,jdbcType=DATE}
@@ -506,7 +494,7 @@
       RETURNMSG = #{returnmsg,jdbcType=VARCHAR},
       TRANSSTATUS = #{transstatus,jdbcType=VARCHAR},
       CRTDATETIME = #{crtdatetime,jdbcType=TIMESTAMP},
-      DATELASTMAINT = #{datelastmaint,jdbcType=TIMESTAMP}
+      DATELASTMAINT = now()
     where OVERALLTRANSNBR = #{overalltransnbr,jdbcType=VARCHAR}
       and TRANSDATE = #{transdate,jdbcType=DATE}
   </update>
