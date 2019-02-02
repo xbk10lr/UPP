@@ -1,315 +1,337 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.upp.dao.mapper.TransexceptionregMapper">
-  <resultMap id="BaseResultMap" type="com.upp.dto.generate.Transexceptionreg">
-    <id column="EXCEPPSEQNBR" jdbcType="VARCHAR" property="exceppseqnbr" />
-    <result column="TRANSDATE" jdbcType="DATE" property="transdate" />
-    <result column="INNERFUNDTRANSNBR" jdbcType="VARCHAR" property="innerfundtransnbr" />
-    <result column="OVERALLTRANSNBR" jdbcType="VARCHAR" property="overalltransnbr" />
-    <result column="FUNDCHANNELCODE" jdbcType="VARCHAR" property="fundchannelcode" />
-    <result column="RETRYTIMES" jdbcType="INTEGER" property="retrytimes" />
-    <result column="MAXRETRYTIMES" jdbcType="INTEGER" property="maxretrytimes" />
-    <result column="LASTRETRYTIME" jdbcType="TIMESTAMP" property="lastretrytime" />
-    <result column="HANDLESTATUS" jdbcType="VARCHAR" property="handlestatus" />
-    <result column="EXCEPSERVICENAME" jdbcType="VARCHAR" property="excepservicename" />
-    <result column="EXCEPMETHODNAME" jdbcType="VARCHAR" property="excepmethodname" />
-    <result column="EXCEPDESC" jdbcType="VARCHAR" property="excepdesc" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    EXCEPPSEQNBR, TRANSDATE, INNERFUNDTRANSNBR, OVERALLTRANSNBR, FUNDCHANNELCODE, RETRYTIMES, 
-    MAXRETRYTIMES, LASTRETRYTIME, HANDLESTATUS, EXCEPSERVICENAME, EXCEPMETHODNAME, EXCEPDESC
-  </sql>
-  <select id="selectByExample" parameterType="com.upp.dto.generate.TransexceptionregExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from TRANSEXCEPTIONREG
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from TRANSEXCEPTIONREG
-    where EXCEPPSEQNBR = #{exceppseqnbr,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from TRANSEXCEPTIONREG
-    where EXCEPPSEQNBR = #{exceppseqnbr,jdbcType=VARCHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.upp.dto.generate.TransexceptionregExample">
-    delete from TRANSEXCEPTIONREG
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.upp.dto.generate.Transexceptionreg">
-    insert into TRANSEXCEPTIONREG (EXCEPPSEQNBR, TRANSDATE, INNERFUNDTRANSNBR, 
-      OVERALLTRANSNBR, FUNDCHANNELCODE, RETRYTIMES, 
-      MAXRETRYTIMES, LASTRETRYTIME, HANDLESTATUS, 
-      EXCEPSERVICENAME, EXCEPMETHODNAME, EXCEPDESC
-      )
-    values (#{exceppseqnbr,jdbcType=VARCHAR}, #{transdate,jdbcType=DATE}, #{innerfundtransnbr,jdbcType=VARCHAR}, 
-      #{overalltransnbr,jdbcType=VARCHAR}, #{fundchannelcode,jdbcType=VARCHAR}, #{retrytimes,jdbcType=INTEGER}, 
-      #{maxretrytimes,jdbcType=INTEGER}, now(), #{handlestatus,jdbcType=VARCHAR}, 
-      #{excepservicename,jdbcType=VARCHAR}, #{excepmethodname,jdbcType=VARCHAR}, #{excepdesc,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.upp.dto.generate.Transexceptionreg">
-    insert into TRANSEXCEPTIONREG
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="exceppseqnbr != null">
-        EXCEPPSEQNBR,
-      </if>
-      <if test="transdate != null">
-        TRANSDATE,
-      </if>
-      <if test="innerfundtransnbr != null">
-        INNERFUNDTRANSNBR,
-      </if>
-      <if test="overalltransnbr != null">
-        OVERALLTRANSNBR,
-      </if>
-      <if test="fundchannelcode != null">
-        FUNDCHANNELCODE,
-      </if>
-      <if test="retrytimes != null">
-        RETRYTIMES,
-      </if>
-      <if test="maxretrytimes != null">
-        MAXRETRYTIMES,
-      </if>
-        LASTRETRYTIME,
-      <if test="handlestatus != null">
-        HANDLESTATUS,
-      </if>
-      <if test="excepservicename != null">
-        EXCEPSERVICENAME,
-      </if>
-      <if test="excepmethodname != null">
-        EXCEPMETHODNAME,
-      </if>
-      <if test="excepdesc != null">
-        EXCEPDESC,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="exceppseqnbr != null">
-        #{exceppseqnbr,jdbcType=VARCHAR},
-      </if>
-      <if test="transdate != null">
-        #{transdate,jdbcType=DATE},
-      </if>
-      <if test="innerfundtransnbr != null">
-        #{innerfundtransnbr,jdbcType=VARCHAR},
-      </if>
-      <if test="overalltransnbr != null">
-        #{overalltransnbr,jdbcType=VARCHAR},
-      </if>
-      <if test="fundchannelcode != null">
-        #{fundchannelcode,jdbcType=VARCHAR},
-      </if>
-      <if test="retrytimes != null">
-        #{retrytimes,jdbcType=INTEGER},
-      </if>
-      <if test="maxretrytimes != null">
-        #{maxretrytimes,jdbcType=INTEGER},
-      </if>
-        now(),
-      <if test="handlestatus != null">
-        #{handlestatus,jdbcType=VARCHAR},
-      </if>
-      <if test="excepservicename != null">
-        #{excepservicename,jdbcType=VARCHAR},
-      </if>
-      <if test="excepmethodname != null">
-        #{excepmethodname,jdbcType=VARCHAR},
-      </if>
-      <if test="excepdesc != null">
-        #{excepdesc,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.upp.dto.generate.TransexceptionregExample" resultType="java.lang.Long">
-    select count(*) from TRANSEXCEPTIONREG
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update TRANSEXCEPTIONREG
-    <set>
-      <if test="record.exceppseqnbr != null">
-        EXCEPPSEQNBR = #{record.exceppseqnbr,jdbcType=VARCHAR},
-      </if>
-      <if test="record.transdate != null">
-        TRANSDATE = #{record.transdate,jdbcType=DATE},
-      </if>
-      <if test="record.innerfundtransnbr != null">
-        INNERFUNDTRANSNBR = #{record.innerfundtransnbr,jdbcType=VARCHAR},
-      </if>
-      <if test="record.overalltransnbr != null">
-        OVERALLTRANSNBR = #{record.overalltransnbr,jdbcType=VARCHAR},
-      </if>
-      <if test="record.fundchannelcode != null">
-        FUNDCHANNELCODE = #{record.fundchannelcode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.retrytimes != null">
-        RETRYTIMES = #{record.retrytimes,jdbcType=INTEGER},
-      </if>
-      <if test="record.maxretrytimes != null">
-        MAXRETRYTIMES = #{record.maxretrytimes,jdbcType=INTEGER},
-      </if>
-        LASTRETRYTIME = now(),
-      <if test="record.handlestatus != null">
-        HANDLESTATUS = #{record.handlestatus,jdbcType=VARCHAR},
-      </if>
-      <if test="record.excepservicename != null">
-        EXCEPSERVICENAME = #{record.excepservicename,jdbcType=VARCHAR},
-      </if>
-      <if test="record.excepmethodname != null">
-        EXCEPMETHODNAME = #{record.excepmethodname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.excepdesc != null">
-        EXCEPDESC = #{record.excepdesc,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update TRANSEXCEPTIONREG
-    set EXCEPPSEQNBR = #{record.exceppseqnbr,jdbcType=VARCHAR},
-      TRANSDATE = #{record.transdate,jdbcType=DATE},
-      INNERFUNDTRANSNBR = #{record.innerfundtransnbr,jdbcType=VARCHAR},
-      OVERALLTRANSNBR = #{record.overalltransnbr,jdbcType=VARCHAR},
-      FUNDCHANNELCODE = #{record.fundchannelcode,jdbcType=VARCHAR},
-      RETRYTIMES = #{record.retrytimes,jdbcType=INTEGER},
-      MAXRETRYTIMES = #{record.maxretrytimes,jdbcType=INTEGER},
-      LASTRETRYTIME = now(),
-      HANDLESTATUS = #{record.handlestatus,jdbcType=VARCHAR},
-      EXCEPSERVICENAME = #{record.excepservicename,jdbcType=VARCHAR},
-      EXCEPMETHODNAME = #{record.excepmethodname,jdbcType=VARCHAR},
-      EXCEPDESC = #{record.excepdesc,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.upp.dto.generate.Transexceptionreg">
-    update TRANSEXCEPTIONREG
-    <set>
-      <if test="transdate != null">
-        TRANSDATE = #{transdate,jdbcType=DATE},
-      </if>
-      <if test="innerfundtransnbr != null">
-        INNERFUNDTRANSNBR = #{innerfundtransnbr,jdbcType=VARCHAR},
-      </if>
-      <if test="overalltransnbr != null">
-        OVERALLTRANSNBR = #{overalltransnbr,jdbcType=VARCHAR},
-      </if>
-      <if test="fundchannelcode != null">
-        FUNDCHANNELCODE = #{fundchannelcode,jdbcType=VARCHAR},
-      </if>
-      <if test="retrytimes != null">
-        RETRYTIMES = #{retrytimes,jdbcType=INTEGER},
-      </if>
-      <if test="maxretrytimes != null">
-        MAXRETRYTIMES = #{maxretrytimes,jdbcType=INTEGER},
-      </if>
-        LASTRETRYTIME = now(),
-      <if test="handlestatus != null">
-        HANDLESTATUS = #{handlestatus,jdbcType=VARCHAR},
-      </if>
-      <if test="excepservicename != null">
-        EXCEPSERVICENAME = #{excepservicename,jdbcType=VARCHAR},
-      </if>
-      <if test="excepmethodname != null">
-        EXCEPMETHODNAME = #{excepmethodname,jdbcType=VARCHAR},
-      </if>
-      <if test="excepdesc != null">
-        EXCEPDESC = #{excepdesc,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where EXCEPPSEQNBR = #{exceppseqnbr,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.upp.dto.generate.Transexceptionreg">
-    update TRANSEXCEPTIONREG
-    set TRANSDATE = #{transdate,jdbcType=DATE},
-      INNERFUNDTRANSNBR = #{innerfundtransnbr,jdbcType=VARCHAR},
-      OVERALLTRANSNBR = #{overalltransnbr,jdbcType=VARCHAR},
-      FUNDCHANNELCODE = #{fundchannelcode,jdbcType=VARCHAR},
-      RETRYTIMES = #{retrytimes,jdbcType=INTEGER},
-      MAXRETRYTIMES = #{maxretrytimes,jdbcType=INTEGER},
-      LASTRETRYTIME = now(),
-      HANDLESTATUS = #{handlestatus,jdbcType=VARCHAR},
-      EXCEPSERVICENAME = #{excepservicename,jdbcType=VARCHAR},
-      EXCEPMETHODNAME = #{excepmethodname,jdbcType=VARCHAR},
-      EXCEPDESC = #{excepdesc,jdbcType=VARCHAR}
-    where EXCEPPSEQNBR = #{exceppseqnbr,jdbcType=VARCHAR}
-  </update>
+	<resultMap id="BaseResultMap" type="com.upp.dto.generate.Transexceptionreg">
+		<id column="EXCEPPSEQNBR" jdbcType="VARCHAR" property="exceppseqnbr" />
+		<result column="TRANSDATE" jdbcType="DATE" property="transdate" />
+		<result column="INNERFUNDTRANSNBR" jdbcType="VARCHAR" property="innerfundtransnbr" />
+		<result column="OVERALLTRANSNBR" jdbcType="VARCHAR" property="overalltransnbr" />
+		<result column="FUNDCHANNELCODE" jdbcType="VARCHAR" property="fundchannelcode" />
+		<result column="RETRYTIMES" jdbcType="INTEGER" property="retrytimes" />
+		<result column="MAXRETRYTIMES" jdbcType="INTEGER" property="maxretrytimes" />
+		<result column="LASTRETRYTIME" jdbcType="TIMESTAMP" property="lastretrytime" />
+		<result column="HANDLESTATUS" jdbcType="VARCHAR" property="handlestatus" />
+		<result column="EXCEPSERVICENAME" jdbcType="VARCHAR" property="excepservicename" />
+		<result column="EXCEPMETHODNAME" jdbcType="VARCHAR" property="excepmethodname" />
+		<result column="EXCEPDESC" jdbcType="VARCHAR" property="excepdesc" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		EXCEPPSEQNBR, TRANSDATE, INNERFUNDTRANSNBR, OVERALLTRANSNBR, FUNDCHANNELCODE,
+		RETRYTIMES,
+		MAXRETRYTIMES, LASTRETRYTIME, HANDLESTATUS, EXCEPSERVICENAME, EXCEPMETHODNAME,
+		EXCEPDESC
+	</sql>
+	<select id="selectByExample" parameterType="com.upp.dto.generate.TransexceptionregExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from TRANSEXCEPTIONREG
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from TRANSEXCEPTIONREG
+		where EXCEPPSEQNBR = #{exceppseqnbr,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from TRANSEXCEPTIONREG
+		where EXCEPPSEQNBR = #{exceppseqnbr,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.upp.dto.generate.TransexceptionregExample">
+		delete from TRANSEXCEPTIONREG
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.upp.dto.generate.Transexceptionreg">
+		insert into TRANSEXCEPTIONREG (EXCEPPSEQNBR, TRANSDATE, INNERFUNDTRANSNBR,
+		OVERALLTRANSNBR, FUNDCHANNELCODE, RETRYTIMES,
+		MAXRETRYTIMES, LASTRETRYTIME, HANDLESTATUS,
+		EXCEPSERVICENAME, EXCEPMETHODNAME, EXCEPDESC
+		)
+		values (#{exceppseqnbr,jdbcType=VARCHAR}, #{transdate,jdbcType=DATE},
+		#{innerfundtransnbr,jdbcType=VARCHAR},
+		#{overalltransnbr,jdbcType=VARCHAR},
+		#{fundchannelcode,jdbcType=VARCHAR}, #{retrytimes,jdbcType=INTEGER},
+		#{maxretrytimes,jdbcType=INTEGER}, now(),
+		#{handlestatus,jdbcType=VARCHAR},
+		#{excepservicename,jdbcType=VARCHAR},
+		#{excepmethodname,jdbcType=VARCHAR}, #{excepdesc,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.upp.dto.generate.Transexceptionreg">
+		insert into TRANSEXCEPTIONREG
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="exceppseqnbr != null">
+				EXCEPPSEQNBR,
+			</if>
+			<if test="transdate != null">
+				TRANSDATE,
+			</if>
+			<if test="innerfundtransnbr != null">
+				INNERFUNDTRANSNBR,
+			</if>
+			<if test="overalltransnbr != null">
+				OVERALLTRANSNBR,
+			</if>
+			<if test="fundchannelcode != null">
+				FUNDCHANNELCODE,
+			</if>
+			<if test="retrytimes != null">
+				RETRYTIMES,
+			</if>
+			<if test="maxretrytimes != null">
+				MAXRETRYTIMES,
+			</if>
+			LASTRETRYTIME,
+			<if test="handlestatus != null">
+				HANDLESTATUS,
+			</if>
+			<if test="excepservicename != null">
+				EXCEPSERVICENAME,
+			</if>
+			<if test="excepmethodname != null">
+				EXCEPMETHODNAME,
+			</if>
+			<if test="excepdesc != null">
+				EXCEPDESC,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="exceppseqnbr != null">
+				#{exceppseqnbr,jdbcType=VARCHAR},
+			</if>
+			<if test="transdate != null">
+				#{transdate,jdbcType=DATE},
+			</if>
+			<if test="innerfundtransnbr != null">
+				#{innerfundtransnbr,jdbcType=VARCHAR},
+			</if>
+			<if test="overalltransnbr != null">
+				#{overalltransnbr,jdbcType=VARCHAR},
+			</if>
+			<if test="fundchannelcode != null">
+				#{fundchannelcode,jdbcType=VARCHAR},
+			</if>
+			<if test="retrytimes != null">
+				#{retrytimes,jdbcType=INTEGER},
+			</if>
+			<if test="maxretrytimes != null">
+				#{maxretrytimes,jdbcType=INTEGER},
+			</if>
+			now(),
+			<if test="handlestatus != null">
+				#{handlestatus,jdbcType=VARCHAR},
+			</if>
+			<if test="excepservicename != null">
+				#{excepservicename,jdbcType=VARCHAR},
+			</if>
+			<if test="excepmethodname != null">
+				#{excepmethodname,jdbcType=VARCHAR},
+			</if>
+			<if test="excepdesc != null">
+				#{excepdesc,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.upp.dto.generate.TransexceptionregExample"
+		resultType="java.lang.Long">
+		select count(*) from TRANSEXCEPTIONREG
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update TRANSEXCEPTIONREG
+		<set>
+			<if test="record.exceppseqnbr != null">
+				EXCEPPSEQNBR = #{record.exceppseqnbr,jdbcType=VARCHAR},
+			</if>
+			<if test="record.transdate != null">
+				TRANSDATE = #{record.transdate,jdbcType=DATE},
+			</if>
+			<if test="record.innerfundtransnbr != null">
+				INNERFUNDTRANSNBR = #{record.innerfundtransnbr,jdbcType=VARCHAR},
+			</if>
+			<if test="record.overalltransnbr != null">
+				OVERALLTRANSNBR = #{record.overalltransnbr,jdbcType=VARCHAR},
+			</if>
+			<if test="record.fundchannelcode != null">
+				FUNDCHANNELCODE = #{record.fundchannelcode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.retrytimes != null">
+				RETRYTIMES = #{record.retrytimes,jdbcType=INTEGER},
+			</if>
+			<if test="record.maxretrytimes != null">
+				MAXRETRYTIMES = #{record.maxretrytimes,jdbcType=INTEGER},
+			</if>
+			LASTRETRYTIME = now(),
+			<if test="record.handlestatus != null">
+				HANDLESTATUS = #{record.handlestatus,jdbcType=VARCHAR},
+			</if>
+			<if test="record.excepservicename != null">
+				EXCEPSERVICENAME = #{record.excepservicename,jdbcType=VARCHAR},
+			</if>
+			<if test="record.excepmethodname != null">
+				EXCEPMETHODNAME = #{record.excepmethodname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.excepdesc != null">
+				EXCEPDESC = #{record.excepdesc,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update TRANSEXCEPTIONREG
+		set EXCEPPSEQNBR = #{record.exceppseqnbr,jdbcType=VARCHAR},
+		TRANSDATE = #{record.transdate,jdbcType=DATE},
+		INNERFUNDTRANSNBR = #{record.innerfundtransnbr,jdbcType=VARCHAR},
+		OVERALLTRANSNBR = #{record.overalltransnbr,jdbcType=VARCHAR},
+		FUNDCHANNELCODE = #{record.fundchannelcode,jdbcType=VARCHAR},
+		RETRYTIMES = #{record.retrytimes,jdbcType=INTEGER},
+		MAXRETRYTIMES = #{record.maxretrytimes,jdbcType=INTEGER},
+		LASTRETRYTIME = now(),
+		HANDLESTATUS = #{record.handlestatus,jdbcType=VARCHAR},
+		EXCEPSERVICENAME = #{record.excepservicename,jdbcType=VARCHAR},
+		EXCEPMETHODNAME = #{record.excepmethodname,jdbcType=VARCHAR},
+		EXCEPDESC = #{record.excepdesc,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.upp.dto.generate.Transexceptionreg">
+		update TRANSEXCEPTIONREG
+		<set>
+			<if test="transdate != null">
+				TRANSDATE = #{transdate,jdbcType=DATE},
+			</if>
+			<if test="innerfundtransnbr != null">
+				INNERFUNDTRANSNBR = #{innerfundtransnbr,jdbcType=VARCHAR},
+			</if>
+			<if test="overalltransnbr != null">
+				OVERALLTRANSNBR = #{overalltransnbr,jdbcType=VARCHAR},
+			</if>
+			<if test="fundchannelcode != null">
+				FUNDCHANNELCODE = #{fundchannelcode,jdbcType=VARCHAR},
+			</if>
+			<if test="retrytimes != null">
+				RETRYTIMES = #{retrytimes,jdbcType=INTEGER},
+			</if>
+			<if test="maxretrytimes != null">
+				MAXRETRYTIMES = #{maxretrytimes,jdbcType=INTEGER},
+			</if>
+			LASTRETRYTIME = now(),
+			<if test="handlestatus != null">
+				HANDLESTATUS = #{handlestatus,jdbcType=VARCHAR},
+			</if>
+			<if test="excepservicename != null">
+				EXCEPSERVICENAME = #{excepservicename,jdbcType=VARCHAR},
+			</if>
+			<if test="excepmethodname != null">
+				EXCEPMETHODNAME = #{excepmethodname,jdbcType=VARCHAR},
+			</if>
+			<if test="excepdesc != null">
+				EXCEPDESC = #{excepdesc,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where EXCEPPSEQNBR = #{exceppseqnbr,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.upp.dto.generate.Transexceptionreg">
+		update TRANSEXCEPTIONREG
+		set TRANSDATE = #{transdate,jdbcType=DATE},
+		INNERFUNDTRANSNBR = #{innerfundtransnbr,jdbcType=VARCHAR},
+		OVERALLTRANSNBR = #{overalltransnbr,jdbcType=VARCHAR},
+		FUNDCHANNELCODE = #{fundchannelcode,jdbcType=VARCHAR},
+		RETRYTIMES = #{retrytimes,jdbcType=INTEGER},
+		MAXRETRYTIMES = #{maxretrytimes,jdbcType=INTEGER},
+		LASTRETRYTIME = now(),
+		HANDLESTATUS = #{handlestatus,jdbcType=VARCHAR},
+		EXCEPSERVICENAME = #{excepservicename,jdbcType=VARCHAR},
+		EXCEPMETHODNAME = #{excepmethodname,jdbcType=VARCHAR},
+		EXCEPDESC = #{excepdesc,jdbcType=VARCHAR}
+		where EXCEPPSEQNBR = #{exceppseqnbr,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectOuttimeException" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from TRANSEXCEPTIONREG
+		where HANDLESTATUS = '1' and <![CDATA[LASTRETRYTIME <= now() - ((1+RETRYTIMES)*RETRYTIMES/2) * (#{beforequeryminute,jdbcType=INTEGER}/24/60)]]>
+	</select>
 </mapper>

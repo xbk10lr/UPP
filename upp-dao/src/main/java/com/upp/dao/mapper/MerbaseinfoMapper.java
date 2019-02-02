@@ -3,8 +3,11 @@ package com.upp.dao.mapper;
 import com.upp.dto.generate.Merbaseinfo;
 import com.upp.dto.generate.MerbaseinfoExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface MerbaseinfoMapper {
     long countByExample(MerbaseinfoExample example);
 

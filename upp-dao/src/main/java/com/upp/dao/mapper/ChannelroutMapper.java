@@ -3,8 +3,11 @@ package com.upp.dao.mapper;
 import com.upp.dto.generate.Channelrout;
 import com.upp.dto.generate.ChannelroutExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface ChannelroutMapper {
     long countByExample(ChannelroutExample example);
 

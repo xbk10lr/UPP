@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.upp.constant.DictErrors;
 import com.upp.constant.FundchannelCode;
+import com.upp.constant.TransStatus;
 import com.upp.dto.Context;
 import com.upp.dto.common.InputFundTrans;
 import com.upp.dto.generate.Channelrout;
@@ -62,7 +63,6 @@ public class FundCollectionService extends FundCommonService {
 	}
 	
 	
-	
 	public RespFundCollection sendCollection(InputFundTrans input,Context ctx) throws UppException{
 		String fundchannelcode = input.getFundchannelcode();
 		RespFundCollection resp = null;
@@ -74,6 +74,9 @@ public class FundCollectionService extends FundCommonService {
 			resp = (RespFundCollection) nt.netsDS(new ReqNetsUnionDs());
 		} else {
 			throw new UppException(DictErrors.AUTO_CHANNEL_ERROR);
+		}
+		if(TransStatus.TIMEOUT.equals(resp.getRespStatus())){
+			
 		}
 		return resp;
 	}

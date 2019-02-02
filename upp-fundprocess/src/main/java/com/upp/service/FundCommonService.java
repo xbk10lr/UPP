@@ -7,25 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.upp.baseClass.BaseService;
-import com.upp.constant.DateFormatCode;
 import com.upp.constant.DictErrors;
-import com.upp.constant.TransStatus;
+import com.upp.constant.ExcepHandleStatus;
+import com.upp.constant.ExcepInfoEnum;
 import com.upp.constant.SysStatus;
+import com.upp.constant.TransStatus;
 import com.upp.dao.mapper.ChannelroutMapper;
 import com.upp.dao.mapper.InnerfundtransMapper;
 import com.upp.dao.mapper.OveralltransMapper;
+import com.upp.dao.mapper.TransexceptionregMapper;
 import com.upp.dao.mapper.UppersysinfoMapper;
 import com.upp.dto.Context;
 import com.upp.dto.common.InputFundTrans;
 import com.upp.dto.generate.Innerfundtrans;
 import com.upp.dto.generate.Overalltrans;
 import com.upp.dto.generate.OveralltransExample;
+import com.upp.dto.generate.Transexceptionreg;
 import com.upp.dto.generate.Uppersysinfo;
 import com.upp.dubbo.fundprocess.RespFundCollection;
 import com.upp.exception.UppException;
-import com.upp.util.DateUtil;
+import com.upp.util.SeqNbrFactory;
 import com.upp.util.StringUtil;
-import com.upp.util.UUIDUtil;
 
 /**
  * fundprocess通用service
@@ -47,6 +49,9 @@ public class FundCommonService extends BaseService {
 
 	@Autowired
 	protected UppersysinfoMapper um;
+	
+	@Autowired
+	protected TransexceptionregMapper tm;
 
 	/**
 	 * 插入资金流水表
@@ -54,8 +59,7 @@ public class FundCommonService extends BaseService {
 	 * @param req
 	 */
 	public void insertFundtrans(InputFundTrans input) {
-		input.setInnerfundtransnbr(
-				DateUtil.Date_To_DateTimeFormat(new Date(), DateFormatCode.DATETIME_FORMATTER3) + UUIDUtil.getUUID());
+		input.setInnerfundtransnbr(SeqNbrFactory.getSeqNbrByDate());
 		input.setTransstatus(TransStatus.INIT);
 		Innerfundtrans inner = new Innerfundtrans();
 		inner.setOveralltransnbr(input.getOveralltransnbr());
@@ -99,8 +103,7 @@ public class FundCommonService extends BaseService {
 	 * 插入总交易流水表
 	 */
 	public void insertOveralltrans(InputFundTrans input) {
-		input.setOveralltransnbr(
-				DateUtil.Date_To_DateTimeFormat(new Date(), DateFormatCode.DATETIME_FORMATTER3) + UUIDUtil.getUUID());
+		input.setOveralltransnbr(SeqNbrFactory.getSeqNbrByDate());
 		Overalltrans over = new Overalltrans();
 		over.setOveralltransnbr(input.getOveralltransnbr());
 		over.setTransdate(input.getTransdate());
@@ -183,6 +186,26 @@ public class FundCommonService extends BaseService {
 					+ uppertransdate);
 			throw new UppException(DictErrors.UPPERSYS_TRANS_REPEAT);
 		}
+	}
+	
+	/**
+	 * 插入异常处理表
+	 * @param input
+	 * @param ex
+	 */
+	public void insertTransexceptionreg(InputFundTrans input,ExcepInfoEnum ex){
+		Transexceptionreg record = new Transexceptionreg();
+		record.setExceppseqnbr(SeqNbrFactory.getSeqNbrByDate());
+		record.setTransdate(input.getTransdate());
+		record.setInnerfundtransnbr(input.getInnerfundtransnbr());
+		record.setOveralltransnbr(input.getOveralltransnbr());
+		record.setFundchannelcode(input.getFundchannelcode());
+		record.setRetrytimes(0);
+		record.setMaxretrytimes(ex.getMaxRetryTimes());
+		record.setExcepdesc(ex.getExcepDesc());
+		record.setExcepmethodname(ex.getExcepMethodName());
+		record.setExcepservicename(ex.getExcepServiceName());
+		record.setHandlestatus(ExcepHandleStatus.PRE);
 	}
 
 }

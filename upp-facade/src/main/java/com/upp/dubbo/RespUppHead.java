@@ -48,7 +48,7 @@ public class RespUppHead {
 	public void setRespCode(String respCode) {
 		this.respCode = respCode;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "RespUppHead [respStatus=" + respStatus + ", respMsg=" + respMsg + ", respCode=" + respCode

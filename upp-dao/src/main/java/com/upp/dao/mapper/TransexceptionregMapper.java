@@ -3,8 +3,11 @@ package com.upp.dao.mapper;
 import com.upp.dto.generate.Transexceptionreg;
 import com.upp.dto.generate.TransexceptionregExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface TransexceptionregMapper {
     long countByExample(TransexceptionregExample example);
 
@@ -27,4 +30,7 @@ public interface TransexceptionregMapper {
     int updateByPrimaryKeySelective(Transexceptionreg record);
 
     int updateByPrimaryKey(Transexceptionreg record);
+    
+    //自定义方法
+    List<Transexceptionreg> selectOuttimeException(Integer beforequeryminute);
 }

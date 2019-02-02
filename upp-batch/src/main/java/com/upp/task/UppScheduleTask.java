@@ -24,8 +24,13 @@ public class UppScheduleTask {
 	@Autowired
 	private ExceptionHandleAction exceptionHandleAction;
 	
+	/**
+	 * 异常处理定时任务
+	 * 
+	 */
 	@Scheduled(cron="0 */1 * * * *")
-	private void process(){
+	private void exceptionHandle(){
+		log.info("异常处理定时任务task启动");
 		try {
 			exceptionHandleAction.excute(context);
 		} catch (Exception e) {

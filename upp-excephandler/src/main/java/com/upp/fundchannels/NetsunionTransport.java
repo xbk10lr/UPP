@@ -6,6 +6,11 @@ import com.upp.baseClass.BaseTransport;
 import com.upp.dto.model.ReqNetsUnionDs;
 import com.upp.dubbo.RespUppHead;
 
+/**
+ * 网联通道
+ * @author Administrator
+ *
+ */
 @Component
 public class NetsunionTransport extends BaseTransport {
 	

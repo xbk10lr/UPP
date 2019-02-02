@@ -4,8 +4,11 @@ import com.upp.dto.generate.Overalltrans;
 import com.upp.dto.generate.OveralltransExample;
 import com.upp.dto.generate.OveralltransKey;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface OveralltransMapper {
     long countByExample(OveralltransExample example);
 

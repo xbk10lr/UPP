@@ -3,8 +3,11 @@ package com.upp.dao.mapper;
 import com.upp.dto.generate.Uppersysinfo;
 import com.upp.dto.generate.UppersysinfoExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface UppersysinfoMapper {
     long countByExample(UppersysinfoExample example);
 

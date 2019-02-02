@@ -4,8 +4,11 @@ import com.upp.dto.generate.Innerfundtrans;
 import com.upp.dto.generate.InnerfundtransExample;
 import com.upp.dto.generate.InnerfundtransKey;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface InnerfundtransMapper {
     long countByExample(InnerfundtransExample example);
 
