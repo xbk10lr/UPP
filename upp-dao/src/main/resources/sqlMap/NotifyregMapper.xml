@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upp.dao.mapper.NotifyregMapper">
+  <resultMap id="BaseResultMap" type="com.upp.dto.generate.Notifyreg">
+    <id column="NOTIFYNBR" jdbcType="VARCHAR" property="notifynbr" />
+    <result column="UPPERTRANSNBR" jdbcType="VARCHAR" property="uppertransnbr" />
+    <result column="TRANSDATE" jdbcType="DATE" property="transdate" />
+    <result column="MERNBR" jdbcType="VARCHAR" property="mernbr" />
+    <result column="UPPERSYSNBR" jdbcType="VARCHAR" property="uppersysnbr" />
+    <result column="NOTIFYSTATUS" jdbcType="VARCHAR" property="notifystatus" />
+    <result column="CRTDATETIME" jdbcType="TIMESTAMP" property="crtdatetime" />
+    <result column="DATELASTMAINT" jdbcType="TIMESTAMP" property="datelastmaint" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    NOTIFYNBR, UPPERTRANSNBR, TRANSDATE, MERNBR, UPPERSYSNBR, NOTIFYSTATUS, CRTDATETIME, 
+    DATELASTMAINT
+  </sql>
+  <select id="selectByExample" parameterType="com.upp.dto.generate.NotifyregExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from NOTIFYREG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from NOTIFYREG
+    where NOTIFYNBR = #{notifynbr,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from NOTIFYREG
+    where NOTIFYNBR = #{notifynbr,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.upp.dto.generate.NotifyregExample">
+    delete from NOTIFYREG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.upp.dto.generate.Notifyreg">
+    insert into NOTIFYREG (NOTIFYNBR, UPPERTRANSNBR, TRANSDATE, 
+      MERNBR, UPPERSYSNBR, NOTIFYSTATUS, 
+      CRTDATETIME, DATELASTMAINT)
+    values (#{notifynbr,jdbcType=VARCHAR}, #{uppertransnbr,jdbcType=VARCHAR}, #{transdate,jdbcType=DATE}, 
+      #{mernbr,jdbcType=VARCHAR}, #{uppersysnbr,jdbcType=VARCHAR}, #{notifystatus,jdbcType=VARCHAR}, 
+      now(), now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.upp.dto.generate.Notifyreg">
+    insert into NOTIFYREG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="notifynbr != null">
+        NOTIFYNBR,
+      </if>
+      <if test="uppertransnbr != null">
+        UPPERTRANSNBR,
+      </if>
+      <if test="transdate != null">
+        TRANSDATE,
+      </if>
+      <if test="mernbr != null">
+        MERNBR,
+      </if>
+      <if test="uppersysnbr != null">
+        UPPERSYSNBR,
+      </if>
+      <if test="notifystatus != null">
+        NOTIFYSTATUS,
+      </if>
+      	CRTDATETIME,
+        DATELASTMAINT,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="notifynbr != null">
+        #{notifynbr,jdbcType=VARCHAR},
+      </if>
+      <if test="uppertransnbr != null">
+        #{uppertransnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="transdate != null">
+        #{transdate,jdbcType=DATE},
+      </if>
+      <if test="mernbr != null">
+        #{mernbr,jdbcType=VARCHAR},
+      </if>
+      <if test="uppersysnbr != null">
+        #{uppersysnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="notifystatus != null">
+        #{notifystatus,jdbcType=VARCHAR},
+      </if>
+       	now(),
+        now(),
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.upp.dto.generate.NotifyregExample" resultType="java.lang.Long">
+    select count(*) from NOTIFYREG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update NOTIFYREG
+    <set>
+      <if test="record.notifynbr != null">
+        NOTIFYNBR = #{record.notifynbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uppertransnbr != null">
+        UPPERTRANSNBR = #{record.uppertransnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transdate != null">
+        TRANSDATE = #{record.transdate,jdbcType=DATE},
+      </if>
+      <if test="record.mernbr != null">
+        MERNBR = #{record.mernbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uppersysnbr != null">
+        UPPERSYSNBR = #{record.uppersysnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notifystatus != null">
+        NOTIFYSTATUS = #{record.notifystatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crtdatetime != null">
+        CRTDATETIME = #{record.crtdatetime,jdbcType=TIMESTAMP},
+      </if>
+       DATELASTMAINT = now(),
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update NOTIFYREG
+    set NOTIFYNBR = #{record.notifynbr,jdbcType=VARCHAR},
+      UPPERTRANSNBR = #{record.uppertransnbr,jdbcType=VARCHAR},
+      TRANSDATE = #{record.transdate,jdbcType=DATE},
+      MERNBR = #{record.mernbr,jdbcType=VARCHAR},
+      UPPERSYSNBR = #{record.uppersysnbr,jdbcType=VARCHAR},
+      NOTIFYSTATUS = #{record.notifystatus,jdbcType=VARCHAR},
+      CRTDATETIME = #{record.crtdatetime,jdbcType=TIMESTAMP},
+      DATELASTMAINT = now()
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.upp.dto.generate.Notifyreg">
+    update NOTIFYREG
+    <set>
+      <if test="uppertransnbr != null">
+        UPPERTRANSNBR = #{uppertransnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="transdate != null">
+        TRANSDATE = #{transdate,jdbcType=DATE},
+      </if>
+      <if test="mernbr != null">
+        MERNBR = #{mernbr,jdbcType=VARCHAR},
+      </if>
+      <if test="uppersysnbr != null">
+        UPPERSYSNBR = #{uppersysnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="notifystatus != null">
+        NOTIFYSTATUS = #{notifystatus,jdbcType=VARCHAR},
+      </if>
+      <if test="crtdatetime != null">
+        CRTDATETIME = #{crtdatetime,jdbcType=TIMESTAMP},
+      </if>
+      	DATELASTMAINT = now(),
+    </set>
+    where NOTIFYNBR = #{notifynbr,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.upp.dto.generate.Notifyreg">
+    update NOTIFYREG
+    set UPPERTRANSNBR = #{uppertransnbr,jdbcType=VARCHAR},
+      TRANSDATE = #{transdate,jdbcType=DATE},
+      MERNBR = #{mernbr,jdbcType=VARCHAR},
+      UPPERSYSNBR = #{uppersysnbr,jdbcType=VARCHAR},
+      NOTIFYSTATUS = #{notifystatus,jdbcType=VARCHAR},
+      CRTDATETIME = #{crtdatetime,jdbcType=TIMESTAMP},
+      DATELASTMAINT = now()
+    where NOTIFYNBR = #{notifynbr,jdbcType=VARCHAR}
+  </update>
+</mapper>

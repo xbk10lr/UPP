@@ -7,6 +7,8 @@ public class Merbaseinfo {
 
     private String merstatus;
 
+    private String merurl;
+
     public String getMernbr() {
         return mernbr;
     }
@@ -29,5 +31,13 @@ public class Merbaseinfo {
 
     public void setMerstatus(String merstatus) {
         this.merstatus = merstatus;
+    }
+
+    public String getMerurl() {
+        return merurl;
+    }
+
+    public void setMerurl(String merurl) {
+        this.merurl = merurl;
     }
 }

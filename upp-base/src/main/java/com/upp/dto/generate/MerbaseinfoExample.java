@@ -313,6 +313,76 @@ public class MerbaseinfoExample {
             addCriterion("MERSTATUS not between", value1, value2, "merstatus");
             return (Criteria) this;
         }
+
+        public Criteria andMerurlIsNull() {
+            addCriterion("MERURL is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerurlIsNotNull() {
+            addCriterion("MERURL is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerurlEqualTo(String value) {
+            addCriterion("MERURL =", value, "merurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerurlNotEqualTo(String value) {
+            addCriterion("MERURL <>", value, "merurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerurlGreaterThan(String value) {
+            addCriterion("MERURL >", value, "merurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerurlGreaterThanOrEqualTo(String value) {
+            addCriterion("MERURL >=", value, "merurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerurlLessThan(String value) {
+            addCriterion("MERURL <", value, "merurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerurlLessThanOrEqualTo(String value) {
+            addCriterion("MERURL <=", value, "merurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerurlLike(String value) {
+            addCriterion("MERURL like", value, "merurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerurlNotLike(String value) {
+            addCriterion("MERURL not like", value, "merurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerurlIn(List<String> values) {
+            addCriterion("MERURL in", values, "merurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerurlNotIn(List<String> values) {
+            addCriterion("MERURL not in", values, "merurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerurlBetween(String value1, String value2) {
+            addCriterion("MERURL between", value1, value2, "merurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andMerurlNotBetween(String value1, String value2) {
+            addCriterion("MERURL not between", value1, value2, "merurl");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

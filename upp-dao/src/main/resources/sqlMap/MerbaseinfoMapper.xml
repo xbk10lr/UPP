@@ -5,6 +5,7 @@
     <id column="MERNBR" jdbcType="VARCHAR" property="mernbr" />
     <result column="MERNAME" jdbcType="VARCHAR" property="mername" />
     <result column="MERSTATUS" jdbcType="VARCHAR" property="merstatus" />
+    <result column="MERURL" jdbcType="VARCHAR" property="merurl" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    MERNBR, MERNAME, MERSTATUS
+    MERNBR, MERNAME, MERSTATUS, MERURL
   </sql>
   <select id="selectByExample" parameterType="com.upp.dto.generate.MerbaseinfoExample" resultMap="BaseResultMap">
     select
@@ -98,10 +99,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.upp.dto.generate.Merbaseinfo">
-    insert into MERBASEINFO (MERNBR, MERNAME, MERSTATUS
-      )
-    values (#{mernbr,jdbcType=VARCHAR}, #{mername,jdbcType=VARCHAR}, #{merstatus,jdbcType=VARCHAR}
-      )
+    insert into MERBASEINFO (MERNBR, MERNAME, MERSTATUS, 
+      MERURL)
+    values (#{mernbr,jdbcType=VARCHAR}, #{mername,jdbcType=VARCHAR}, #{merstatus,jdbcType=VARCHAR}, 
+      #{merurl,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.upp.dto.generate.Merbaseinfo">
     insert into MERBASEINFO
@@ -115,6 +116,9 @@
       <if test="merstatus != null">
         MERSTATUS,
       </if>
+      <if test="merurl != null">
+        MERURL,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="mernbr != null">
@@ -125,6 +129,9 @@
       </if>
       <if test="merstatus != null">
         #{merstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="merurl != null">
+        #{merurl,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -146,6 +153,9 @@
       <if test="record.merstatus != null">
         MERSTATUS = #{record.merstatus,jdbcType=VARCHAR},
       </if>
+      <if test="record.merurl != null">
+        MERURL = #{record.merurl,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -155,7 +165,8 @@
     update MERBASEINFO
     set MERNBR = #{record.mernbr,jdbcType=VARCHAR},
       MERNAME = #{record.mername,jdbcType=VARCHAR},
-      MERSTATUS = #{record.merstatus,jdbcType=VARCHAR}
+      MERSTATUS = #{record.merstatus,jdbcType=VARCHAR},
+      MERURL = #{record.merurl,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -169,13 +180,17 @@
       <if test="merstatus != null">
         MERSTATUS = #{merstatus,jdbcType=VARCHAR},
       </if>
+      <if test="merurl != null">
+        MERURL = #{merurl,jdbcType=VARCHAR},
+      </if>
     </set>
     where MERNBR = #{mernbr,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.upp.dto.generate.Merbaseinfo">
     update MERBASEINFO
     set MERNAME = #{mername,jdbcType=VARCHAR},
-      MERSTATUS = #{merstatus,jdbcType=VARCHAR}
+      MERSTATUS = #{merstatus,jdbcType=VARCHAR},
+      MERURL = #{merurl,jdbcType=VARCHAR}
     where MERNBR = #{mernbr,jdbcType=VARCHAR}
   </update>
 </mapper>

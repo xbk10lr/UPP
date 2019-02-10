@@ -15,11 +15,13 @@
     </table>
     <table schema="" tableName="OVERALLTRANS">
     </table> -->
-    <table schema="" tableName="TRANSEXCEPTIONREG">
+    <!-- <table schema="" tableName="TRANSEXCEPTIONREG">
+    </table> -->
+    <table schema="" tableName="MERBASEINFO">
     </table>
-    <!-- <table schema="" tableName="MERBASEINFO">
+    <table schema="" tableName="NOTIFYREG">
     </table>
-    <table schema="" tableName="ONLINEORDERINFO">
+    <!-- <table schema="" tableName="ONLINEORDERINFO">
     </table>
     <table schema="" tableName="UPPERSYSINFO">
     </table>

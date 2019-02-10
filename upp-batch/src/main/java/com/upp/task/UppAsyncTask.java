@@ -2,12 +2,11 @@ package com.upp.task;
 
 import java.lang.reflect.Method;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+import com.upp.baseClass.BaseTask;
 import com.upp.constant.ExcepHandleStatus;
 import com.upp.dao.mapper.TransexceptionregMapper;
 import com.upp.dto.generate.Transexceptionreg;
@@ -20,9 +19,7 @@ import com.upp.util.SpringContextUtil;
  *
  */
 @Component
-public class UppAsyncTask {
-	
-	protected Logger log = LoggerFactory.getLogger(this.getClass());
+public class UppAsyncTask extends BaseTask{
 	
 	@Autowired
 	private TransexceptionregMapper tm;
