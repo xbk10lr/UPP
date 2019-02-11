@@ -16,6 +16,7 @@ import com.upp.dto.generate.Merbaseinfo;
 import com.upp.dto.generate.Notifyreg;
 import com.upp.dto.generate.Onlineorderinfo;
 import com.upp.dto.generate.OnlineorderinfoExample;
+import com.upp.dto.model.AsyncNotifyMessage;
 import com.upp.http.MerNotifyTransport;
 import com.upp.util.SeqNbrFactory;
 
@@ -59,10 +60,10 @@ public class AsyncNotifyService extends BaseService {
 		return notifynbr;
 	}
 	
-	public void updateOnlineOrderInfo(Onlineorderinfo onlineOrderInfo,Map<String, Object> retMap){
-		String transstatus = (String) retMap.get("transstatus");
-		String returncode = (String) retMap.get("returncode");
-		String returnmsg = (String) retMap.get("returnmsg");
+	public void updateOnlineOrderInfo(Onlineorderinfo onlineOrderInfo,AsyncNotifyMessage message){
+		String transstatus = message.getTransstatus();
+		String returncode = message.getReturncode();
+		String returnmsg = message.getReturnmsg();
 		onlineOrderInfo.setTransstatus(transstatus);
 		onlineOrderInfo.setRespcode(returncode);
 		onlineOrderInfo.setRespmsg(returnmsg);

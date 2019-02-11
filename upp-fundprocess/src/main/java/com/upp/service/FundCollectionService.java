@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.upp.constant.DictErrors;
+import com.upp.constant.ExcepInfoEnum;
 import com.upp.constant.FundchannelCode;
 import com.upp.constant.TransStatus;
 import com.upp.dto.Context;
@@ -15,12 +16,16 @@ import com.upp.dto.generate.Channelrout;
 import com.upp.dto.generate.ChannelroutExample;
 import com.upp.dto.model.ReqNetsUnionDs;
 import com.upp.dto.model.ReqUnionPayDs;
-import com.upp.dubbo.RespUppHead;
 import com.upp.dubbo.fundprocess.RespFundCollection;
 import com.upp.exception.UppException;
 import com.upp.fundchannels.NetsunionTransport;
 import com.upp.fundchannels.UnionpayTransport;
 
+/**
+ * 代收交易service
+ * @author Administrator
+ *
+ */
 @Service
 public class FundCollectionService extends FundCommonService {
 
@@ -69,14 +74,17 @@ public class FundCollectionService extends FundCommonService {
 		if(FundchannelCode.UNIONPAY.equals(fundchannelcode)){
 			//资金流水落库、发送下游通道
 			resp = (RespFundCollection) ut.unionDS(new ReqUnionPayDs());
+			if(TransStatus.TIMEOUT.equals(resp.getRespStatus())){
+				this.insertTransexceptionreg(input, ExcepInfoEnum.UnionPayTimeOut);
+			}
 		} else if(FundchannelCode.NETSUNION.equals(fundchannelcode)){
 			//资金流水落库、发送下游通道
 			resp = (RespFundCollection) nt.netsDS(new ReqNetsUnionDs());
+			if(TransStatus.TIMEOUT.equals(resp.getRespStatus())){
+				this.insertTransexceptionreg(input, ExcepInfoEnum.NetsUnionTimeOut);
+			}
 		} else {
 			throw new UppException(DictErrors.AUTO_CHANNEL_ERROR);
-		}
-		if(TransStatus.TIMEOUT.equals(resp.getRespStatus())){
-			
 		}
 		return resp;
 	}

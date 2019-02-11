@@ -18,7 +18,7 @@ public class AsyncNotifySender extends BaseTransport{
 	@Autowired
 	private AmqpTemplate rabbitTemplate;
 	
-	public void asyncNotifySend(String message) {
+	public void asyncNotifySend(Object message) {
 		log.info("异步通知消息队列发送消息"+message);
 		this.rabbitTemplate.convertAndSend(RabbitConfig.NOTIFYQUEUE, message);
 	}

@@ -24,7 +24,7 @@ import com.upp.dto.generate.Overalltrans;
 import com.upp.dto.generate.OveralltransExample;
 import com.upp.dto.generate.Transexceptionreg;
 import com.upp.dto.generate.Uppersysinfo;
-import com.upp.dubbo.fundprocess.RespFundCollection;
+import com.upp.dubbo.RespUppHead;
 import com.upp.exception.UppException;
 import com.upp.util.SeqNbrFactory;
 import com.upp.util.StringUtil;
@@ -85,7 +85,7 @@ public class FundCommonService extends BaseService {
 	 * 
 	 * @param req
 	 */
-	public void updateFundtrans(RespFundCollection resp, InputFundTrans input) {
+	public void updateFundtrans(RespUppHead resp, InputFundTrans input) {
 		Innerfundtrans record = new Innerfundtrans();
 		record.setInnerfundtransnbr(input.getInnerfundtransnbr());
 		record.setTransdate(input.getTransdate());
@@ -208,4 +208,9 @@ public class FundCommonService extends BaseService {
 		record.setHandlestatus(ExcepHandleStatus.PRE);
 	}
 
+	public void formatrespcontext(Context ctx,RespUppHead resp){
+		ctx.setRespCode(resp.getRespCode());
+		ctx.setRespMsg(resp.getRespMsg());
+		ctx.setRespStatus(resp.getRespStatus());
+	}
 }

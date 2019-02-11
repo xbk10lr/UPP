@@ -47,5 +47,10 @@ public class DictErrors {
 	 */
 	public static final String UPPERSYS_TRANS_REPEAT = "UPPERSYSTRANSREPEAT";//交易超时
 	
+	/**
+	 * 充值交易代收失败
+	 */
+	public static final String RECHARGE_COLLECTION_FAIL = "RECHARGECOLLECTIONFAIL";//交易超时
+	
 	
 }

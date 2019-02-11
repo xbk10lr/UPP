@@ -1,7 +1,5 @@
 package com.upp.task;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -9,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.upp.baseClass.BaseTask;
 import com.upp.constant.NotifyStatus;
 import com.upp.dto.generate.Onlineorderinfo;
+import com.upp.dto.model.AsyncNotifyMessage;
 import com.upp.service.AsyncNotifyService;
 
 /**
@@ -28,15 +27,14 @@ public class AsyncNotifyTask  extends BaseTask{
 	 * @param ex
 	 */
 	@Async("taskExecutor")
-	public void handleNotify(String message) {
+	public void handleNotify(AsyncNotifyMessage message) {
 		log.info("开始执行异步任务，发送交易结果通知");
 		//解析报文
-		Map<String, Object> retMap = ans.parseNotifyMessage(message);
-		String overalltransnbr = (String) retMap.get("overalltransnbr");
+		String overalltransnbr = message.getOveralltransnbr();
 		//获取原订单信息
 		Onlineorderinfo onlineOrderInfo = ans.getOnlineOrderInfo(overalltransnbr);
 		//更新原订单
-		ans.updateOnlineOrderInfo(onlineOrderInfo,retMap);
+		ans.updateOnlineOrderInfo(onlineOrderInfo,message);
 		//插入通知表
 		String notifynbr = ans.insertNotifyReg(onlineOrderInfo);
 		//发送请求

@@ -4,10 +4,24 @@ import java.util.Date;
 
 import com.upp.dto.generate.Innerfundtrans;
 import com.upp.dubbo.fundprocess.ReqFundCollection;
+import com.upp.dubbo.fundprocess.ReqRecharge;
 
 public class InputFundTrans extends Innerfundtrans {
 
 	public InputFundTrans(ReqFundCollection req) {
+		this.setPayeracctnbr(req.getPayeracctnbr());
+		this.setPayeeacctnbr(req.getPayeeacctnbr());
+		this.setPayername(req.getPayeracctname());
+		this.setPayeename(req.getPayeeacctname());
+		this.setCurrencycd(req.getCurrencycd());
+		this.setTransamt(req.getTransamt());
+		this.setUppersysnbr(req.getUppersysnbr());
+		this.setUppertransnbr(req.getUppertransnbr());
+		this.setUppertransdate(req.getUppertransdate());
+		this.setUppertranstime(req.getUppertranstime());
+	}
+	
+	public InputFundTrans(ReqRecharge req) {
 		this.setPayeracctnbr(req.getPayeracctnbr());
 		this.setPayeeacctnbr(req.getPayeeacctnbr());
 		this.setPayername(req.getPayeracctname());

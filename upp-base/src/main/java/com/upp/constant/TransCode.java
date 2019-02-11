@@ -11,4 +11,14 @@ public class TransCode {
 	 * 代收
 	 */
 	public static final String COLLECTION = "collection";
+	
+	/**
+	 * 充值
+	 */
+	public static final String RECHARGE = "recharge";
+	
+	/**
+	 * 互联网核心入账
+	 */
+	public static final String EACCOUNTSETTLE = "eaccountsettle";
 }

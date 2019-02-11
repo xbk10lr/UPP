@@ -13,4 +13,11 @@ public interface FundTrans {
 	 * @return
 	 */
 	public RespFundCollection fundCollection(ReqFundCollection req);
+	
+	/**
+	 * 充值交易
+	 * @param req
+	 * @return
+	 */
+	public RespRecharge recharge(ReqRecharge req);
 }
