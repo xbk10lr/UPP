@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.upp.constant.DictErrors;
 import com.upp.constant.ExcepInfoEnum;
 import com.upp.constant.FundchannelCode;
+import com.upp.constant.TransCode;
 import com.upp.constant.TransStatus;
 import com.upp.dto.Context;
 import com.upp.dto.common.InputFundTrans;
@@ -75,13 +76,19 @@ public class FundCollectionService extends FundCommonService {
 			//资金流水落库、发送下游通道
 			resp = (RespFundCollection) ut.unionDS(new ReqUnionPayDs());
 			if(TransStatus.TIMEOUT.equals(resp.getRespStatus())){
-				this.insertTransexceptionreg(input, ExcepInfoEnum.UnionPayTimeOut);
+				if(TransCode.COLLECTION.equals(input.getOveralltranstyp())){
+					this.insertTransexceptionreg(input, ExcepInfoEnum.UnionPayCollectionTimeOut);
+				} else if(TransCode.RECHARGE.equals(input.getOveralltranstyp())){
+					this.insertTransexceptionreg(input, ExcepInfoEnum.RechargeCollectionTimeOut);
+				}
 			}
 		} else if(FundchannelCode.NETSUNION.equals(fundchannelcode)){
 			//资金流水落库、发送下游通道
 			resp = (RespFundCollection) nt.netsDS(new ReqNetsUnionDs());
 			if(TransStatus.TIMEOUT.equals(resp.getRespStatus())){
-				this.insertTransexceptionreg(input, ExcepInfoEnum.NetsUnionTimeOut);
+				this.insertTransexceptionreg(input, ExcepInfoEnum.NetsUnionCollectionTimeOut);
+			} else if(TransCode.RECHARGE.equals(input.getOveralltranstyp())){
+				this.insertTransexceptionreg(input, ExcepInfoEnum.RechargeCollectionTimeOut);
 			}
 		} else {
 			throw new UppException(DictErrors.AUTO_CHANNEL_ERROR);

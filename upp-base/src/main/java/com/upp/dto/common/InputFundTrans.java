@@ -3,12 +3,19 @@ package com.upp.dto.common;
 import java.util.Date;
 
 import com.upp.dto.generate.Innerfundtrans;
+import com.upp.dto.generate.Transexceptionreg;
 import com.upp.dubbo.fundprocess.ReqFundCollection;
 import com.upp.dubbo.fundprocess.ReqRecharge;
 
 public class InputFundTrans extends Innerfundtrans {
-
+	
+	public InputFundTrans(){
+		super();
+	}
+	
+	
 	public InputFundTrans(ReqFundCollection req) {
+		super();
 		this.setPayeracctnbr(req.getPayeracctnbr());
 		this.setPayeeacctnbr(req.getPayeeacctnbr());
 		this.setPayername(req.getPayeracctname());
@@ -22,6 +29,7 @@ public class InputFundTrans extends Innerfundtrans {
 	}
 	
 	public InputFundTrans(ReqRecharge req) {
+		super();
 		this.setPayeracctnbr(req.getPayeracctnbr());
 		this.setPayeeacctnbr(req.getPayeeacctnbr());
 		this.setPayername(req.getPayeracctname());

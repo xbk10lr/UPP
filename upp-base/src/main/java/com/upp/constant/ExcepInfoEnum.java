@@ -2,8 +2,11 @@ package com.upp.constant;
 
 public enum ExcepInfoEnum {
 	
-	UnionPayTimeOut(6,"ExceptionHandleService","unionpayCollectionQuery","银联超时查询"),
-	NetsUnionTimeOut(6,"ExceptionHandleService","netsUnionCollectionQuery","网联超时查询");
+	UnionPayCollectionTimeOut(6,"ExceptionHandleService","unionpayCollectionQuery","银联超时查询"),
+	NetsUnionCollectionTimeOut(6,"ExceptionHandleService","netsUnionCollectionQuery","网联超时查询"),
+	RechargeCollectionTimeOut(6,"ExceptionHandleService","rechargeCollectionQuery","充值交易第三方代收超时查询"),
+	EaccountRechargeTimeOut(6,"ExceptionHandleService","eaccountRechargeQuery","充值交易互联网核心记账查询");
+
 	
 	private Integer maxRetryTimes;
 	private String excepServiceName;

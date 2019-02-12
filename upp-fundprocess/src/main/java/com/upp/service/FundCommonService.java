@@ -135,7 +135,7 @@ public class FundCommonService extends BaseService {
 	}
 
 	/**
-	 * 插入总交易流水表
+	 * 更新总交易流水表
 	 */
 	public void updateOveralltrans(InputFundTrans input, Context ctx) {
 		Overalltrans over = new Overalltrans();
@@ -206,6 +206,7 @@ public class FundCommonService extends BaseService {
 		record.setExcepmethodname(ex.getExcepMethodName());
 		record.setExcepservicename(ex.getExcepServiceName());
 		record.setHandlestatus(ExcepHandleStatus.PRE);
+		tm.insertSelective(record);
 	}
 
 	public void formatrespcontext(Context ctx,RespUppHead resp){

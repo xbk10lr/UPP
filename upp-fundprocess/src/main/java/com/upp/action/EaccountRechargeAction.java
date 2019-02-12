@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import com.upp.baseClass.BaseAction;
 import com.upp.constant.FundchannelCode;
 import com.upp.constant.TransCode;
-import com.upp.constant.TransStatus;
 import com.upp.dto.Context;
 import com.upp.dto.common.InputFundTrans;
 import com.upp.dubbo.fundprocess.RespRecharge;
@@ -27,10 +26,6 @@ public class EaccountRechargeAction extends BaseAction {
 	
 	@Override
 	public void excute(Context context) throws UppException {
-		if(!TransStatus.SUCCESS.equals(context.getRespStatus())){
-			//如果上一步交易没有成功，则抛出异常，中断交易
-			throw new UppException();
-		}
 		InputFundTrans input = (InputFundTrans) context.getInput();
 		
 		try {

@@ -3,21 +3,29 @@ package com.upp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.upp.baseClass.BaseService;
+import com.upp.constant.EaccountRespStatus;
+import com.upp.constant.ExcepInfoEnum;
+import com.upp.constant.FundchannelCode;
 import com.upp.constant.NetsUnionRespStatus;
+import com.upp.constant.TransCode;
 import com.upp.constant.TransStatus;
 import com.upp.constant.UnionpayRespStatus;
-import com.upp.dao.mapper.InnerfundtransMapper;
-import com.upp.dao.mapper.OveralltransMapper;
+import com.upp.dto.common.InputFundTrans;
 import com.upp.dto.generate.Innerfundtrans;
 import com.upp.dto.generate.Overalltrans;
+import com.upp.dto.generate.OveralltransKey;
 import com.upp.dto.generate.Transexceptionreg;
 import com.upp.dto.model.AsyncNotifyMessage;
+import com.upp.dto.model.ReqEaccountQuery;
+import com.upp.dto.model.ReqEaccountRecharge;
 import com.upp.dto.model.ReqNetsUnionQuery;
 import com.upp.dto.model.ReqUnionPayQuery;
+import com.upp.dto.model.RespEaccountQuery;
 import com.upp.dto.model.RespNetsUnionQuery;
 import com.upp.dto.model.RespUnionQuery;
+import com.upp.dubbo.fundprocess.RespRecharge;
 import com.upp.exception.UppException;
+import com.upp.fundchannels.EaccountTransport;
 import com.upp.fundchannels.NetsunionTransport;
 import com.upp.fundchannels.UnionpayTransport;
 import com.upp.rabbit.sender.AsyncNotifySender;
@@ -28,7 +36,7 @@ import com.upp.rabbit.sender.AsyncNotifySender;
  *
  */
 @Component("exceptionHandleService")
-public class ExceptionHandleService extends BaseService{
+public class ExceptionHandleService extends ScheduleCommonService{
 	
 	@Autowired
 	private UnionpayTransport ut;
@@ -37,13 +45,10 @@ public class ExceptionHandleService extends BaseService{
 	private NetsunionTransport nt;
 	
 	@Autowired
+	private EaccountTransport et;
+	
+	@Autowired
 	private AsyncNotifySender ans;
-	
-	@Autowired
-	private InnerfundtransMapper im;
-	
-	@Autowired
-	private OveralltransMapper om;
 	
 	/**
 	 * 银联代收超时查询
@@ -128,6 +133,152 @@ public class ExceptionHandleService extends BaseService{
 			throw new UppException("未查到交易结果，继续查询");
 		}
 	}
+	
+	/**
+	 * 电子账户充值互联网核心入账超时查询
+	 * @param ex
+	 * @throws UppException 
+	 */
+	public void eaccountRechargeQuery(Transexceptionreg ex) throws UppException{
+		log.info("电子账户充值超时查询开始");
+		String innertransnbr = ex.getInnerfundtransnbr();
+		ReqEaccountQuery req = new ReqEaccountQuery();
+		req.setOrigInnertransnbr(innertransnbr);
+		RespEaccountQuery resp = et.eaccountQuery(req);
+		if(EaccountRespStatus.SUCCESS.equals(resp.getRespStatus())){
+			Innerfundtrans record = new Innerfundtrans();
+			record.setInnerfundtransnbr(innertransnbr);
+			record.setTransdate(ex.getTransdate());
+			record.setReturncode(resp.getOrigRespCode());
+			record.setReturnmsg(resp.getOrigRespMsg());
+			Overalltrans over = new Overalltrans();
+			over.setOveralltransnbr(ex.getOveralltransnbr());
+			over.setTransdate(ex.getTransdate());
+			over.setReturnmsg(resp.getOrigRespMsg());
+			if(EaccountRespStatus.SUCCESS.equals(resp.getOrigRespStatus())){
+				record.setTransstatus(TransStatus.SUCCESS);
+				over.setTransstatus(TransStatus.SUCCESS);
+				over.setReturncode("000000");
+			} else{
+				record.setTransstatus(TransStatus.FAILURE);
+				over.setTransstatus(TransStatus.FAILURE);
+				over.setReturncode("999999");
+			}
+			//更新子交易流水表
+			im.updateByPrimaryKeySelective(record);
+			//更新总交易流水表
+			om.updateByPrimaryKeySelective(over);
+			//查到交易结果，异步通知
+//			ans.asyncNotifySend(new AsyncNotifyMessage(over.getOveralltransnbr(), over.getTransstatus(), over.getReturncode(), over.getReturnmsg()));
+		} else {
+			log.error("未查到交易结果，继续查询");
+			throw new UppException("未查到交易结果，继续查询");
+		}
+	}
+	
+	/**
+	 * 电子账户充值第三方支付代扣超时查询
+	 * @param ex
+	 * @throws UppException 
+	 */
+	public void rechargeCollectionQuery(Transexceptionreg ex) throws UppException{
+		log.info("电子账户充值第三方支付代扣超时查询开始");
+		String innertransnbr = ex.getInnerfundtransnbr();
+		if(FundchannelCode.UNIONPAY.equals(ex.getFundchannelcode())){
+			ReqUnionPayQuery req = new ReqUnionPayQuery();
+			req.setOrigInnertransnbr(innertransnbr);
+			RespUnionQuery resp = ut.unionQuery(req);
+			if(UnionpayRespStatus.SUCCESS.equals(resp.getRespStatus())){
+				Innerfundtrans record = new Innerfundtrans();
+				record.setInnerfundtransnbr(innertransnbr);
+				record.setTransdate(ex.getTransdate());
+				record.setReturncode(resp.getOrigRespCode());
+				record.setReturnmsg(resp.getOrigRespMsg());
+				if(UnionpayRespStatus.SUCCESS.equals(resp.getOrigRespStatus())){
+					record.setTransstatus(TransStatus.SUCCESS);
+					//更新子交易流水表
+					im.updateByPrimaryKeySelective(record);
+				} else{
+					Overalltrans over = new Overalltrans();
+					over.setOveralltransnbr(ex.getOveralltransnbr());
+					over.setTransdate(ex.getTransdate());
+					over.setReturnmsg(resp.getOrigRespMsg());
+					record.setTransstatus(TransStatus.FAILURE);
+					over.setTransstatus(TransStatus.FAILURE);
+					over.setReturncode("999999");
+					//更新子交易流水表
+					im.updateByPrimaryKeySelective(record);
+					//更新总交易流水表
+					om.updateByPrimaryKeySelective(over);
+				}
+			} else {
+				log.error("未查到交易结果，继续查询");
+				throw new UppException("未查到交易结果，继续查询");
+			}
+		} else if(FundchannelCode.NETSUNION.equals(ex.getFundchannelcode())){
+			ReqNetsUnionQuery req = new ReqNetsUnionQuery();
+			req.setOrigInnertransnbr(innertransnbr);
+			RespNetsUnionQuery resp = nt.netsQuery(req);
+			if(NetsUnionRespStatus.SUCCESS.equals(resp.getRespStatus())){
+				Innerfundtrans record = new Innerfundtrans();
+				record.setInnerfundtransnbr(innertransnbr);
+				record.setTransdate(ex.getTransdate());
+				record.setReturncode(resp.getOrigRespCode());
+				record.setReturnmsg(resp.getOrigRespMsg());
+				if(NetsUnionRespStatus.SUCCESS.equals(resp.getOrigRespStatus())){
+					record.setTransstatus(TransStatus.SUCCESS);
+					//更新子交易流水表
+					im.updateByPrimaryKeySelective(record);
+				} else{
+					Overalltrans over = new Overalltrans();
+					over.setOveralltransnbr(ex.getOveralltransnbr());
+					over.setTransdate(ex.getTransdate());
+					over.setReturnmsg(resp.getOrigRespMsg());
+					record.setTransstatus(TransStatus.FAILURE);
+					over.setTransstatus(TransStatus.FAILURE);
+					over.setReturncode("999999");
+					//更新子交易流水表
+					im.updateByPrimaryKeySelective(record);
+					//更新总交易流水表
+					om.updateByPrimaryKeySelective(over);
+				}
+			} else {
+				log.error("未查到交易结果，继续查询");
+				throw new UppException("未查到交易结果，继续查询");
+			}
+		}
+	}
+	
+	/**
+	 * 充值交易电子账户超时入账
+	 * @param ex
+	 * @throws UppException
+	 */
+	public void rechargeEaccountSettle(Transexceptionreg ex) throws UppException{
+		InputFundTrans input = new InputFundTrans();
+		input.setFundchannelcode(FundchannelCode.EACCOUNT);
+		input.setTranscode(TransCode.EACCOUNTSETTLE);
+		OveralltransKey key = new OveralltransKey();
+		key.setOveralltransnbr(ex.getOveralltransnbr());
+		key.setTransdate(ex.getTransdate());
+		Overalltrans over = om.selectByPrimaryKey(key);
+		//落库
+		this.insertFundtrans(input,over);
+		RespRecharge resp = (RespRecharge)et.eaccountSettle(new ReqEaccountRecharge());
+		//更新库表
+		this.updateFundtrans(resp, input);
+		
+		if(TransStatus.TIMEOUT.equals(resp.getRespStatus())){
+			//超时异常处理
+			this.insertTransexceptionreg(ex, ExcepInfoEnum.EaccountRechargeTimeOut);
+		} else {
+			this.updateOveralltrans(ex, resp);
+		}
+	}
+	
+	
+	
+	
 	
 	public void test(Transexceptionreg ex) throws UppException{
 		log.info("成功唤起异步线程");

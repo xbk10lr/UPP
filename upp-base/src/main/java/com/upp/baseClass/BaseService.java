@@ -8,5 +8,4 @@ public abstract class BaseService {
 	
 	protected Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	
 }
