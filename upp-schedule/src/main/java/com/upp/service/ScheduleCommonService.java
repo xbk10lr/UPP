@@ -15,7 +15,6 @@ import com.upp.dto.generate.Overalltrans;
 import com.upp.dto.generate.Transexceptionreg;
 import com.upp.dubbo.RespUppHead;
 import com.upp.dubbo.fundprocess.RespRecharge;
-import com.upp.util.SeqNbrFactory;
 
 public class ScheduleCommonService extends BaseService {
 	
@@ -30,7 +29,7 @@ public class ScheduleCommonService extends BaseService {
 	
 	public void insertTransexceptionreg(Transexceptionreg reg,ExcepInfoEnum ex){
 		Transexceptionreg record = new Transexceptionreg();
-		record.setExceppseqnbr(SeqNbrFactory.getSeqNbrByDate());
+		record.setExceppseqnbr(seqNbrFactory.getSnowFlakeSeqNbr());
 		record.setTransdate(reg.getTransdate());
 		record.setInnerfundtransnbr(reg.getInnerfundtransnbr());
 		record.setOveralltransnbr(reg.getOveralltransnbr());
@@ -65,7 +64,7 @@ public class ScheduleCommonService extends BaseService {
 	 * @param req
 	 */
 	public void insertFundtrans(InputFundTrans input) {
-		input.setInnerfundtransnbr(SeqNbrFactory.getSeqNbrByDate());
+		input.setInnerfundtransnbr(seqNbrFactory.getSnowFlakeSeqNbr());
 		input.setTransstatus(TransStatus.INIT);
 		Innerfundtrans inner = new Innerfundtrans();
 		inner.setOveralltransnbr(input.getOveralltransnbr());

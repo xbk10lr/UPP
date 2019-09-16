@@ -38,7 +38,7 @@ public class PlaceOrderService extends BaseService{
 	 */
 	public void insertOnlineOrderInfo(InputPlaceOrder input){
 		input.setTranscode(TransCode.COLLECTION);
-		input.setTransseqnbr(DateUtil.Date_To_DateTimeFormat(new Date(), DateFormatCode.DATETIME_FORMATTER3)+UUIDUtil.getUUID());
+		input.setTransseqnbr(seqNbrFactory.getSnowFlakeSeqNbr());
 		input.setTransstatus(TransStatus.INIT);
 		input.setTransdate(new Date());
 		dao.insertSelective(input);

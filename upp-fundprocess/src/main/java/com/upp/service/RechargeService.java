@@ -17,7 +17,7 @@ import com.upp.fundchannels.EaccountTransport;
  * @author Administrator
  *
  */
-@Service
+@Service("RechargeService")
 public class RechargeService extends FundCommonService {
 
 	@Autowired

@@ -1,6 +1,7 @@
 package com.upp.action;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.upp.baseClass.BaseAction;
@@ -12,6 +13,7 @@ import com.upp.service.FundCommonService;
 public class CommonOutputAction extends BaseAction {
 
 	@Autowired
+	@Qualifier("FundCommonService")
 	private FundCommonService fcs;
 	
 	@Override

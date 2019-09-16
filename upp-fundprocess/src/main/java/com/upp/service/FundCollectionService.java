@@ -27,7 +27,7 @@ import com.upp.fundchannels.UnionpayTransport;
  * @author Administrator
  *
  */
-@Service
+@Service("FundCollectionService")
 public class FundCollectionService extends FundCommonService {
 
 	@Autowired

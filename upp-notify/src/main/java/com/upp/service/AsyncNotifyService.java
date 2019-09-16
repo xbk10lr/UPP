@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.upp.baseClass.BaseService;
 import com.upp.constant.NotifyStatus;
@@ -18,9 +19,8 @@ import com.upp.dto.generate.Onlineorderinfo;
 import com.upp.dto.generate.OnlineorderinfoExample;
 import com.upp.dto.model.AsyncNotifyMessage;
 import com.upp.http.MerNotifyTransport;
-import com.upp.util.SeqNbrFactory;
 
-@Component
+@Service
 public class AsyncNotifyService extends BaseService {
 
 	@Autowired
@@ -48,7 +48,7 @@ public class AsyncNotifyService extends BaseService {
 	}
 	
 	public String insertNotifyReg(Onlineorderinfo onlineOrderInfo){
-		String notifynbr = SeqNbrFactory.getSeqNbrByDate()+"NOTIFY";
+		String notifynbr = seqNbrFactory.getSnowFlakeSeqNbr();
 		//入通知表
 		Notifyreg record = new Notifyreg();
 		record.setMernbr(onlineOrderInfo.getMernbr());

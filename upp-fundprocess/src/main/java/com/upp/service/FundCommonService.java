@@ -26,7 +26,6 @@ import com.upp.dto.generate.Transexceptionreg;
 import com.upp.dto.generate.Uppersysinfo;
 import com.upp.dubbo.RespUppHead;
 import com.upp.exception.UppException;
-import com.upp.util.SeqNbrFactory;
 import com.upp.util.StringUtil;
 
 /**
@@ -35,7 +34,7 @@ import com.upp.util.StringUtil;
  * @author Administrator
  *
  */
-@Service
+@Service("FundCommonService")
 public class FundCommonService extends BaseService {
 
 	@Autowired
@@ -59,7 +58,7 @@ public class FundCommonService extends BaseService {
 	 * @param req
 	 */
 	public void insertFundtrans(InputFundTrans input) {
-		input.setInnerfundtransnbr(SeqNbrFactory.getSeqNbrByDate());
+		input.setInnerfundtransnbr(seqNbrFactory.getSnowFlakeSeqNbr());
 		input.setTransstatus(TransStatus.INIT);
 		Innerfundtrans inner = new Innerfundtrans();
 		inner.setOveralltransnbr(input.getOveralltransnbr());
@@ -103,7 +102,7 @@ public class FundCommonService extends BaseService {
 	 * 插入总交易流水表
 	 */
 	public void insertOveralltrans(InputFundTrans input) {
-		input.setOveralltransnbr(SeqNbrFactory.getSeqNbrByDate());
+		input.setOveralltransnbr(seqNbrFactory.getSnowFlakeSeqNbr());
 		Overalltrans over = new Overalltrans();
 		over.setOveralltransnbr(input.getOveralltransnbr());
 		over.setTransdate(input.getTransdate());
@@ -195,7 +194,7 @@ public class FundCommonService extends BaseService {
 	 */
 	public void insertTransexceptionreg(InputFundTrans input,ExcepInfoEnum ex){
 		Transexceptionreg record = new Transexceptionreg();
-		record.setExceppseqnbr(SeqNbrFactory.getSeqNbrByDate());
+		record.setExceppseqnbr(seqNbrFactory.getSnowFlakeSeqNbr());
 		record.setTransdate(input.getTransdate());
 		record.setInnerfundtransnbr(input.getInnerfundtransnbr());
 		record.setOveralltransnbr(input.getOveralltransnbr());
