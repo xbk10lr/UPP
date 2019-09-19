@@ -44,7 +44,7 @@ public class UppFundprocessApplicationTests {
 //		o.setTransamt(new BigDecimal("1"));
 //		om.insertSelective(o);
 //		om.insert(o);
-		for(int i=0;i<30;i++){
+		for(int i=0;i<3;i++){
 			System.out.println(seqNbrFactory.getSnowFlakeSeqNbr());
 		}
 		
