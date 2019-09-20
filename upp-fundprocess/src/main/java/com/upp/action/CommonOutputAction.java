@@ -18,7 +18,7 @@ public class CommonOutputAction extends BaseAction {
 	
 	@Override
 	public void excute(Context context) throws UppException {
-		//插入总交易流水表
+		//更新总交易流水表
 		fcs.updateOveralltransCtx(context);
 	}
 

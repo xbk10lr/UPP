@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.upp.dao.mapper.MerbaseinfoMapper;
-import com.upp.dao.mapper.OnlineorderinfoMapper;
+import com.upp.constant.DictErrors;
+import com.upp.dto.Context;
+import com.upp.exception.UppException;
+import com.upp.exception.UppExceptionHandler;
 import com.upp.util.SeqNbrFactory;
 
 @RunWith(SpringRunner.class)
@@ -22,6 +24,9 @@ public class UppFundprocessApplicationTests {
 	
 	@Autowired
 	private SeqNbrFactory seqNbrFactory;
+	
+	@Autowired
+	private UppExceptionHandler handler;
 	
 	@Test
 	public void contextLoads() {
@@ -44,9 +49,12 @@ public class UppFundprocessApplicationTests {
 //		o.setTransamt(new BigDecimal("1"));
 //		om.insertSelective(o);
 //		om.insert(o);
-		for(int i=0;i<3;i++){
-			System.out.println(seqNbrFactory.getSnowFlakeSeqNbr());
-		}
+//		for(int i=0;i<3;i++){
+//			System.out.println(seqNbrFactory.getSnowFlakeSeqNbr());
+//		}
+		Context ctx = new Context();
+		handler.handle(new UppException(DictErrors.TIMEOUT), ctx);
+		System.out.println(ctx.getRespMsg()+"---"+ctx.getRespCode()+"---"+ctx.getRespStatus());
 		
 	}
 

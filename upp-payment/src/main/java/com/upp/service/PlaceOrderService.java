@@ -7,11 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.upp.baseClass.BaseService;
-import com.upp.constant.DateFormatCode;
 import com.upp.constant.DictErrors;
+import com.upp.constant.SysNbr;
 import com.upp.constant.TransCode;
 import com.upp.constant.TransStatus;
-import com.upp.constant.SysNbr;
 import com.upp.dao.mapper.OnlineorderinfoMapper;
 import com.upp.dto.Context;
 import com.upp.dto.common.InputPlaceOrder;
@@ -20,8 +19,6 @@ import com.upp.dubbo.InnerDubboTransport;
 import com.upp.dubbo.fundprocess.ReqFundCollection;
 import com.upp.dubbo.fundprocess.RespFundCollection;
 import com.upp.exception.UppException;
-import com.upp.util.DateUtil;
-import com.upp.util.UUIDUtil;
 
 @Component
 public class PlaceOrderService extends BaseService{

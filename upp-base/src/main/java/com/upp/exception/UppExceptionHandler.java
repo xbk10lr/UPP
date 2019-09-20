@@ -1,11 +1,15 @@
 package com.upp.exception;
 
+import java.util.Locale;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.upp.constant.DictErrors;
 import com.upp.constant.TransStatus;
 import com.upp.dto.Context;
-import com.upp.util.PropUtils;
+import com.upp.util.MessageUtils;
+import com.upp.util.SpringContextUtil;
 import com.upp.util.StringUtil;
 
 /**
@@ -21,19 +25,16 @@ public class UppExceptionHandler {
 			UppException uppException = (UppException) exception;
 			String errorcode = uppException.getMessage();
 			String errormessage = uppException.getErrormessage();
-			try {
-				String val = PropUtils.readValue(errorcode, "errorcodes.properties");
-				if (StringUtil.isStringEmpty(val)) {
-					val = PropUtils.readValue(DictErrors.TRANS_EXCEPTION, "errorcodes.properties");
-				}
-				if (!StringUtil.isStringEmpty(errormessage)) {
-					formatContext(context, String.format(val.split(";")[1], errormessage), val.split(";")[0],
-							val.split(";")[2]);
-				} else {
-					formatContext(context, val.split(";")[1], val.split(";")[0], val.split(";")[2]);
-				}
-			} catch (UppException e) {
-				formatContext(context, "系统异常，请联系管理员", "100003", TransStatus.FAILURE);
+			//				String val = PropUtils.readValue(errorcode, "errorcodes.properties");
+			String message = MessageUtils.get(errorcode);
+			if (StringUtil.isStringEmpty(message)) {
+				message = SpringContextUtil.getApplicationContext().getMessage(DictErrors.TRANS_EXCEPTION, null, Locale.CHINA);
+			}
+			if (!StringUtil.isStringEmpty(errormessage)) {
+				formatContext(context, String.format(message.split(";")[1], errormessage), message.split(";")[0],
+						message.split(";")[2]);
+			} else {
+				formatContext(context, message.split(";")[1], message.split(";")[0], message.split(";")[2]);
 			}
 		} else {
 			formatContext(context, "交易失败，请联系管理员", "100000", TransStatus.FAILURE);
