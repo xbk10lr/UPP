@@ -1,13 +1,8 @@
-package com.upp.fundchannels;
+package com.upp.dubbo.connectors;
 
-import org.springframework.stereotype.Component;
-
-import com.upp.baseClass.BaseTransport;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.upp.constant.TransStatus;
 import com.upp.constant.UnionpayRespStatus;
-import com.upp.dto.model.ReqUnionPayDs;
-import com.upp.dto.model.ReqUnionPayQuery;
-import com.upp.dto.model.RespUnionQuery;
 import com.upp.dubbo.RespUppHead;
 
 /**
@@ -15,8 +10,8 @@ import com.upp.dubbo.RespUppHead;
  * @author Administrator
  *
  */
-@Component
-public class UnionpayTransport extends BaseTransport {
+@Service(version = "1.0.0")
+public class UnionpayChannelImpl implements UnionpayChannel {
 	
 	/**
 	 * 银联代收

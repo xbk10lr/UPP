@@ -3,9 +3,9 @@ package com.upp.service;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.upp.constant.DictErrors;
 import com.upp.constant.ExcepInfoEnum;
 import com.upp.constant.FundchannelCode;
@@ -15,12 +15,12 @@ import com.upp.dto.Context;
 import com.upp.dto.common.InputFundTrans;
 import com.upp.dto.generate.Channelrout;
 import com.upp.dto.generate.ChannelroutExample;
-import com.upp.dto.model.ReqNetsUnionDs;
-import com.upp.dto.model.ReqUnionPayDs;
+import com.upp.dubbo.connectors.NetsunionChannel;
+import com.upp.dubbo.connectors.ReqNetsUnionDs;
+import com.upp.dubbo.connectors.ReqUnionPayDs;
+import com.upp.dubbo.connectors.UnionpayChannel;
 import com.upp.dubbo.fundprocess.RespFundCollection;
 import com.upp.exception.UppException;
-import com.upp.fundchannels.NetsunionTransport;
-import com.upp.fundchannels.UnionpayTransport;
 
 /**
  * 代收交易service
@@ -30,11 +30,11 @@ import com.upp.fundchannels.UnionpayTransport;
 @Service("FundCollectionService")
 public class FundCollectionService extends FundCommonService {
 
-	@Autowired
-	private UnionpayTransport ut;
+	@Reference(version="1.0.0")
+	private UnionpayChannel uc;
 	
-	@Autowired
-	private NetsunionTransport nt;
+	@Reference(version="1.0.0")
+	private NetsunionChannel nc;
 
 	/**
 	 * 根据限额、优先级，获取最合适的路由
@@ -74,7 +74,7 @@ public class FundCollectionService extends FundCommonService {
 		RespFundCollection resp = null;
 		if(FundchannelCode.UNIONPAY.equals(fundchannelcode)){
 			//资金流水落库、发送下游通道
-			resp = (RespFundCollection) ut.unionDS(new ReqUnionPayDs());
+			resp = (RespFundCollection) uc.unionDS(new ReqUnionPayDs());
 			if(TransStatus.TIMEOUT.equals(resp.getRespStatus())){
 				if(TransCode.COLLECTION.equals(input.getOveralltranstyp())){
 					this.insertTransexceptionreg(input, ExcepInfoEnum.UnionPayCollectionTimeOut);
@@ -84,7 +84,7 @@ public class FundCollectionService extends FundCommonService {
 			}
 		} else if(FundchannelCode.NETSUNION.equals(fundchannelcode)){
 			//资金流水落库、发送下游通道
-			resp = (RespFundCollection) nt.netsDS(new ReqNetsUnionDs());
+			resp = (RespFundCollection) nc.netsDS(new ReqNetsUnionDs());
 			if(TransStatus.TIMEOUT.equals(resp.getRespStatus())){
 				this.insertTransexceptionreg(input, ExcepInfoEnum.NetsUnionCollectionTimeOut);
 			} else if(TransCode.RECHARGE.equals(input.getOveralltranstyp())){

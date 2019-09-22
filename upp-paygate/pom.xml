@@ -22,11 +22,11 @@
 			<artifactId>upp-dao</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.upp</groupId>
 			<artifactId>upp-transport</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 
 </project>

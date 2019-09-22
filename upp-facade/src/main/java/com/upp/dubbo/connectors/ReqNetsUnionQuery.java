@@ -1,6 +1,6 @@
-package com.upp.dto.model;
+package com.upp.dubbo.connectors;
 
-public class ReqUnionPayQuery {
+public class ReqNetsUnionQuery {
 	
 	private String origInnertransnbr;
 

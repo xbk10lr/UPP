@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.upp.baseClass.BaseTransport;
+import com.upp.config.RabbitConfig;
 import com.upp.dto.model.AsyncNotifyMessage;
-import com.upp.rabbit.config.RabbitConfig;
 import com.upp.task.AsyncNotifyTask;
 
 @Component

@@ -1,4 +1,4 @@
-package com.upp.dto.model;
+package com.upp.dubbo.connectors;
 
 public class ReqEaccountQuery {
 	

@@ -29,7 +29,7 @@
 		<module>upp-paygate</module>
 		<module>upp-notify</module>
 		<module>upp-schedule</module>
-		<module>upp-transport</module>
+		<module>upp-connectors</module>
 	</modules>
 	
 	<properties>

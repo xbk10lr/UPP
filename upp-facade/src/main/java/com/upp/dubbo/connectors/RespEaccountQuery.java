@@ -1,8 +1,8 @@
-package com.upp.dto.model;
+package com.upp.dubbo.connectors;
 
 import com.upp.dubbo.RespUppHead;
 
-public class RespNetsUnionQuery extends RespUppHead{
+public class RespEaccountQuery extends RespUppHead{
 	
 	private String origRespStatus;
 	

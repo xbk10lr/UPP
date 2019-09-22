@@ -7,6 +7,9 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.upp.baseClass.Action;
 import com.upp.dto.Context;
 import com.upp.dto.common.InputPlaceOrder;
+import com.upp.dubbo.payment.PlaceOrder;
+import com.upp.dubbo.payment.ReqPlaceOrder;
+import com.upp.dubbo.payment.RespPlaceOrder;
 import com.upp.exception.UppExceptionHandler;
 
 @Service(version="1.0.0")

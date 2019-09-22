@@ -3,6 +3,7 @@ package com.upp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.upp.constant.EaccountRespStatus;
 import com.upp.constant.ExcepInfoEnum;
 import com.upp.constant.FundchannelCode;
@@ -16,18 +17,18 @@ import com.upp.dto.generate.Overalltrans;
 import com.upp.dto.generate.OveralltransKey;
 import com.upp.dto.generate.Transexceptionreg;
 import com.upp.dto.model.AsyncNotifyMessage;
-import com.upp.dto.model.ReqEaccountQuery;
-import com.upp.dto.model.ReqEaccountRecharge;
-import com.upp.dto.model.ReqNetsUnionQuery;
-import com.upp.dto.model.ReqUnionPayQuery;
-import com.upp.dto.model.RespEaccountQuery;
-import com.upp.dto.model.RespNetsUnionQuery;
-import com.upp.dto.model.RespUnionQuery;
+import com.upp.dubbo.connectors.EaccountChannel;
+import com.upp.dubbo.connectors.NetsunionChannel;
+import com.upp.dubbo.connectors.ReqEaccountQuery;
+import com.upp.dubbo.connectors.ReqEaccountRecharge;
+import com.upp.dubbo.connectors.ReqNetsUnionQuery;
+import com.upp.dubbo.connectors.ReqUnionPayQuery;
+import com.upp.dubbo.connectors.RespEaccountQuery;
+import com.upp.dubbo.connectors.RespNetsUnionQuery;
+import com.upp.dubbo.connectors.RespUnionQuery;
+import com.upp.dubbo.connectors.UnionpayChannel;
 import com.upp.dubbo.fundprocess.RespRecharge;
 import com.upp.exception.UppException;
-import com.upp.fundchannels.EaccountTransport;
-import com.upp.fundchannels.NetsunionTransport;
-import com.upp.fundchannels.UnionpayTransport;
 import com.upp.rabbit.sender.AsyncNotifySender;
 
 /**
@@ -38,14 +39,14 @@ import com.upp.rabbit.sender.AsyncNotifySender;
 @Component("exceptionHandleService")
 public class ExceptionHandleService extends ScheduleCommonService{
 	
-	@Autowired
-	private UnionpayTransport ut;
+	@Reference(version="1.0.0")
+	private UnionpayChannel uc;
 	
-	@Autowired
-	private NetsunionTransport nt;
+	@Reference(version="1.0.0")
+	private NetsunionChannel nc;
 	
-	@Autowired
-	private EaccountTransport et;
+	@Reference(version="1.0.0")
+	private EaccountChannel ec;
 	
 	@Autowired
 	private AsyncNotifySender ans;
@@ -60,7 +61,7 @@ public class ExceptionHandleService extends ScheduleCommonService{
 		String innertransnbr = ex.getInnerfundtransnbr();
 		ReqUnionPayQuery req = new ReqUnionPayQuery();
 		req.setOrigInnertransnbr(innertransnbr);
-		RespUnionQuery resp = ut.unionQuery(req);
+		RespUnionQuery resp = uc.unionQuery(req);
 		if(UnionpayRespStatus.SUCCESS.equals(resp.getRespStatus())){
 			Innerfundtrans record = new Innerfundtrans();
 			record.setInnerfundtransnbr(innertransnbr);
@@ -102,7 +103,7 @@ public class ExceptionHandleService extends ScheduleCommonService{
 		String innertransnbr = ex.getInnerfundtransnbr();
 		ReqNetsUnionQuery req = new ReqNetsUnionQuery();
 		req.setOrigInnertransnbr(innertransnbr);
-		RespNetsUnionQuery resp = nt.netsQuery(req);
+		RespNetsUnionQuery resp = nc.netsQuery(req);
 		if(NetsUnionRespStatus.SUCCESS.equals(resp.getRespStatus())){
 			Innerfundtrans record = new Innerfundtrans();
 			record.setInnerfundtransnbr(innertransnbr);
@@ -144,7 +145,7 @@ public class ExceptionHandleService extends ScheduleCommonService{
 		String innertransnbr = ex.getInnerfundtransnbr();
 		ReqEaccountQuery req = new ReqEaccountQuery();
 		req.setOrigInnertransnbr(innertransnbr);
-		RespEaccountQuery resp = et.eaccountQuery(req);
+		RespEaccountQuery resp = ec.eaccountQuery(req);
 		if(EaccountRespStatus.SUCCESS.equals(resp.getRespStatus())){
 			Innerfundtrans record = new Innerfundtrans();
 			record.setInnerfundtransnbr(innertransnbr);
@@ -187,7 +188,7 @@ public class ExceptionHandleService extends ScheduleCommonService{
 		if(FundchannelCode.UNIONPAY.equals(ex.getFundchannelcode())){
 			ReqUnionPayQuery req = new ReqUnionPayQuery();
 			req.setOrigInnertransnbr(innertransnbr);
-			RespUnionQuery resp = ut.unionQuery(req);
+			RespUnionQuery resp = uc.unionQuery(req);
 			if(UnionpayRespStatus.SUCCESS.equals(resp.getRespStatus())){
 				Innerfundtrans record = new Innerfundtrans();
 				record.setInnerfundtransnbr(innertransnbr);
@@ -218,7 +219,7 @@ public class ExceptionHandleService extends ScheduleCommonService{
 		} else if(FundchannelCode.NETSUNION.equals(ex.getFundchannelcode())){
 			ReqNetsUnionQuery req = new ReqNetsUnionQuery();
 			req.setOrigInnertransnbr(innertransnbr);
-			RespNetsUnionQuery resp = nt.netsQuery(req);
+			RespNetsUnionQuery resp = nc.netsQuery(req);
 			if(NetsUnionRespStatus.SUCCESS.equals(resp.getRespStatus())){
 				Innerfundtrans record = new Innerfundtrans();
 				record.setInnerfundtransnbr(innertransnbr);
@@ -264,7 +265,7 @@ public class ExceptionHandleService extends ScheduleCommonService{
 		Overalltrans over = om.selectByPrimaryKey(key);
 		//落库
 		this.insertFundtrans(input,over);
-		RespRecharge resp = (RespRecharge)et.eaccountSettle(new ReqEaccountRecharge());
+		RespRecharge resp = (RespRecharge)ec.eaccountSettle(new ReqEaccountRecharge());
 		//更新库表
 		this.updateFundtrans(resp, input);
 		
