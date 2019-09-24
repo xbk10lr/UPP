@@ -28,7 +28,7 @@ public class SignUtils {
 		}
 	}
 	
-	private static String getMd5String(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+	public static String getMd5String(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException{
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(str.getBytes("utf-8"));
 		return new BigInteger(1, md.digest()).toString(16);

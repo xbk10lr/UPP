@@ -52,5 +52,9 @@ public class DictErrors {
 	 */
 	public static final String RECHARGE_COLLECTION_FAIL = "RECHARGECOLLECTIONFAIL";//交易超时
 	
+	/**
+	 * 验签失败
+	 */
+	public static final String SIGN_ERROR = "SIGNERROR";
 	
 }

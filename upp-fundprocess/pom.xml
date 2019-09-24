@@ -22,11 +22,6 @@
 			<artifactId>upp-dao</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>com.upp</groupId>
-			<artifactId>upp-transport</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency> -->
 	</dependencies>
 
 </project>

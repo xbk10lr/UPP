@@ -1,5 +1,7 @@
 package com.upp.service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.TreeMap;
 
 import org.springframework.beans.BeanUtils;
@@ -25,11 +27,11 @@ public class PaygateService extends BaseService{
 	 * @param req
 	 * @return
 	 */
-	public Boolean verifySign(ReqCollection req){
+	public Boolean verifySign(ReqCollection req,String keyWord){
 		TreeMap<String, Object> tm = new TreeMap<>();
     	UppBeanUtils.transBean2Map(req, tm);
     	String signature = (String) tm.remove("signature");
-    	if(!SignUtils.verifySign(tm, "test", signature)){
+    	if(!SignUtils.verifySign(tm, keyWord, signature)){
     		log.error("验签失败");
     		return false;
     	}
@@ -48,5 +50,12 @@ public class PaygateService extends BaseService{
     	RespPlaceOrder resp = idt.toPayment(rpo); 
 		return resp;
 	}
-
+	
+	public String formatRespMsg(RespPlaceOrder resp,String keyWord) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+		String respStr = "respCode="+resp.getRespCode()+"&respStatus="+resp.getRespStatus()+"&respMsg="+resp.getRespMsg();
+		String signStr = SignUtils.getMd5String(respStr+"&key="+keyWord);
+		String respMsg = respStr+"&sign="+signStr;
+		return respMsg;
+	}
+	
 }
