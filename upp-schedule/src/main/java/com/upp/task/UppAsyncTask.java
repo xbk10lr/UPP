@@ -45,7 +45,7 @@ public class UppAsyncTask extends BaseTask{
 			if(retrytimes.compareTo(maxretrytimes) == 0){
 				ex.setHandlestatus(ExcepHandleStatus.OUTTIMES);
 			} else{
-				ex.setHandlestatus(ExcepHandleStatus.HANDLING);
+				ex.setHandlestatus(ExcepHandleStatus.WAITHANDLE);
 			}
 			ex.setRetrytimes(retrytimes+1);
 			tm.updateByPrimaryKeySelective(ex);

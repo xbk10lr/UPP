@@ -42,6 +42,8 @@ public class ExceptionHandleAction extends BaseAction {
 		if(null != exceps && !exceps.isEmpty()){
 			log.info("共有"+exceps.size()+"条待处理的异常任务");
 			for(Transexceptionreg ex : exceps){
+				ex.setHandlestatus(ExcepHandleStatus.HANDLING);
+				tm.updateByPrimaryKeySelective(ex);
 				//异步线程处理
 				uat.handleException(ex);
 			}

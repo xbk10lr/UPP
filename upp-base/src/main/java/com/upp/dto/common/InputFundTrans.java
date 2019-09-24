@@ -3,7 +3,6 @@ package com.upp.dto.common;
 import java.util.Date;
 
 import com.upp.dto.generate.Innerfundtrans;
-import com.upp.dto.generate.Transexceptionreg;
 import com.upp.dubbo.fundprocess.ReqFundCollection;
 import com.upp.dubbo.fundprocess.ReqRecharge;
 

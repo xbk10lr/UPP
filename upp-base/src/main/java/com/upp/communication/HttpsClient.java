@@ -1,4 +1,4 @@
-package com.upp.http;
+package com.upp.communication;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;

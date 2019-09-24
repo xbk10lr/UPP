@@ -3,6 +3,7 @@ package com.upp.http;
 import org.springframework.stereotype.Component;
 
 import com.upp.baseClass.BaseTransport;
+import com.upp.communication.HttpsClient;
 import com.upp.constant.NotifyStatus;
 
 @Component

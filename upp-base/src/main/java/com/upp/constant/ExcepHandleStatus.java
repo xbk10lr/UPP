@@ -8,9 +8,9 @@ public class ExcepHandleStatus {
 	public static final String PRE = "0";
 	
 	/**
-	 * 处理中
+	 * 等待下次处理
 	 */
-	public static final String HANDLING = "1";
+	public static final String WAITHANDLE = "1";
 	
 	/**
 	 * 处理完成
@@ -21,5 +21,9 @@ public class ExcepHandleStatus {
 	 * 处理次数超限
 	 */
 	public static final String OUTTIMES = "3";
+	/**
+	 * 处理中
+	 */
+	public static final String HANDLING = "1";
 	
 }
