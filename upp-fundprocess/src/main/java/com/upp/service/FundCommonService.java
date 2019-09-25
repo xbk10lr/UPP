@@ -12,6 +12,7 @@ import com.upp.constant.ExcepHandleStatus;
 import com.upp.constant.ExcepInfoEnum;
 import com.upp.constant.SysStatus;
 import com.upp.constant.TransStatus;
+import com.upp.dao.mapper.ChannelbanklimitMapper;
 import com.upp.dao.mapper.ChannelroutMapper;
 import com.upp.dao.mapper.InnerfundtransMapper;
 import com.upp.dao.mapper.OveralltransMapper;
@@ -51,6 +52,9 @@ public class FundCommonService extends BaseService {
 	
 	@Autowired
 	protected TransexceptionregMapper tm;
+	
+	@Autowired
+	protected ChannelbanklimitMapper cbm;
 
 	/**
 	 * 插入资金流水表

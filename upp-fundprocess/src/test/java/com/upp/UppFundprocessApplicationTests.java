@@ -1,16 +1,18 @@
 package com.upp;
 
+import javax.validation.ValidationException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.upp.constant.DictErrors;
-import com.upp.dto.Context;
+import com.upp.dto.model.ReqCollection;
 import com.upp.exception.UppException;
 import com.upp.exception.UppExceptionHandler;
 import com.upp.util.SeqNbrFactory;
+import com.upp.util.ValidationHandler;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -27,6 +29,9 @@ public class UppFundprocessApplicationTests {
 	
 	@Autowired
 	private UppExceptionHandler handler;
+	
+	@Autowired
+	private ValidationHandler vh;
 	
 	@Test
 	public void contextLoads() {
@@ -52,9 +57,17 @@ public class UppFundprocessApplicationTests {
 //		for(int i=0;i<3;i++){
 //			System.out.println(seqNbrFactory.getSnowFlakeSeqNbr());
 //		}
-		Context ctx = new Context();
-		handler.handle(new UppException(DictErrors.TIMEOUT), ctx);
-		System.out.println(ctx.getRespMsg()+"---"+ctx.getRespCode()+"---"+ctx.getRespStatus());
+//		Context ctx = new Context();
+//		handler.handle(new UppException(DictErrors.TIMEOUT), ctx);
+//		System.out.println(ctx.getRespMsg()+"---"+ctx.getRespCode()+"---"+ctx.getRespStatus());
+		ReqCollection req = new ReqCollection();
+		req.setMernbr("222");
+		try {
+			vh.validate(req);
+		} catch (ValidationException | UppException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

@@ -22,10 +22,6 @@ public class SeqNbrFactory {
 	
 	private IdWorker idWorker;
 	
-//	public String getSeqNbrByDate(){
-//		return DateUtil.Date_To_DateTimeFormat(new Date(), DateFormatCode.DATETIME_FORMATTER3) + UUIDUtil.getUUID();
-//	}
-	
 	public String getSnowFlakeSeqNbr(){
 		if(idWorker==null){
 			//从环境变量中获取workerId

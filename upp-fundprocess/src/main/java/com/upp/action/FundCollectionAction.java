@@ -7,6 +7,7 @@ import com.upp.baseClass.BaseAction;
 import com.upp.constant.TransCode;
 import com.upp.dto.Context;
 import com.upp.dto.common.InputFundTrans;
+import com.upp.dto.generate.Channelbanklimit;
 import com.upp.dubbo.fundprocess.RespFundCollection;
 import com.upp.exception.UppException;
 import com.upp.service.FundCollectionService;
@@ -30,9 +31,10 @@ public class FundCollectionAction extends BaseAction {
 		
 		try {
 			//路由选路
-			String channel = fcs.autoChannel(input);
-			input.setFundchannelcode(channel);
+			Channelbanklimit autoChannel = fcs.autoChannel(input);
+			input.setFundchannelcode(autoChannel.getFundchannelcode());
 			input.setTranscode(TransCode.COLLECTION);
+			input.setDownbankcode(autoChannel.getChannelbankcode());
 			//落库
 			fcs.insertFundtrans(input);
 			//发送下游

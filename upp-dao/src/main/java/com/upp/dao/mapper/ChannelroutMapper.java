@@ -3,17 +3,14 @@ package com.upp.dao.mapper;
 import com.upp.dto.generate.Channelrout;
 import com.upp.dto.generate.ChannelroutExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface ChannelroutMapper {
     long countByExample(ChannelroutExample example);
 
     int deleteByExample(ChannelroutExample example);
 
-    int deleteByPrimaryKey(String fundchannelcode);
+    int deleteByPrimaryKey(String id);
 
     int insert(Channelrout record);
 
@@ -21,7 +18,7 @@ public interface ChannelroutMapper {
 
     List<Channelrout> selectByExample(ChannelroutExample example);
 
-    Channelrout selectByPrimaryKey(String fundchannelcode);
+    Channelrout selectByPrimaryKey(String id);
 
     int updateByExampleSelective(@Param("record") Channelrout record, @Param("example") ChannelroutExample example);
 

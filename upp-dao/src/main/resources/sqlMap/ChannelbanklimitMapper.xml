@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.upp.dao.mapper.ChannelroutMapper">
-  <resultMap id="BaseResultMap" type="com.upp.dto.generate.Channelrout">
+<mapper namespace="com.upp.dao.mapper.ChannelbanklimitMapper">
+  <resultMap id="BaseResultMap" type="com.upp.dto.generate.Channelbanklimit">
     <id column="ID" jdbcType="VARCHAR" property="id" />
-    <result column="FUNDCHANNELCODE" jdbcType="VARCHAR" property="fundchannelcode" />
-    <result column="ROUTSTATE" jdbcType="VARCHAR" property="routstate" />
-    <result column="PRIORITY" jdbcType="VARCHAR" property="priority" />
+    <result column="BANKCODE" jdbcType="VARCHAR" property="bankcode" />
+    <result column="CHANNELBANKCODE" jdbcType="VARCHAR" property="channelbankcode" />
+    <result column="ISOMNICHANNEL" jdbcType="VARCHAR" property="isomnichannel" />
+    <result column="ONYN" jdbcType="VARCHAR" property="onyn" />
     <result column="LIMITAMT" jdbcType="DECIMAL" property="limitamt" />
     <result column="TRANSTYPE" jdbcType="VARCHAR" property="transtype" />
+    <result column="FUNDCHANNELCODE" jdbcType="VARCHAR" property="fundchannelcode" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,15 +70,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, FUNDCHANNELCODE, ROUTSTATE, PRIORITY, LIMITAMT, TRANSTYPE
+    ID, BANKCODE, CHANNELBANKCODE, ISOMNICHANNEL, ONYN, LIMITAMT, TRANSTYPE, FUNDCHANNELCODE
   </sql>
-  <select id="selectByExample" parameterType="com.upp.dto.generate.ChannelroutExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.upp.dto.generate.ChannelbanklimitExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from CHANNELROUT
+    from CHANNELBANKLIMIT
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,41 +89,44 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from CHANNELROUT
+    from CHANNELBANKLIMIT
     where ID = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from CHANNELROUT
+    delete from CHANNELBANKLIMIT
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.upp.dto.generate.ChannelroutExample">
-    delete from CHANNELROUT
+  <delete id="deleteByExample" parameterType="com.upp.dto.generate.ChannelbanklimitExample">
+    delete from CHANNELBANKLIMIT
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.upp.dto.generate.Channelrout">
-    insert into CHANNELROUT (ID, FUNDCHANNELCODE, ROUTSTATE, 
-      PRIORITY, LIMITAMT, TRANSTYPE
-      )
-    values (#{id,jdbcType=VARCHAR}, #{fundchannelcode,jdbcType=VARCHAR}, #{routstate,jdbcType=VARCHAR}, 
-      #{priority,jdbcType=VARCHAR}, #{limitamt,jdbcType=DECIMAL}, #{transtype,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="com.upp.dto.generate.Channelbanklimit">
+    insert into CHANNELBANKLIMIT (ID, BANKCODE, CHANNELBANKCODE, 
+      ISOMNICHANNEL, ONYN, LIMITAMT, 
+      TRANSTYPE, FUNDCHANNELCODE)
+    values (#{id,jdbcType=VARCHAR}, #{bankcode,jdbcType=VARCHAR}, #{channelbankcode,jdbcType=VARCHAR}, 
+      #{isomnichannel,jdbcType=VARCHAR}, #{onyn,jdbcType=VARCHAR}, #{limitamt,jdbcType=DECIMAL}, 
+      #{transtype,jdbcType=VARCHAR}, #{fundchannelcode,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.upp.dto.generate.Channelrout">
-    insert into CHANNELROUT
+  <insert id="insertSelective" parameterType="com.upp.dto.generate.Channelbanklimit">
+    insert into CHANNELBANKLIMIT
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         ID,
       </if>
-      <if test="fundchannelcode != null">
-        FUNDCHANNELCODE,
+      <if test="bankcode != null">
+        BANKCODE,
       </if>
-      <if test="routstate != null">
-        ROUTSTATE,
+      <if test="channelbankcode != null">
+        CHANNELBANKCODE,
       </if>
-      <if test="priority != null">
-        PRIORITY,
+      <if test="isomnichannel != null">
+        ISOMNICHANNEL,
+      </if>
+      <if test="onyn != null">
+        ONYN,
       </if>
       <if test="limitamt != null">
         LIMITAMT,
@@ -129,19 +134,25 @@
       <if test="transtype != null">
         TRANSTYPE,
       </if>
+      <if test="fundchannelcode != null">
+        FUNDCHANNELCODE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="fundchannelcode != null">
-        #{fundchannelcode,jdbcType=VARCHAR},
+      <if test="bankcode != null">
+        #{bankcode,jdbcType=VARCHAR},
       </if>
-      <if test="routstate != null">
-        #{routstate,jdbcType=VARCHAR},
+      <if test="channelbankcode != null">
+        #{channelbankcode,jdbcType=VARCHAR},
       </if>
-      <if test="priority != null">
-        #{priority,jdbcType=VARCHAR},
+      <if test="isomnichannel != null">
+        #{isomnichannel,jdbcType=VARCHAR},
+      </if>
+      <if test="onyn != null">
+        #{onyn,jdbcType=VARCHAR},
       </if>
       <if test="limitamt != null">
         #{limitamt,jdbcType=DECIMAL},
@@ -149,28 +160,34 @@
       <if test="transtype != null">
         #{transtype,jdbcType=VARCHAR},
       </if>
+      <if test="fundchannelcode != null">
+        #{fundchannelcode,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.upp.dto.generate.ChannelroutExample" resultType="java.lang.Long">
-    select count(*) from CHANNELROUT
+  <select id="countByExample" parameterType="com.upp.dto.generate.ChannelbanklimitExample" resultType="java.lang.Long">
+    select count(*) from CHANNELBANKLIMIT
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update CHANNELROUT
+    update CHANNELBANKLIMIT
     <set>
       <if test="record.id != null">
         ID = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.fundchannelcode != null">
-        FUNDCHANNELCODE = #{record.fundchannelcode,jdbcType=VARCHAR},
+      <if test="record.bankcode != null">
+        BANKCODE = #{record.bankcode,jdbcType=VARCHAR},
       </if>
-      <if test="record.routstate != null">
-        ROUTSTATE = #{record.routstate,jdbcType=VARCHAR},
+      <if test="record.channelbankcode != null">
+        CHANNELBANKCODE = #{record.channelbankcode,jdbcType=VARCHAR},
       </if>
-      <if test="record.priority != null">
-        PRIORITY = #{record.priority,jdbcType=VARCHAR},
+      <if test="record.isomnichannel != null">
+        ISOMNICHANNEL = #{record.isomnichannel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.onyn != null">
+        ONYN = #{record.onyn,jdbcType=VARCHAR},
       </if>
       <if test="record.limitamt != null">
         LIMITAMT = #{record.limitamt,jdbcType=DECIMAL},
@@ -178,34 +195,42 @@
       <if test="record.transtype != null">
         TRANSTYPE = #{record.transtype,jdbcType=VARCHAR},
       </if>
+      <if test="record.fundchannelcode != null">
+        FUNDCHANNELCODE = #{record.fundchannelcode,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update CHANNELROUT
+    update CHANNELBANKLIMIT
     set ID = #{record.id,jdbcType=VARCHAR},
-      FUNDCHANNELCODE = #{record.fundchannelcode,jdbcType=VARCHAR},
-      ROUTSTATE = #{record.routstate,jdbcType=VARCHAR},
-      PRIORITY = #{record.priority,jdbcType=VARCHAR},
+      BANKCODE = #{record.bankcode,jdbcType=VARCHAR},
+      CHANNELBANKCODE = #{record.channelbankcode,jdbcType=VARCHAR},
+      ISOMNICHANNEL = #{record.isomnichannel,jdbcType=VARCHAR},
+      ONYN = #{record.onyn,jdbcType=VARCHAR},
       LIMITAMT = #{record.limitamt,jdbcType=DECIMAL},
-      TRANSTYPE = #{record.transtype,jdbcType=VARCHAR}
+      TRANSTYPE = #{record.transtype,jdbcType=VARCHAR},
+      FUNDCHANNELCODE = #{record.fundchannelcode,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.upp.dto.generate.Channelrout">
-    update CHANNELROUT
+  <update id="updateByPrimaryKeySelective" parameterType="com.upp.dto.generate.Channelbanklimit">
+    update CHANNELBANKLIMIT
     <set>
-      <if test="fundchannelcode != null">
-        FUNDCHANNELCODE = #{fundchannelcode,jdbcType=VARCHAR},
+      <if test="bankcode != null">
+        BANKCODE = #{bankcode,jdbcType=VARCHAR},
       </if>
-      <if test="routstate != null">
-        ROUTSTATE = #{routstate,jdbcType=VARCHAR},
+      <if test="channelbankcode != null">
+        CHANNELBANKCODE = #{channelbankcode,jdbcType=VARCHAR},
       </if>
-      <if test="priority != null">
-        PRIORITY = #{priority,jdbcType=VARCHAR},
+      <if test="isomnichannel != null">
+        ISOMNICHANNEL = #{isomnichannel,jdbcType=VARCHAR},
+      </if>
+      <if test="onyn != null">
+        ONYN = #{onyn,jdbcType=VARCHAR},
       </if>
       <if test="limitamt != null">
         LIMITAMT = #{limitamt,jdbcType=DECIMAL},
@@ -213,16 +238,37 @@
       <if test="transtype != null">
         TRANSTYPE = #{transtype,jdbcType=VARCHAR},
       </if>
+      <if test="fundchannelcode != null">
+        FUNDCHANNELCODE = #{fundchannelcode,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.upp.dto.generate.Channelrout">
-    update CHANNELROUT
-    set FUNDCHANNELCODE = #{fundchannelcode,jdbcType=VARCHAR},
-      ROUTSTATE = #{routstate,jdbcType=VARCHAR},
-      PRIORITY = #{priority,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.upp.dto.generate.Channelbanklimit">
+    update CHANNELBANKLIMIT
+    set BANKCODE = #{bankcode,jdbcType=VARCHAR},
+      CHANNELBANKCODE = #{channelbankcode,jdbcType=VARCHAR},
+      ISOMNICHANNEL = #{isomnichannel,jdbcType=VARCHAR},
+      ONYN = #{onyn,jdbcType=VARCHAR},
       LIMITAMT = #{limitamt,jdbcType=DECIMAL},
-      TRANSTYPE = #{transtype,jdbcType=VARCHAR}
+      TRANSTYPE = #{transtype,jdbcType=VARCHAR},
+      FUNDCHANNELCODE = #{fundchannelcode,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="selectSupportBankLimit" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    a.FUNDCHANNELCODE,a.CHANNELBANKCODE
+    from CHANNELBANKLIMIT a,FUNDCHANNEL b,CHANNELROUT c
+    where (a.BANKCODE = #{bankcode,jdbcType=VARCHAR} or a.ISOMNICHANNEL='0')
+    and a.ONYN='Y' 
+    and a.LIMITAMT <![CDATA[>=]]> #{transamt,jdbcType=DECIMAL} 
+    and a.TRANSTYPE = #{transtype,jdbcType=DECIMAL}
+    and a.FUNDCHANNELCODE=b.FUNDCHANNELCODE
+    and a.FUNDCHANNELCODE=c.FUNDCHANNELCODE
+    and a.TRANSTYPE = c.TRANSTYPE
+    and b.FUNDCHANNELSTATUS='0' 
+    and c.ROUTSTATE='0'
+    and c.LIMITAMT <![CDATA[>=]]> #{transamt,jdbcType=DECIMAL}
+    order by c.PRIORITY desc 
+  </select>
 </mapper>

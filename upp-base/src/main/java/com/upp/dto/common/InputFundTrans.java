@@ -58,6 +58,30 @@ public class InputFundTrans extends Innerfundtrans {
 	private Date uppertranstime;
 	
 	private String checkdataflag;
+	
+	private String bankcode;
+	
+	private String downbankcode;
+
+	public String getDownbankcode() {
+		return downbankcode;
+	}
+
+
+	public void setDownbankcode(String downbankcode) {
+		this.downbankcode = downbankcode;
+	}
+
+
+	public String getBankcode() {
+		return bankcode;
+	}
+
+
+	public void setBankcode(String bankcode) {
+		this.bankcode = bankcode;
+	}
+
 
 	public String getOveralltransnbr() {
 		return overalltransnbr;

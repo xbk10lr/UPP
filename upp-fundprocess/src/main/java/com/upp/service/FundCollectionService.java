@@ -11,10 +11,10 @@ import com.upp.constant.ExcepInfoEnum;
 import com.upp.constant.FundchannelCode;
 import com.upp.constant.TransCode;
 import com.upp.constant.TransStatus;
+import com.upp.constant.TransType;
 import com.upp.dto.Context;
 import com.upp.dto.common.InputFundTrans;
-import com.upp.dto.generate.Channelrout;
-import com.upp.dto.generate.ChannelroutExample;
+import com.upp.dto.generate.Channelbanklimit;
 import com.upp.dubbo.connectors.NetsunionChannel;
 import com.upp.dubbo.connectors.ReqNetsUnionDs;
 import com.upp.dubbo.connectors.ReqUnionPayDs;
@@ -42,30 +42,16 @@ public class FundCollectionService extends FundCommonService {
 	 * @return
 	 * @throws UppException 
 	 */
-	public String autoChannel(InputFundTrans input) throws UppException {
+	public Channelbanklimit autoChannel(InputFundTrans input) throws UppException {
+		String bankcode = input.getBankcode();
 		BigDecimal transamt = input.getTransamt();
-		ChannelroutExample example = new ChannelroutExample();
-		example.createCriteria().andLimitamtGreaterThan(transamt);
-		List<Channelrout> lists = cm.selectByExample(example);
-		if (lists != null && !lists.isEmpty()) {
-			if (lists.size() == 1) {
-				return lists.get(0).getFundchannelcode();
-			} else {
-				String fundc = lists.get(0).getFundchannelcode();
-				Integer prio = Integer.valueOf(lists.get(0).getPriority());
-				for (int i = 1; i < lists.size(); i++) {
-					Integer prio2 = Integer.valueOf(lists.get(i).getPriority());
-					if ( prio2 > prio) {
-						prio = prio2;
-						fundc = lists.get(i).getFundchannelcode();
-					}
-				}
-				return fundc;
-			}
-		} else{
+		//根据支持银行、交易金额、交易类型三个类别选出所有支持的通道
+		List<Channelbanklimit> cbls = cbm.selectSupportBankLimit(bankcode,transamt,TransType.DS);
+		if(cbls == null || cbls.isEmpty()){
 			throw new UppException(DictErrors.AUTO_CHANNEL_ERROR);
+		} else {
+			return cbls.get(0);
 		}
-
 	}
 	
 	

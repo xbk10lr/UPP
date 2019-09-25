@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChannelroutExample {
+public class ChannelbanklimitExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public ChannelroutExample() {
+    public ChannelbanklimitExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -175,213 +175,283 @@ public class ChannelroutExample {
             return (Criteria) this;
         }
 
-        public Criteria andFundchannelcodeIsNull() {
-            addCriterion("FUNDCHANNELCODE is null");
+        public Criteria andBankcodeIsNull() {
+            addCriterion("BANKCODE is null");
             return (Criteria) this;
         }
 
-        public Criteria andFundchannelcodeIsNotNull() {
-            addCriterion("FUNDCHANNELCODE is not null");
+        public Criteria andBankcodeIsNotNull() {
+            addCriterion("BANKCODE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFundchannelcodeEqualTo(String value) {
-            addCriterion("FUNDCHANNELCODE =", value, "fundchannelcode");
+        public Criteria andBankcodeEqualTo(String value) {
+            addCriterion("BANKCODE =", value, "bankcode");
             return (Criteria) this;
         }
 
-        public Criteria andFundchannelcodeNotEqualTo(String value) {
-            addCriterion("FUNDCHANNELCODE <>", value, "fundchannelcode");
+        public Criteria andBankcodeNotEqualTo(String value) {
+            addCriterion("BANKCODE <>", value, "bankcode");
             return (Criteria) this;
         }
 
-        public Criteria andFundchannelcodeGreaterThan(String value) {
-            addCriterion("FUNDCHANNELCODE >", value, "fundchannelcode");
+        public Criteria andBankcodeGreaterThan(String value) {
+            addCriterion("BANKCODE >", value, "bankcode");
             return (Criteria) this;
         }
 
-        public Criteria andFundchannelcodeGreaterThanOrEqualTo(String value) {
-            addCriterion("FUNDCHANNELCODE >=", value, "fundchannelcode");
+        public Criteria andBankcodeGreaterThanOrEqualTo(String value) {
+            addCriterion("BANKCODE >=", value, "bankcode");
             return (Criteria) this;
         }
 
-        public Criteria andFundchannelcodeLessThan(String value) {
-            addCriterion("FUNDCHANNELCODE <", value, "fundchannelcode");
+        public Criteria andBankcodeLessThan(String value) {
+            addCriterion("BANKCODE <", value, "bankcode");
             return (Criteria) this;
         }
 
-        public Criteria andFundchannelcodeLessThanOrEqualTo(String value) {
-            addCriterion("FUNDCHANNELCODE <=", value, "fundchannelcode");
+        public Criteria andBankcodeLessThanOrEqualTo(String value) {
+            addCriterion("BANKCODE <=", value, "bankcode");
             return (Criteria) this;
         }
 
-        public Criteria andFundchannelcodeLike(String value) {
-            addCriterion("FUNDCHANNELCODE like", value, "fundchannelcode");
+        public Criteria andBankcodeLike(String value) {
+            addCriterion("BANKCODE like", value, "bankcode");
             return (Criteria) this;
         }
 
-        public Criteria andFundchannelcodeNotLike(String value) {
-            addCriterion("FUNDCHANNELCODE not like", value, "fundchannelcode");
+        public Criteria andBankcodeNotLike(String value) {
+            addCriterion("BANKCODE not like", value, "bankcode");
             return (Criteria) this;
         }
 
-        public Criteria andFundchannelcodeIn(List<String> values) {
-            addCriterion("FUNDCHANNELCODE in", values, "fundchannelcode");
+        public Criteria andBankcodeIn(List<String> values) {
+            addCriterion("BANKCODE in", values, "bankcode");
             return (Criteria) this;
         }
 
-        public Criteria andFundchannelcodeNotIn(List<String> values) {
-            addCriterion("FUNDCHANNELCODE not in", values, "fundchannelcode");
+        public Criteria andBankcodeNotIn(List<String> values) {
+            addCriterion("BANKCODE not in", values, "bankcode");
             return (Criteria) this;
         }
 
-        public Criteria andFundchannelcodeBetween(String value1, String value2) {
-            addCriterion("FUNDCHANNELCODE between", value1, value2, "fundchannelcode");
+        public Criteria andBankcodeBetween(String value1, String value2) {
+            addCriterion("BANKCODE between", value1, value2, "bankcode");
             return (Criteria) this;
         }
 
-        public Criteria andFundchannelcodeNotBetween(String value1, String value2) {
-            addCriterion("FUNDCHANNELCODE not between", value1, value2, "fundchannelcode");
+        public Criteria andBankcodeNotBetween(String value1, String value2) {
+            addCriterion("BANKCODE not between", value1, value2, "bankcode");
             return (Criteria) this;
         }
 
-        public Criteria andRoutstateIsNull() {
-            addCriterion("ROUTSTATE is null");
+        public Criteria andChannelbankcodeIsNull() {
+            addCriterion("CHANNELBANKCODE is null");
             return (Criteria) this;
         }
 
-        public Criteria andRoutstateIsNotNull() {
-            addCriterion("ROUTSTATE is not null");
+        public Criteria andChannelbankcodeIsNotNull() {
+            addCriterion("CHANNELBANKCODE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRoutstateEqualTo(String value) {
-            addCriterion("ROUTSTATE =", value, "routstate");
+        public Criteria andChannelbankcodeEqualTo(String value) {
+            addCriterion("CHANNELBANKCODE =", value, "channelbankcode");
             return (Criteria) this;
         }
 
-        public Criteria andRoutstateNotEqualTo(String value) {
-            addCriterion("ROUTSTATE <>", value, "routstate");
+        public Criteria andChannelbankcodeNotEqualTo(String value) {
+            addCriterion("CHANNELBANKCODE <>", value, "channelbankcode");
             return (Criteria) this;
         }
 
-        public Criteria andRoutstateGreaterThan(String value) {
-            addCriterion("ROUTSTATE >", value, "routstate");
+        public Criteria andChannelbankcodeGreaterThan(String value) {
+            addCriterion("CHANNELBANKCODE >", value, "channelbankcode");
             return (Criteria) this;
         }
 
-        public Criteria andRoutstateGreaterThanOrEqualTo(String value) {
-            addCriterion("ROUTSTATE >=", value, "routstate");
+        public Criteria andChannelbankcodeGreaterThanOrEqualTo(String value) {
+            addCriterion("CHANNELBANKCODE >=", value, "channelbankcode");
             return (Criteria) this;
         }
 
-        public Criteria andRoutstateLessThan(String value) {
-            addCriterion("ROUTSTATE <", value, "routstate");
+        public Criteria andChannelbankcodeLessThan(String value) {
+            addCriterion("CHANNELBANKCODE <", value, "channelbankcode");
             return (Criteria) this;
         }
 
-        public Criteria andRoutstateLessThanOrEqualTo(String value) {
-            addCriterion("ROUTSTATE <=", value, "routstate");
+        public Criteria andChannelbankcodeLessThanOrEqualTo(String value) {
+            addCriterion("CHANNELBANKCODE <=", value, "channelbankcode");
             return (Criteria) this;
         }
 
-        public Criteria andRoutstateLike(String value) {
-            addCriterion("ROUTSTATE like", value, "routstate");
+        public Criteria andChannelbankcodeLike(String value) {
+            addCriterion("CHANNELBANKCODE like", value, "channelbankcode");
             return (Criteria) this;
         }
 
-        public Criteria andRoutstateNotLike(String value) {
-            addCriterion("ROUTSTATE not like", value, "routstate");
+        public Criteria andChannelbankcodeNotLike(String value) {
+            addCriterion("CHANNELBANKCODE not like", value, "channelbankcode");
             return (Criteria) this;
         }
 
-        public Criteria andRoutstateIn(List<String> values) {
-            addCriterion("ROUTSTATE in", values, "routstate");
+        public Criteria andChannelbankcodeIn(List<String> values) {
+            addCriterion("CHANNELBANKCODE in", values, "channelbankcode");
             return (Criteria) this;
         }
 
-        public Criteria andRoutstateNotIn(List<String> values) {
-            addCriterion("ROUTSTATE not in", values, "routstate");
+        public Criteria andChannelbankcodeNotIn(List<String> values) {
+            addCriterion("CHANNELBANKCODE not in", values, "channelbankcode");
             return (Criteria) this;
         }
 
-        public Criteria andRoutstateBetween(String value1, String value2) {
-            addCriterion("ROUTSTATE between", value1, value2, "routstate");
+        public Criteria andChannelbankcodeBetween(String value1, String value2) {
+            addCriterion("CHANNELBANKCODE between", value1, value2, "channelbankcode");
             return (Criteria) this;
         }
 
-        public Criteria andRoutstateNotBetween(String value1, String value2) {
-            addCriterion("ROUTSTATE not between", value1, value2, "routstate");
+        public Criteria andChannelbankcodeNotBetween(String value1, String value2) {
+            addCriterion("CHANNELBANKCODE not between", value1, value2, "channelbankcode");
             return (Criteria) this;
         }
 
-        public Criteria andPriorityIsNull() {
-            addCriterion("PRIORITY is null");
+        public Criteria andIsomnichannelIsNull() {
+            addCriterion("ISOMNICHANNEL is null");
             return (Criteria) this;
         }
 
-        public Criteria andPriorityIsNotNull() {
-            addCriterion("PRIORITY is not null");
+        public Criteria andIsomnichannelIsNotNull() {
+            addCriterion("ISOMNICHANNEL is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPriorityEqualTo(String value) {
-            addCriterion("PRIORITY =", value, "priority");
+        public Criteria andIsomnichannelEqualTo(String value) {
+            addCriterion("ISOMNICHANNEL =", value, "isomnichannel");
             return (Criteria) this;
         }
 
-        public Criteria andPriorityNotEqualTo(String value) {
-            addCriterion("PRIORITY <>", value, "priority");
+        public Criteria andIsomnichannelNotEqualTo(String value) {
+            addCriterion("ISOMNICHANNEL <>", value, "isomnichannel");
             return (Criteria) this;
         }
 
-        public Criteria andPriorityGreaterThan(String value) {
-            addCriterion("PRIORITY >", value, "priority");
+        public Criteria andIsomnichannelGreaterThan(String value) {
+            addCriterion("ISOMNICHANNEL >", value, "isomnichannel");
             return (Criteria) this;
         }
 
-        public Criteria andPriorityGreaterThanOrEqualTo(String value) {
-            addCriterion("PRIORITY >=", value, "priority");
+        public Criteria andIsomnichannelGreaterThanOrEqualTo(String value) {
+            addCriterion("ISOMNICHANNEL >=", value, "isomnichannel");
             return (Criteria) this;
         }
 
-        public Criteria andPriorityLessThan(String value) {
-            addCriterion("PRIORITY <", value, "priority");
+        public Criteria andIsomnichannelLessThan(String value) {
+            addCriterion("ISOMNICHANNEL <", value, "isomnichannel");
             return (Criteria) this;
         }
 
-        public Criteria andPriorityLessThanOrEqualTo(String value) {
-            addCriterion("PRIORITY <=", value, "priority");
+        public Criteria andIsomnichannelLessThanOrEqualTo(String value) {
+            addCriterion("ISOMNICHANNEL <=", value, "isomnichannel");
             return (Criteria) this;
         }
 
-        public Criteria andPriorityLike(String value) {
-            addCriterion("PRIORITY like", value, "priority");
+        public Criteria andIsomnichannelLike(String value) {
+            addCriterion("ISOMNICHANNEL like", value, "isomnichannel");
             return (Criteria) this;
         }
 
-        public Criteria andPriorityNotLike(String value) {
-            addCriterion("PRIORITY not like", value, "priority");
+        public Criteria andIsomnichannelNotLike(String value) {
+            addCriterion("ISOMNICHANNEL not like", value, "isomnichannel");
             return (Criteria) this;
         }
 
-        public Criteria andPriorityIn(List<String> values) {
-            addCriterion("PRIORITY in", values, "priority");
+        public Criteria andIsomnichannelIn(List<String> values) {
+            addCriterion("ISOMNICHANNEL in", values, "isomnichannel");
             return (Criteria) this;
         }
 
-        public Criteria andPriorityNotIn(List<String> values) {
-            addCriterion("PRIORITY not in", values, "priority");
+        public Criteria andIsomnichannelNotIn(List<String> values) {
+            addCriterion("ISOMNICHANNEL not in", values, "isomnichannel");
             return (Criteria) this;
         }
 
-        public Criteria andPriorityBetween(String value1, String value2) {
-            addCriterion("PRIORITY between", value1, value2, "priority");
+        public Criteria andIsomnichannelBetween(String value1, String value2) {
+            addCriterion("ISOMNICHANNEL between", value1, value2, "isomnichannel");
             return (Criteria) this;
         }
 
-        public Criteria andPriorityNotBetween(String value1, String value2) {
-            addCriterion("PRIORITY not between", value1, value2, "priority");
+        public Criteria andIsomnichannelNotBetween(String value1, String value2) {
+            addCriterion("ISOMNICHANNEL not between", value1, value2, "isomnichannel");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnynIsNull() {
+            addCriterion("ONYN is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnynIsNotNull() {
+            addCriterion("ONYN is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnynEqualTo(String value) {
+            addCriterion("ONYN =", value, "onyn");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnynNotEqualTo(String value) {
+            addCriterion("ONYN <>", value, "onyn");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnynGreaterThan(String value) {
+            addCriterion("ONYN >", value, "onyn");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnynGreaterThanOrEqualTo(String value) {
+            addCriterion("ONYN >=", value, "onyn");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnynLessThan(String value) {
+            addCriterion("ONYN <", value, "onyn");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnynLessThanOrEqualTo(String value) {
+            addCriterion("ONYN <=", value, "onyn");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnynLike(String value) {
+            addCriterion("ONYN like", value, "onyn");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnynNotLike(String value) {
+            addCriterion("ONYN not like", value, "onyn");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnynIn(List<String> values) {
+            addCriterion("ONYN in", values, "onyn");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnynNotIn(List<String> values) {
+            addCriterion("ONYN not in", values, "onyn");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnynBetween(String value1, String value2) {
+            addCriterion("ONYN between", value1, value2, "onyn");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnynNotBetween(String value1, String value2) {
+            addCriterion("ONYN not between", value1, value2, "onyn");
             return (Criteria) this;
         }
 
@@ -512,6 +582,76 @@ public class ChannelroutExample {
 
         public Criteria andTranstypeNotBetween(String value1, String value2) {
             addCriterion("TRANSTYPE not between", value1, value2, "transtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundchannelcodeIsNull() {
+            addCriterion("FUNDCHANNELCODE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundchannelcodeIsNotNull() {
+            addCriterion("FUNDCHANNELCODE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundchannelcodeEqualTo(String value) {
+            addCriterion("FUNDCHANNELCODE =", value, "fundchannelcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundchannelcodeNotEqualTo(String value) {
+            addCriterion("FUNDCHANNELCODE <>", value, "fundchannelcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundchannelcodeGreaterThan(String value) {
+            addCriterion("FUNDCHANNELCODE >", value, "fundchannelcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundchannelcodeGreaterThanOrEqualTo(String value) {
+            addCriterion("FUNDCHANNELCODE >=", value, "fundchannelcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundchannelcodeLessThan(String value) {
+            addCriterion("FUNDCHANNELCODE <", value, "fundchannelcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundchannelcodeLessThanOrEqualTo(String value) {
+            addCriterion("FUNDCHANNELCODE <=", value, "fundchannelcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundchannelcodeLike(String value) {
+            addCriterion("FUNDCHANNELCODE like", value, "fundchannelcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundchannelcodeNotLike(String value) {
+            addCriterion("FUNDCHANNELCODE not like", value, "fundchannelcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundchannelcodeIn(List<String> values) {
+            addCriterion("FUNDCHANNELCODE in", values, "fundchannelcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundchannelcodeNotIn(List<String> values) {
+            addCriterion("FUNDCHANNELCODE not in", values, "fundchannelcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundchannelcodeBetween(String value1, String value2) {
+            addCriterion("FUNDCHANNELCODE between", value1, value2, "fundchannelcode");
+            return (Criteria) this;
+        }
+
+        public Criteria andFundchannelcodeNotBetween(String value1, String value2) {
+            addCriterion("FUNDCHANNELCODE not between", value1, value2, "fundchannelcode");
             return (Criteria) this;
         }
     }

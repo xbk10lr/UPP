@@ -17,10 +17,10 @@
     </table> -->
     <!-- <table schema="" tableName="TRANSEXCEPTIONREG">
     </table> -->
-    <table schema="" tableName="MERBASEINFO">
+    <!-- <table schema="" tableName="MERBASEINFO">
     </table>
     <table schema="" tableName="NOTIFYREG">
-    </table>
+    </table> -->
     <!-- <table schema="" tableName="ONLINEORDERINFO">
     </table>
     <table schema="" tableName="UPPERSYSINFO">
@@ -28,5 +28,12 @@
     
     <table schema="" tableName="CHANNELROUT">
     </table> -->
+    
+    <!-- <table schema="" tableName="CHANNELROUT">
+    </table>
+    <table schema="" tableName="FUNDCHANNEL">
+    </table> -->
+    <table schema="" tableName="CHANNELBANKLIMIT">
+    </table>
   </context>
 </generatorConfiguration>

@@ -2,12 +2,20 @@ package com.upp.dto.model;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class ReqCollection {
 	
 	//商户号
+	@NotEmpty(message="merNbr can not be Null")
+	@Size(message="字段长度超限",max=2)
 	private String mernbr;
 	
 	//商户交易流水号
+	@NotNull(message="merseqnbr can not be Null")
 	private String merseqnbr;
 	
 	//商户交易时间

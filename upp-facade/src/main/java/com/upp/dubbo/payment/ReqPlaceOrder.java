@@ -2,17 +2,23 @@ package com.upp.dubbo.payment;
 
 import java.math.BigDecimal;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class ReqPlaceOrder {
 	//商户号
+	@NotEmpty(message="mernbr不能为空")
 	private String mernbr;
 	
 	//商户交易流水号
+	@NotEmpty(message="merseqnbr不能为空")
 	private String merseqnbr;
 	
 	//商户交易时间
+	@NotEmpty(message="mertranstime不能为空")
 	private String mertranstime;
 	
 	//付款账户
+	@NotEmpty(message="payeracctnbr不能为空")
 	private String payeracctnbr;
 	
 	//收款账户
@@ -28,6 +34,7 @@ public class ReqPlaceOrder {
 	private String payeeacctname;
 	
 	//付款账户名
+	@NotEmpty(message="payeracctname不能为空")
 	private String payeracctname;
 	
 	//付款账户类型
@@ -40,6 +47,7 @@ public class ReqPlaceOrder {
 	private String currencycd;
 	
 	//交易金额
+	@NotEmpty(message="transamt不能为空")
 	private BigDecimal transamt;
 
 	public String getMernbr() {

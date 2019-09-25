@@ -11,6 +11,7 @@ import com.upp.dubbo.payment.PlaceOrder;
 import com.upp.dubbo.payment.ReqPlaceOrder;
 import com.upp.dubbo.payment.RespPlaceOrder;
 import com.upp.exception.UppExceptionHandler;
+import com.upp.util.ValidationHandler;
 
 @Service(version="1.0.0")
 public class PlaceOrderImpl implements PlaceOrder {
@@ -22,15 +23,19 @@ public class PlaceOrderImpl implements PlaceOrder {
 	@Autowired
 	private UppExceptionHandler exceptionHandler;
 	
+	@Autowired
+	private ValidationHandler validationHandler;
+	
 	/**
 	 * 代收交易payment接口
 	 */
 	@Override
 	public RespPlaceOrder placeOrder(ReqPlaceOrder req){
-		InputPlaceOrder input = new InputPlaceOrder(req);
 		Context context = new Context();
-		context.setInput(input);
 		try {
+			validationHandler.validate(req);
+			InputPlaceOrder input = new InputPlaceOrder(req);
+			context.setInput(input);
 			paymentCollectionAction.excute(context);
 		} catch (Throwable e) {
 //			异常处理
@@ -40,7 +45,6 @@ public class PlaceOrderImpl implements PlaceOrder {
 		rpo.setRespCode(context.getRespCode());
 		rpo.setRespMsg(context.getRespMsg());
 		rpo.setRespStatus(context.getRespStatus());
-		rpo.setDowntransnbr(input.getTransseqnbr());
 		return rpo;
 	}
 
