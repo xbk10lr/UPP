@@ -32,6 +32,7 @@ public class FundCollectionAction extends BaseAction {
 		try {
 			//路由选路
 			Channelbanklimit autoChannel = fcs.autoChannel(input);
+			context.setFundchannelcode(autoChannel.getFundchannelcode());
 			input.setFundchannelcode(autoChannel.getFundchannelcode());
 			input.setTranscode(TransCode.COLLECTION);
 			input.setDownbankcode(autoChannel.getChannelbankcode());

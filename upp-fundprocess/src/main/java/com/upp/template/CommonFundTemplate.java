@@ -12,7 +12,7 @@ import com.upp.baseClass.Action;
 import com.upp.constant.SysNbr;
 import com.upp.dto.Context;
 import com.upp.dubbo.RespUppHead;
-import com.upp.dubbo.fundprocess.RespFundCollection;
+import com.upp.errorcodes.ErrorCodeReflect;
 import com.upp.exception.UppExceptionHandler;
 
 /**
@@ -59,15 +59,12 @@ public class CommonFundTemplate {
 	 * @param ctx
 	 * @return
 	 */
-	public RespUppHead fundCommomResp(Context ctx){
-		RespUppHead resp = new RespFundCollection();
+	public void fundCommomResp(Context ctx ,RespUppHead resp){
 		resp.setDownsysnbr(SysNbr.FUND);
 		resp.setDowntransdate(new Date());
 		resp.setDowntransnbr(ctx.getOveralltransnbr());
 		resp.setDowntranstime(new Date());
-		resp.setRespCode(ctx.getRespCode());
-		resp.setRespMsg(ctx.getRespMsg());
-		resp.setRespStatus(ctx.getRespStatus());
-		return resp;
+		//错误码映射
+		ErrorCodeReflect.getLocalErrorCode(ctx.getFundchannelcode(), ctx.getRespCode(),ctx.getRespMsg(),resp);
 	}
 }

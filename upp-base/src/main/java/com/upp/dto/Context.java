@@ -35,6 +35,16 @@ public class Context extends HashMap<String, Object>{
 	
 	//响应码
 	private String respCode;
+	
+	private String fundchannelcode;
+
+	public String getFundchannelcode() {
+		return fundchannelcode;
+	}
+
+	public void setFundchannelcode(String fundchannelcode) {
+		this.fundchannelcode = fundchannelcode;
+	}
 
 	public String getRespStatus() {
 		return respStatus;

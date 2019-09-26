@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.upp.dto.Context;
 import com.upp.dto.model.ReqCollection;
+import com.upp.dubbo.RespUppHead;
 import com.upp.exception.UppException;
 import com.upp.exception.UppExceptionHandler;
+import com.upp.template.CommonFundTemplate;
 import com.upp.util.SeqNbrFactory;
 import com.upp.util.ValidationHandler;
 
@@ -32,6 +35,9 @@ public class UppFundprocessApplicationTests {
 	
 	@Autowired
 	private ValidationHandler vh;
+	
+	@Autowired
+	private CommonFundTemplate cft;
 	
 	@Test
 	public void contextLoads() {
@@ -60,14 +66,21 @@ public class UppFundprocessApplicationTests {
 //		Context ctx = new Context();
 //		handler.handle(new UppException(DictErrors.TIMEOUT), ctx);
 //		System.out.println(ctx.getRespMsg()+"---"+ctx.getRespCode()+"---"+ctx.getRespStatus());
-		ReqCollection req = new ReqCollection();
-		req.setMernbr("222");
-		try {
-			vh.validate(req);
-		} catch (ValidationException | UppException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		ReqCollection req = new ReqCollection();
+//		req.setMernbr("222");
+//		try {
+//			vh.validate(req);
+//		} catch (ValidationException | UppException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		Context ctx = new Context();
+		RespUppHead resp = new RespUppHead();
+		ctx.setFundchannelcode("UNIONPAY");
+		ctx.setRespCode("13011");
+		ctx.setRespMsg("交易失败啦阿拉拉");
+		cft.fundCommomResp(ctx, resp);
+		System.out.println(resp.getRespCode()+"_"+resp.getRespMsg()+"_"+resp.getRespStatus());
 		
 	}
 

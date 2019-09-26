@@ -55,9 +55,10 @@ public class FundTransImpl implements FundTrans {
 		cft.excute(ctx);
 		log.info("代收交易结束,交易耗时：" + (System.currentTimeMillis() - start) + "ms，总交易流水号=" + input.getOveralltransnbr()
 				+ "，上游交易流水号=" + req.getUppertransnbr());
-		// 组装返回报文
 		ctx.setOveralltransnbr(input.getOveralltransnbr());
-		RespFundCollection resp = (RespFundCollection) cft.fundCommomResp(ctx);
+		RespFundCollection resp =  new RespFundCollection();
+		//错误码映射
+		cft.fundCommomResp(ctx,resp);
 		return resp;
 	}
 	/**
@@ -86,9 +87,9 @@ public class FundTransImpl implements FundTrans {
 				+ "，上游交易流水号=" + req.getUppertransnbr());
 		// 组装返回报文
 		ctx.setOveralltransnbr(input.getOveralltransnbr());
-		RespRecharge resp = (RespRecharge) cft.fundCommomResp(ctx);
+		RespRecharge resp =  new RespRecharge();
+		cft.fundCommomResp(ctx,resp);
 		return resp;
-	
 	}
 	
 	

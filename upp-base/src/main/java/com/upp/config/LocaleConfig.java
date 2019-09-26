@@ -29,7 +29,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 /**
  * 配置国际化语言
  */
-@Configuration
+//@Configuration
 public class LocaleConfig {
 	
 //	@Bean
