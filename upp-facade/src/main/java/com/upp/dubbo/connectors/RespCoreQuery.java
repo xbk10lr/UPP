@@ -2,7 +2,7 @@ package com.upp.dubbo.connectors;
 
 import com.upp.dubbo.RespUppHead;
 
-public class RespEaccountQuery extends RespUppHead{
+public class RespCoreQuery extends RespUppHead{
 	
 	private String origRespStatus;
 	

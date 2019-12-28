@@ -1,9 +1,17 @@
 package com.upp.dubbo.connectors;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.upp.constant.TransStatus;
 import com.upp.constant.UnionpayRespStatus;
 import com.upp.dubbo.RespUppHead;
+import com.upp.service.SendService;
+import com.upp.util.UppBeanUtils;
 
 /**
  * 银联通信类
@@ -13,15 +21,20 @@ import com.upp.dubbo.RespUppHead;
 @Service(version = "1.0.0")
 public class UnionpayChannelImpl implements UnionpayChannel {
 	
+	@Autowired
+	@Qualifier("UnionService")
+	private SendService sendService;
+	
 	/**
 	 * 银联代收
 	 * @return
 	 */
 	public RespUppHead unionDS(ReqUnionPayDs req){
+		HashMap<String, Object> map = new HashMap<>();
+		UppBeanUtils.transBean2Map(req, map);
+		Map<String, Object> respMap = sendService.send(map);
 		RespUppHead resp = new RespUppHead();
-		resp.setRespCode("000000");
-		resp.setRespMsg("交易成功");
-		resp.setRespStatus(TransStatus.SUCCESS);
+		UppBeanUtils.transMap2Bean(respMap, resp);
 		return resp;
 	}
 	
@@ -31,13 +44,11 @@ public class UnionpayChannelImpl implements UnionpayChannel {
 	 * @return
 	 */
 	public RespUnionQuery unionQuery(ReqUnionPayQuery req){
+		HashMap<String, Object> map = new HashMap<>();
+		UppBeanUtils.transBean2Map(req, map);
+		Map<String, Object> respMap = sendService.send(map);
 		RespUnionQuery resp = new RespUnionQuery();
-		resp.setRespCode("000000");
-		resp.setRespMsg("查询成功");
-		resp.setRespStatus(UnionpayRespStatus.SUCCESS);
-		resp.setOrigRespStatus(UnionpayRespStatus.SUCCESS);
-		resp.setOrigRespMsg("原交易成功");
-		resp.setOrigRespCode("000000");
+		UppBeanUtils.transMap2Bean(respMap, resp);
 		return resp;
 	}
 }

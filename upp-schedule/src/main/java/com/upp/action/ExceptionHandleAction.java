@@ -35,6 +35,7 @@ public class ExceptionHandleAction extends BaseAction {
 		example.createCriteria().andHandlestatusEqualTo(ExcepHandleStatus.PRE);
 		//查询出所有待处理的交易
 		List<Transexceptionreg> exceps1 = tm.selectByExample(example);
+		//查出未一次查询到结果的交易
 		List<Transexceptionreg> exceps2 = tm.selectOuttimeException(1);
 		List<Transexceptionreg> exceps = new ArrayList<>();
 		exceps.addAll(exceps1);
@@ -51,5 +52,4 @@ public class ExceptionHandleAction extends BaseAction {
 			log.info("没有待处理的异常任务");
 		}
 	}
-
 }

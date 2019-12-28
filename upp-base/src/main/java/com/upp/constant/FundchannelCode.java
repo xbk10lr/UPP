@@ -6,5 +6,5 @@ public class FundchannelCode {
 	
 	public static final String NETSUNION = "NETSUNION";
 	
-	public static final String EACCOUNT = "EACCOUNT";
+	public static final String CORE = "CORE";
 }

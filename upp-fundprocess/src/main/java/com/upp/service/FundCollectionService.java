@@ -48,6 +48,7 @@ public class FundCollectionService extends FundCommonService {
 		//根据支持银行、交易金额、交易类型三个类别选出所有支持的通道
 		List<Channelbanklimit> cbls = cbm.selectSupportBankLimit(bankcode,transamt,TransType.DS);
 		if(cbls == null || cbls.isEmpty()){
+			//若没有选出合适的通道，抛出 AUTOCHANNELERROR-没有合适的通道 异常
 			throw new UppException(DictErrors.AUTO_CHANNEL_ERROR);
 		} else {
 			return cbls.get(0);

@@ -1,5 +1,5 @@
 package com.upp.dubbo.connectors;
 
-public class ReqEaccountRecharge {
+public class ReqCoreRecharge {
 
 }

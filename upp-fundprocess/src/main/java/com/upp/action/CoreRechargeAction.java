@@ -18,7 +18,7 @@ import com.upp.service.RechargeService;
  *
  */
 @Component
-public class EaccountRechargeAction extends BaseAction {
+public class CoreRechargeAction extends BaseAction {
 	
 	@Autowired
 	private RechargeService rs;
@@ -29,8 +29,8 @@ public class EaccountRechargeAction extends BaseAction {
 		InputFundTrans input = (InputFundTrans) context.getInput();
 		
 		try {
-			input.setFundchannelcode(FundchannelCode.EACCOUNT);
-			input.setTranscode(TransCode.EACCOUNTSETTLE);
+			input.setFundchannelcode(FundchannelCode.CORE);
+			input.setTranscode(TransCode.CORESETTLE);
 			//落库
 			rs.insertFundtrans(input);
 			//发送下游

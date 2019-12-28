@@ -25,12 +25,11 @@ public class UppExceptionHandler {
 			UppException uppException = (UppException) exception;
 			String errorcode = uppException.getMessage();
 			String errormessage = uppException.getErrormessage();
-			//				String val = PropUtils.readValue(errorcode, "errorcodes.properties");
 			String message = MessageUtils.get(errorcode);
 			if (StringUtil.isStringEmpty(message)) {
-				message = SpringContextUtil.getApplicationContext().getMessage(DictErrors.TRANS_EXCEPTION, null, Locale.CHINA);
+				message =  MessageUtils.get(DictErrors.TRANS_EXCEPTION);
 			}
-			if (!StringUtil.isStringEmpty(errormessage)) {
+			if ("100004".equals(errormessage.split(";")[0])) {
 				formatContext(context, String.format(message.split(";")[1], errormessage), message.split(";")[0],
 						message.split(";")[2]);
 			} else {
@@ -39,7 +38,6 @@ public class UppExceptionHandler {
 		} else {
 			formatContext(context, "交易失败，请联系管理员", "100000", TransStatus.FAILURE);
 		}
-
 	}
 
 	private void formatContext(Context context, String respMsg, String respCode, String respStatus) {

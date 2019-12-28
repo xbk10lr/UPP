@@ -7,8 +7,8 @@ import com.upp.constant.ExcepInfoEnum;
 import com.upp.constant.TransStatus;
 import com.upp.dto.Context;
 import com.upp.dto.common.InputFundTrans;
-import com.upp.dubbo.connectors.EaccountChannel;
-import com.upp.dubbo.connectors.ReqEaccountRecharge;
+import com.upp.dubbo.connectors.CoreChannel;
+import com.upp.dubbo.connectors.ReqCoreRecharge;
 import com.upp.dubbo.fundprocess.RespRecharge;
 import com.upp.exception.UppException;
 
@@ -21,7 +21,7 @@ import com.upp.exception.UppException;
 public class RechargeService extends FundCommonService {
 
 	@Reference(version="1.0.0")
-	private EaccountChannel ec;
+	private CoreChannel ec;
 
 	/**
 	 * 请求互联网核心接口
@@ -31,7 +31,7 @@ public class RechargeService extends FundCommonService {
 	 * @throws UppException
 	 */
 	public RespRecharge sendEaccountRecharge(InputFundTrans input,Context ctx) throws UppException{
-		RespRecharge resp = (RespRecharge)ec.eaccountSettle(new ReqEaccountRecharge());
+		RespRecharge resp = (RespRecharge)ec.coreSettle(new ReqCoreRecharge());
 		if(TransStatus.TIMEOUT.equals(resp.getRespStatus())){
 			//超时异常处理
 			this.insertTransexceptionreg(input, ExcepInfoEnum.EaccountRechargeTimeOut);

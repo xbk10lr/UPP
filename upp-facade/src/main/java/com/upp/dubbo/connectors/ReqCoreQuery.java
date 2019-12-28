@@ -1,6 +1,6 @@
 package com.upp.dubbo.connectors;
 
-public class ReqEaccountQuery {
+public class ReqCoreQuery {
 	
 	private String origInnertransnbr;
 

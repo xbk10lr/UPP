@@ -20,5 +20,5 @@ public class TransCode {
 	/**
 	 * 互联网核心入账
 	 */
-	public static final String EACCOUNTSETTLE = "eaccountsettle";
+	public static final String CORESETTLE = "coresettle";
 }

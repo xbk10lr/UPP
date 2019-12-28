@@ -26,27 +26,20 @@ public class FundCollectionAction extends BaseAction {
 	
 	@Override
 	public void excute(Context context) throws UppException {
-		
 		InputFundTrans input = (InputFundTrans) context.getInput();
-		
-		try {
-			//路由选路
-			Channelbanklimit autoChannel = fcs.autoChannel(input);
-			context.setFundchannelcode(autoChannel.getFundchannelcode());
-			input.setFundchannelcode(autoChannel.getFundchannelcode());
-			input.setTranscode(TransCode.COLLECTION);
-			input.setDownbankcode(autoChannel.getChannelbankcode());
-			//落库
-			fcs.insertFundtrans(input);
-			//发送下游
-			RespFundCollection resp = fcs.sendCollection(input, context);
-			//更新库表
-			fcs.updateFundtrans(resp, input);
-			//组装返回context
-			fcs.formatrespcontext(context, resp);
-		} catch (Exception e) {
-			exceptionHandler.handle(e, context);
-		}
+		//路由选路
+		Channelbanklimit autoChannel = fcs.autoChannel(input);
+		context.setFundchannelcode(autoChannel.getFundchannelcode());
+		input.setFundchannelcode(autoChannel.getFundchannelcode());
+		input.setTranscode(TransCode.COLLECTION);
+		input.setDownbankcode(autoChannel.getChannelbankcode());
+		//落库
+		fcs.insertFundtrans(input);
+		//发送下游
+		RespFundCollection resp = fcs.sendCollection(input, context);
+		//更新库表
+		fcs.updateFundtrans(resp, input);
+		//组装返回context
+		fcs.formatrespcontext(context, resp);
 	}
-
 }

@@ -17,13 +17,13 @@ import com.upp.dto.generate.Overalltrans;
 import com.upp.dto.generate.OveralltransKey;
 import com.upp.dto.generate.Transexceptionreg;
 import com.upp.dto.model.AsyncNotifyMessage;
-import com.upp.dubbo.connectors.EaccountChannel;
+import com.upp.dubbo.connectors.CoreChannel;
 import com.upp.dubbo.connectors.NetsunionChannel;
-import com.upp.dubbo.connectors.ReqEaccountQuery;
-import com.upp.dubbo.connectors.ReqEaccountRecharge;
+import com.upp.dubbo.connectors.ReqCoreQuery;
+import com.upp.dubbo.connectors.ReqCoreRecharge;
 import com.upp.dubbo.connectors.ReqNetsUnionQuery;
 import com.upp.dubbo.connectors.ReqUnionPayQuery;
-import com.upp.dubbo.connectors.RespEaccountQuery;
+import com.upp.dubbo.connectors.RespCoreQuery;
 import com.upp.dubbo.connectors.RespNetsUnionQuery;
 import com.upp.dubbo.connectors.RespUnionQuery;
 import com.upp.dubbo.connectors.UnionpayChannel;
@@ -46,7 +46,7 @@ public class ExceptionHandleService extends ScheduleCommonService{
 	private NetsunionChannel nc;
 	
 	@Reference(version="1.0.0")
-	private EaccountChannel ec;
+	private CoreChannel ec;
 	
 	@Autowired
 	private AsyncNotifySender ans;
@@ -143,9 +143,9 @@ public class ExceptionHandleService extends ScheduleCommonService{
 	public void eaccountRechargeQuery(Transexceptionreg ex) throws UppException{
 		log.info("电子账户充值超时查询开始");
 		String innertransnbr = ex.getInnerfundtransnbr();
-		ReqEaccountQuery req = new ReqEaccountQuery();
+		ReqCoreQuery req = new ReqCoreQuery();
 		req.setOrigInnertransnbr(innertransnbr);
-		RespEaccountQuery resp = ec.eaccountQuery(req);
+		RespCoreQuery resp = ec.coreQuery(req);
 		if(EaccountRespStatus.SUCCESS.equals(resp.getRespStatus())){
 			Innerfundtrans record = new Innerfundtrans();
 			record.setInnerfundtransnbr(innertransnbr);
@@ -257,15 +257,15 @@ public class ExceptionHandleService extends ScheduleCommonService{
 	 */
 	public void rechargeEaccountSettle(Transexceptionreg ex) throws UppException{
 		InputFundTrans input = new InputFundTrans();
-		input.setFundchannelcode(FundchannelCode.EACCOUNT);
-		input.setTranscode(TransCode.EACCOUNTSETTLE);
+		input.setFundchannelcode(FundchannelCode.CORE);
+		input.setTranscode(TransCode.CORESETTLE);
 		OveralltransKey key = new OveralltransKey();
 		key.setOveralltransnbr(ex.getOveralltransnbr());
 		key.setTransdate(ex.getTransdate());
 		Overalltrans over = om.selectByPrimaryKey(key);
 		//落库
 		this.insertFundtrans(input,over);
-		RespRecharge resp = (RespRecharge)ec.eaccountSettle(new ReqEaccountRecharge());
+		RespRecharge resp = (RespRecharge)ec.coreSettle(new ReqCoreRecharge());
 		//更新库表
 		this.updateFundtrans(resp, input);
 		

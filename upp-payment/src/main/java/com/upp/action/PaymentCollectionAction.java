@@ -19,9 +19,6 @@ public class PaymentCollectionAction extends BaseAction{
 
 	@Autowired
 	private PlaceOrderService pos;
-	
-//	@Autowired
-//	private UppExceptionHandler exceptionHandler;
 
 	@Override
 	public void excute(Context context) throws UppException {
@@ -37,8 +34,5 @@ public class PaymentCollectionAction extends BaseAction{
 		}
 		//订单更新
 		pos.updateOnlineOrderInfo(input,context);
-		
 	}
-
-
 }

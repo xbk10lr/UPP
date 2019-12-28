@@ -13,6 +13,7 @@ import com.upp.dto.model.ReqCollection;
 import com.upp.dubbo.InnerDubboTransport;
 import com.upp.dubbo.payment.ReqPlaceOrder;
 import com.upp.dubbo.payment.RespPlaceOrder;
+import com.upp.util.MessageUtils;
 import com.upp.util.SignUtils;
 import com.upp.util.UppBeanUtils;
 
@@ -52,6 +53,18 @@ public class PaygateService extends BaseService{
 	}
 	
 	public String formatRespMsg(RespPlaceOrder resp,String keyWord) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+		String respStr = "respCode="+resp.getRespCode()+"&respStatus="+resp.getRespStatus()+"&respMsg="+resp.getRespMsg();
+		String signStr = SignUtils.getMd5String(respStr+"&key="+keyWord);
+		String respMsg = respStr+"&sign="+signStr;
+		return respMsg;
+	}
+	
+	public String formatRespMsg(String keyWord,String errorType) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+		RespPlaceOrder resp = new RespPlaceOrder();
+		String msg = MessageUtils.get(errorType);
+		resp.setRespCode(msg.split(";")[0]);
+		resp.setRespMsg(msg.split(";")[1]);
+		resp.setRespStatus(msg.split(";")[2]);
 		String respStr = "respCode="+resp.getRespCode()+"&respStatus="+resp.getRespStatus()+"&respMsg="+resp.getRespMsg();
 		String signStr = SignUtils.getMd5String(respStr+"&key="+keyWord);
 		String respMsg = respStr+"&sign="+signStr;

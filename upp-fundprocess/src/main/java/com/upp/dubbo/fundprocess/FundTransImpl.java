@@ -8,7 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.upp.action.EaccountRechargeAction;
+import com.upp.action.CoreRechargeAction;
 import com.upp.action.FundCollectionAction;
 import com.upp.action.TransCheckAction;
 import com.upp.baseClass.Action;
@@ -25,9 +25,9 @@ public class FundTransImpl implements FundTrans {
 	//代收
 	@Autowired
 	private FundCollectionAction fca;
-	//互联网核心入账
+	//核心入账
 	@Autowired
-	private EaccountRechargeAction era;
+	private CoreRechargeAction era;
 	//检查上一步交易是否成功
 	@Autowired
 	private TransCheckAction tca;
